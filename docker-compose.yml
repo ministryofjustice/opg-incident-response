@@ -1,0 +1,70 @@
+version: '3'
+services:
+
+  response:
+    build:
+      context: .
+      dockerfile: Dockerfile.response
+    image: response
+    entrypoint: bash
+    command: /app/startup.sh
+    expose:
+      - 8000
+    depends_on:
+      - db
+    environment:
+      POSTGRES: "true"
+    env_file: .env
+    volumes:
+      - ./:/app
+      - ../:/response
+      - pypd:/app/pypd
+      # - static_volume:/app/opgincidentresponse/static
+    stdin_open: true
+    tty: true
+
+  nginx:
+    build:
+      context: .
+      dockerfile: Dockerfile.nginx
+    image: response-nginx
+    # volumes:
+    #   - static_volume:/app/opgincidentresponse/static
+    ports:
+      - 80:80
+    depends_on:
+      - response
+
+  cron:
+    build:
+      context: .
+      dockerfile: Dockerfile.cron
+    image: cron
+    container_name: cron
+    depends_on:
+      - response
+    tty: true
+
+  db:
+    image: "postgres:11.2"
+    container_name: postgres
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+
+  # ngrok:
+  #   image: gtriggiano/ngrok-tunnel
+  #   container_name: ngrok
+  #   environment:
+  #     TARGET_HOST: "response"
+  #     TARGET_PORT: 8000
+  #   ports:
+  #     - "4040:4040"
+  #   depends_on:
+  #     - response
+
+volumes:
+  postgres_data:
+  pypd:
+  # static_volume:
