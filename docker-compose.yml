@@ -19,7 +19,6 @@ services:
       - ./:/app
       - ../:/response
       - pypd:/app/pypd
-      # - static_volume:/app/opgincidentresponse/static
     stdin_open: true
     tty: true
 
@@ -28,8 +27,9 @@ services:
       context: .
       dockerfile: Dockerfile.nginx
     image: response-nginx
-    # volumes:
-    #   - static_volume:/app/opgincidentresponse/static
+    environment:
+      APP_HOST: response
+      APP_PORT: 8000
     ports:
       - 80:80
     depends_on:
@@ -67,4 +67,3 @@ services:
 volumes:
   postgres_data:
   pypd:
-  # static_volume:
