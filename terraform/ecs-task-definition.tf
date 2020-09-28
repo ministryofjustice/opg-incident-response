@@ -8,11 +8,6 @@ resource "aws_ecs_task_definition" "response" {
   container_definitions    = "[${local.response}, ${local.nginx}]"
   task_role_arn            = aws_iam_role.response_primary.arn
   execution_role_arn       = aws_iam_role.execution_role.arn
-
-  # volume {
-  #   name      = "static_volume"
-  #   host_path = "/app/opgincidentresponse/static/"
-  # }
 }
 
 
@@ -35,29 +30,12 @@ locals {
       essential = true,
       image     = "${data.aws_ecr_repository.response.repository_url}:${var.nginx_tag}",
       name      = "nginx",
-      mountPoints = [
-        # {
-        #   containerPath = "/app/opgincidentresponse/static/",
-        #   sourceVolume  = "static_volume"
-        # }
-      ],
+      mountPoints = [],
       portMappings = [{
         containerPort = 80,
         hostPort      = 80,
         protocol      = "tcp"
       }],
-
-      # healthCheck = {
-      #   command     = ["CMD-SHELL", "curl -f http://localhost/nginx-health || exit 1"],
-      #   startPeriod = 30,
-      #   interval    = 15,
-      #   timeout     = 10,
-      #   retries     = 3
-      # },
-      # dependsOn = [{
-      #   containerName = "response",
-      #   condition     = "HEALTHY"
-      # }],
       logConfiguration = {
         logDriver = "awslogs",
         options = {
@@ -72,16 +50,8 @@ locals {
           value = "localhost"
         },
         {
-          name  = "APP_NAME",
-          value = "api"
-        },
-        {
           name  = "APP_PORT",
           value = "8000"
-        },
-        {
-          name  = "NGINX_LOG_LEVEL",
-          value = "info"
         }
       ]
     })
@@ -90,25 +60,13 @@ locals {
     cpu          = 0,
     essential    = true,
     image        = "${data.aws_ecr_repository.response.repository_url}:${var.response_tag}",
-    mountPoints = [
-      # {
-      #   containerPath = "/app/opgincidentresponse/static/",
-      #   sourceVolume  = "static_volume"
-      # }
-    ],
+    mountPoints = [],
     name         = "response",
     portMappings = [{
       containerPort = 8000,
       hostPort      = 8000,
       protocol      = "tcp"
     }],
-    # healthCheck = {
-    #   command     = ["CMD-SHELL", "curl -f http://localhost/ht || exit 1"],
-    #   startPeriod = 30,
-    #   interval    = 15,
-    #   timeout     = 10,
-    #   retries     = 3
-    # },
     environment = [{
         name  = "DJANGO_SETTINGS_MODULE",
         value = "opgincidentresponse.settings.prod"
