@@ -21,3 +21,13 @@ resource "aws_secretsmanager_secret" "django_secret_key" {
   name = "response/${terraform.workspace}/django-secret-key"
   tags = local.tags
 }
+
+resource "aws_secretsmanager_secret" "github_client_id" {
+  name = "response/${terraform.workspace}/github-client-id"
+  tags = local.tags
+}
+
+resource "aws_secretsmanager_secret" "github_client_secret" {
+  name = "response/${terraform.workspace}/github-client-secret"
+  tags = local.tags
+}

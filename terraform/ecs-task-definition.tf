@@ -124,6 +124,14 @@ locals {
         name      = "SECRET_KEY"
         valueFrom = aws_secretsmanager_secret.django_secret_key.arn
       },
+      {
+        name      = "SOCIAL_AUTH_GITHUB_KEY",
+        valueFrom = aws_secretsmanager_secret.github_client_id.arn
+      },
+      {
+        name      = "SOCIAL_AUTH_GITHUB_SECRET"
+        valueFrom = aws_secretsmanager_secret.github_client_secret.arn
+      },
     ]
     volumesFrom = [],
     logConfiguration = {
