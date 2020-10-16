@@ -1,12 +1,15 @@
 from django.contrib import admin
+from django.contrib.auth.decorators import login_required
 from django.urls import include, path
 from django.conf.urls import url
 
+from decorator_include import decorator_include
+
 urlpatterns = [
-    path("", include("response.ui.urls")),
-    path('accounts/', include('allauth.urls')),
+    path("", decorator_include(login_required, "response.ui.urls")),
+    url("", include('social_django.urls', namespace='social')),
     path("admin/", admin.site.urls),
     url(r'^ht/', include('health_check.urls')),
     path("slack/", include("response.slack.urls")),
-    path("core/", include("response.core.urls")),
+    path("core/", decorator_include(login_required, "response.core.urls")),
 ]
