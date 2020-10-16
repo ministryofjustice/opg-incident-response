@@ -9,12 +9,12 @@ locals {
     "production"  = "true"
   }
 
-  dns_prefix = lookup(local.dns_prefixes, terraform.workspace)
+  dns_prefix = "incident"
 
   mandatory_moj_tags = {
     business-unit    = "OPG"
     application      = "opg-incident-response"
-    environment-name = "${terraform.workspace}"
+    environment-name = terraform.workspace
     owner            = "OPG Webops: opgteam@digital.justice.gov.uk"
   }
 
@@ -27,11 +27,11 @@ locals {
 }
 
 variable "default_role" {
-  default = "ci"
+  default = "shared-ci"
 }
 
 variable "management_role" {
-  default = "ci"
+  default = "shared-ci"
 }
 
 variable "accounts" {
