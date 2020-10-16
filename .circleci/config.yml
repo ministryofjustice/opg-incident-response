@@ -69,7 +69,7 @@ jobs:
     parameters:
       container_repo_url:
         type: string
-        default: 311462405659.dkr.ecr.eu-west-1.amazonaws.com/opg-incident-response
+        default: 311462405659.dkr.ecr.eu-west-1.amazonaws.com/incident-response/nginx
     steps:
       - checkout
       - response/install_aws_cli
@@ -85,11 +85,11 @@ jobs:
           name: Push container
           command: |
             export SHORT_HASH=${CIRCLE_SHA1:0:7} >> $BASH_ENV
-            docker tag response-nginx:latest << parameters.container_repo_url >>:nginx-latest
-            docker tag response-nginx:latest << parameters.container_repo_url >>:nginx-$CIRCLE_BRANCH-$SHORT_HASH
+            docker tag response-nginx:latest << parameters.container_repo_url >>:latest
+            docker tag response-nginx:latest << parameters.container_repo_url >>:$CIRCLE_BRANCH-$SHORT_HASH
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               # We want all of the tags pushed
               docker push << parameters.container_repo_url >>
             else
-              docker push << parameters.container_repo_url >>:nginx-$CIRCLE_BRANCH-$SHORT_HASH
+              docker push << parameters.container_repo_url >>:$CIRCLE_BRANCH-$SHORT_HASH
             fi
