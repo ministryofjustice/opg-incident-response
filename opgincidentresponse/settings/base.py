@@ -38,10 +38,8 @@ INSTALLED_APPS = [
     "bootstrap4",
     "response.apps.ResponseConfig",
     'health_check',
-    'allauth',
-    'allauth.account',
-    'allauth.socialaccount',
-    'allauth.socialaccount.providers.auth0',
+    'social_django',
+    'opgincidentresponse',
 ]
 
 MIDDLEWARE = [
@@ -68,6 +66,8 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
                 'django.template.context_processors.request',
+                'social_django.context_processors.backends',
+                'social_django.context_processors.login_redirect',
             ]
         },
     }
@@ -87,8 +87,8 @@ DATABASES = {
 }
 
 AUTHENTICATION_BACKENDS = [
+    'social_core.backends.github.GithubOrganizationOAuth2',
     'django.contrib.auth.backends.ModelBackend',
-    'allauth.account.auth_backends.AuthenticationBackend',
 ]
 
 SITE_ID = 2
@@ -199,6 +199,12 @@ def get_env_var(setting, warn_only=False):
 SLACK_TOKEN = get_env_var("SLACK_TOKEN")
 SLACK_CLIENT = SlackClient(SLACK_TOKEN)
 
+SOCIAL_AUTH_GITHUB_ORG_KEY = get_env_var("SOCIAL_AUTH_GITHUB_KEY")
+SOCIAL_AUTH_GITHUB_ORG_SECRET = get_env_var("SOCIAL_AUTH_GITHUB_SECRET")
+SOCIAL_AUTH_GITHUB_ORG_NAME = "ministryofjustice"
+SOCIAL_AUTH_GITHUB_ORG_SCOPE = ["read:org"]
+
+LOGIN_URL = "login/github-org"
 
 # Whether to use https://pypi.org/project/bleach/ to strip potentially dangerous
 # HTML input in string fields
