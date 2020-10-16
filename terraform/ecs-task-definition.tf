@@ -15,8 +15,14 @@ data "aws_ecr_repository" "response" {
   name     = "opg-incident-response"
   provider = aws.management
 }
+
+data "aws_ecr_repository" "nginx" {
+  name     = "incident-response/nginx"
+  provider = aws.management
+}
+
 variable "nginx_tag" {
-  default = "nginx-master-fd08ce6"
+  default = "nginx-ecr-repo-7d206c1"
 }
 
 variable "response_tag"{
@@ -28,7 +34,7 @@ locals {
     nginx = jsonencode({
       cpu       = 0,
       essential = true,
-      image     = "${data.aws_ecr_repository.response.repository_url}:${var.nginx_tag}",
+      image     = "${data.aws_ecr_repository.nginx.repository_url}:${var.nginx_tag}",
       name      = "nginx",
       mountPoints = [],
       portMappings = [{
