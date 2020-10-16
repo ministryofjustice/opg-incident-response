@@ -8,7 +8,7 @@ wait_for_db()
 }
 
 if [ -n "$DJANGO_SUPERUSER_USERNAME" ] && [ -n "$DJANGO_SUPERUSER_PASSWORD" ] ; then
-    (python manage.py createsuperuser --no-input)
+    (python manage.py createsuperuser --no-input )
 fi
 
 echo "[INFO] Waiting for DB"

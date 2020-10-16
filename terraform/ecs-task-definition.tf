@@ -16,11 +16,11 @@ data "aws_ecr_repository" "response" {
   provider = aws.management
 }
 variable "nginx_tag" {
-  default = "nginx-master-91fbac7"
+  default = "nginx-master-fd08ce6"
 }
 
 variable "response_tag"{
-  default = "master-91fbac7"
+  default = "master-fd08ce6"
 }
 
 locals {
