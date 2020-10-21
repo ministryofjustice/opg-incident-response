@@ -79,7 +79,7 @@ locals {
       },
       {
         name  = "INCIDENT_BOT_NAME",
-        value = "opg-incident-response"
+        value = "opgincidentresponse"
       },
       {
         name  = "INCIDENT_CHANNEL_NAME",
