@@ -81,6 +81,11 @@ locals {
         name  = "INCIDENT_BOT_NAME",
         value = "opgincidentresponse"
       },
+
+      {
+        name  = "INCIDENT_BOT_ID",
+        value = "A01CXL45ZE1"
+      },
       {
         name  = "INCIDENT_CHANNEL_NAME",
         value = "opg-incident"
