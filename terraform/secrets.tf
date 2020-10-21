@@ -31,3 +31,13 @@ resource "aws_secretsmanager_secret" "github_client_secret" {
   name = "response/${terraform.workspace}/github-client-secret"
   tags = local.tags
 }
+
+resource "aws_secretsmanager_secret" "statuspage_io_page_id" {
+  name = "response/${terraform.workspace}/statuspageio-page-id"
+  tags = local.tags
+}
+
+resource "aws_secretsmanager_secret" "statuspage_io_api_key" {
+  name = "response/${terraform.workspace}/statuspageio-api-key"
+  tags = local.tags
+}
