@@ -79,15 +79,15 @@ locals {
       },
       {
         name  = "INCIDENT_BOT_NAME",
-        value = "opg_response"
+        value = "opg-incident-response"
       },
       {
         name  = "INCIDENT_CHANNEL_NAME",
-        value = "incidents"
+        value = "opg-incident"
       },
       {
         name  = "INCIDENT_REPORT_CHANNEL_NAME",
-        value = "incident-reports"
+        value = "opg-incident"
       },
       {
         name  = "POSTGRES",
