@@ -22,11 +22,11 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "master-bb3e800"
+  default = "add-pagerduty-integration-c0206c2"
 }
 
 variable "response_tag"{
-  default = "master-bb3e800"
+  default = "add-pagerduty-integration-c0206c2"
 }
 
 locals {
@@ -117,6 +117,14 @@ locals {
       {
         name  = "SITE_URL",
         value = "https://${local.dns_prefix}.${data.aws_route53_zone.opg_service_justice_gov_uk.name}"
+      },
+      {
+        name  = "PAGERDUTY_SERVICE",
+        value = "PWKF9XO"
+      },
+      {
+        name  = "PAGERDUTY_EMAIL",
+        value = "thomas.withers@digital.justice.gov.uk"
       }
     ],
     secrets     = [{
@@ -154,6 +162,10 @@ locals {
       {
         name      = "STATUSPAGEIO_API_KEY"
         valueFrom = aws_secretsmanager_secret.statuspage_io_api_key.arn
+      },
+      {
+        name      = "PAGERDUTY_API_KEY"
+        valueFrom = aws_secretsmanager_secret.pagerduty_api_key.arn
       },
     ]
     volumesFrom = [],
