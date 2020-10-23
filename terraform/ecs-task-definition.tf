@@ -143,6 +143,14 @@ locals {
         name      = "SOCIAL_AUTH_GITHUB_SECRET"
         valueFrom = aws_secretsmanager_secret.github_client_secret.arn
       },
+      {
+        name      = "STATUSPAGEIO_PAGE_ID"
+        valueFrom = aws_secretsmanager_secret.statuspage_io_page_id.arn
+      },
+      {
+        name      = "STATUSPAGEIO_API_KEY"
+        valueFrom = aws_secretsmanager_secret.statuspage_io_api_key.arn
+      },
     ]
     volumesFrom = [],
     logConfiguration = {
