@@ -22,11 +22,11 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "master-eac3fe4"
+  default = "master-bb3e800"
 }
 
 variable "response_tag"{
-  default = "master-eac3fe4"
+  default = "master-bb3e800"
 }
 
 locals {
