@@ -1,16 +1,13 @@
 import logging
 import json
-from django.conf import settings
 from django.contrib import admin
-from django.core.exceptions import ImproperlyConfigured
 from django.db import models
 
 from response.core.models import Incident
 from response.slack import block_kit, dialog_builder
 from response.slack.models import CommsChannel
 from response.slack.decorators import ActionContext, action_handler, dialog_handler, keyword_handler
-from response.slack.decorators.incident_command import incident_command, get_help
-from response.slack.client import SlackError, SlackClient
+from response.slack.decorators.incident_command import incident_command
 from datetime import datetime
 
 from opgincidentresponse.models import StatusPage
