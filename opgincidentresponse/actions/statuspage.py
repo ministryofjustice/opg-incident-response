@@ -91,6 +91,7 @@ def handle_open_status_page_dialog(action_context: ActionContext):
             "message": "We're getting all the information we need to fix this and will update the status page as soon as we can.",
             "impact_override": "major",
             "component_id": None,
+            "component_status": "operational",
         }
 
     dialog = dialog_builder.Dialog(
@@ -115,12 +116,6 @@ def handle_open_status_page_dialog(action_context: ActionContext):
                 name="incident_status",
                 value=values.get("status"),
             ),
-            dialog_builder.SelectWithOptions(
-                StatusPage.get_components(),
-                label="Affected component",
-                name="component_id",
-                value=values.get("component_id"),
-            ),
             dialog_builder.TextArea(
                 label="Description",
                 name="message",
@@ -137,6 +132,26 @@ def handle_open_status_page_dialog(action_context: ActionContext):
                 name="impact_override",
                 optional=True,
                 value=values.get("impact_override"),
+            ),
+            dialog_builder.SelectWithOptions(
+                StatusPage.get_components(),
+                label="Affected component",
+                name="component_id",
+                optional=True,
+                value=values.get("component_id"),
+            ),
+            dialog_builder.SelectWithOptions(
+                [
+                    ("Operational", "operational"),
+                    ("Under maintenance", "under_maintenance"),
+                    ("Degraded performance", "degraded_performance"),
+                    ("Partial outage", "partial_outage"),
+                    ("Major outage", "major_outage"),
+                ],
+                label="Component status",
+                name="component_status",
+                optional=True,
+                value=values.get("component_status"),
             ),
         ],
     )
@@ -157,14 +172,12 @@ def update_status_page(
         status_page = StatusPage(incident=incident)
         status_page.save()
 
-    components = {}
-    components[submission["component_id"]] = "major_outage"
-
     statuspage_incident = {
         "name": submission["name"],
         "status": submission["incident_status"],
         "message": submission["message"] or "",
-        "components": components,
+        "component_ids": [submission["component_id"]],
+        "component_status": submission["component_status"],
     }
     if submission["impact_override"]:
         statuspage_incident["impact_override"] = submission["impact_override"]

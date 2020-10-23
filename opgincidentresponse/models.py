@@ -40,6 +40,17 @@ class StatusPage(models.Model):
             self.statuspage_incident_id = response["id"]
             self.save()
 
+        if kwargs['component_ids']:
+                if kwargs['status'] == 'resolved':
+                    status = 'operational'
+                else:
+                    status = kwargs['component_status']
+
+                if status:
+                    statuspage_client().components.update(
+                        component_id=kwargs['component_ids'][0], status=status
+                    )
+
     def get_from_statuspage(self):
         if self.statuspage_incident_id:
             for incident in statuspage_client().incidents.list():
@@ -50,6 +61,7 @@ class StatusPage(models.Model):
                         "message": incident["incident_updates"][0]["body"],
                         "impact_override": incident["impact_override"],
                         "component_id": incident["components"][0]["id"],
+                        "component_status": incident["components"][0]["status"],
                     }
             raise StatusPageError(
                 f"Statuspage incident with id {self.statuspage_incident_id} not found"
