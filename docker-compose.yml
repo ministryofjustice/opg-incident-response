@@ -57,8 +57,8 @@ services:
   #   image: gtriggiano/ngrok-tunnel
   #   container_name: ngrok
   #   environment:
-  #     TARGET_HOST: "response"
-  #     TARGET_PORT: 8000
+  #     TARGET_HOST: "nginx"
+  #     TARGET_PORT: 80
   #   ports:
   #     - "4040:4040"
   #   depends_on:
