@@ -15,21 +15,6 @@ from datetime import datetime
 
 from opgincidentresponse.models import StatusPage
 
-
-#---------------------------------------------------------------------
-# Status Page Updates
-#---------------------------------------------------------------------
-
-if not (
-    getattr(settings, "STATUSPAGEIO_API_KEY", None)
-    and getattr(settings, "STATUSPAGEIO_PAGE_ID", None)
-):
-    raise ImproperlyConfigured(
-        "Statuspage integration is active but STATUSPAGEIO_API_KEY/STATUSPAGEIO_PAGE_ID are not configured"
-    )
-
-
-
 logger = logging.getLogger(__name__)
 
 OPEN_STATUS_PAGE_DIALOG = "dialog-open-status-page"
@@ -175,14 +160,14 @@ def update_status_page(
         status_page = StatusPage(incident=incident)
         status_page.save()
 
+    components = {}
+    components[submission["component_id"]] = "major_outage"
+
     statuspage_incident = {
         "name": submission["name"],
         "status": submission["incident_status"],
         "message": submission["message"] or "",
-        "component_ids": [submission["component_id"]],
-        "wants_twitter_update": bool(
-            submission.get("wants_twitter_update", "False") == "True"
-        ),
+        "components": components,
     }
     if submission["impact_override"]:
         statuspage_incident["impact_override"] = submission["impact_override"]
