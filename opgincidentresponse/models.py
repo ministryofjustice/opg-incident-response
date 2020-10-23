@@ -49,8 +49,17 @@ class StatusPage(models.Model):
                         "status": incident["status"],
                         "message": incident["incident_updates"][0]["body"],
                         "impact_override": incident["impact_override"],
+                        "component_id": incident["components"][0]["id"],
                     }
             raise StatusPageError(
                 f"Statuspage incident with id {self.statuspage_incident_id} not found"
             )
         return {}
+
+    @staticmethod
+    def get_components():
+        options = []
+        for component in statuspage_client().components.list():
+            options.append( (component.name, component.id) )
+
+        return options

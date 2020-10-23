@@ -108,6 +108,7 @@ def handle_open_status_page_dialog(action_context: ActionContext):
             "status": "investigating",
             "message": "We're getting all the information we need to fix this and will update the status page as soon as we can.",
             "impact_override": "major",
+            "component_id": None,
         }
 
     dialog = dialog_builder.Dialog(
@@ -132,20 +133,17 @@ def handle_open_status_page_dialog(action_context: ActionContext):
                 name="incident_status",
                 value=values.get("status"),
             ),
+            dialog_builder.SelectWithOptions(
+                StatusPage.get_components(),
+                label="Affected component",
+                name="component_id",
+                value=values.get("component_id"),
+            ),
             dialog_builder.TextArea(
                 label="Description",
                 name="message",
                 optional=True,
                 value=values.get("message"),
-            ),
-            dialog_builder.SelectWithOptions(
-                [
-                    ("No - don't share on Twitter", "False"),
-                    ("Yes - post to @monzo-status on Twitter", "True"),
-                ],
-                label="Send to Twitter?",
-                name="wants_twitter_update",
-                optional=True,
             ),
             dialog_builder.SelectWithOptions(
                 [
@@ -181,6 +179,7 @@ def update_status_page(
         "name": submission["name"],
         "status": submission["incident_status"],
         "message": submission["message"] or "",
+        "component_ids": [submission["component_id"]],
         "wants_twitter_update": bool(
             submission.get("wants_twitter_update", "False") == "True"
         ),
