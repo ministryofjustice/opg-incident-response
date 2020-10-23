@@ -1,16 +1,13 @@
-"""
-WSGI config for opgincidentresponse project.
-
-It exposes the WSGI callable as a module-level variable named ``application``.
-
-For more information on this file, see
-https://docs.djangoproject.com/en/3.1/howto/deployment/wsgi/
-"""
-
 import os
 
 from django.core.wsgi import get_wsgi_application
 
+
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'opgincidentresponse.settings')
 
 application = get_wsgi_application()
+
+from .actions.headline_actions import *
+from .actions.incident_commands import *
+from .actions.incident_notifications import *
+from .actions.keyword_handlers import *
