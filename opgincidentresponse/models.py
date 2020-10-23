@@ -1,6 +1,7 @@
 import statuspageio
 
 from django.conf import settings
+from django.contrib import admin
 from django.db import models
 
 from response.core.models import Incident
@@ -75,3 +76,11 @@ class StatusPage(models.Model):
             options.append( (component.name, component.id) )
 
         return options
+
+@admin.register(StatusPage)
+class StatusPageAdmin(admin.ModelAdmin):
+    list_display = ("incident_summary", "statuspage_incident_id")
+
+    def incident_summary(self, obj):
+        return obj.incident.report
+

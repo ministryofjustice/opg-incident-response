@@ -1,6 +1,5 @@
 import logging
 import json
-from django.contrib import admin
 from django.db import models
 
 from response.core.models import Incident
@@ -16,14 +15,6 @@ logger = logging.getLogger(__name__)
 
 OPEN_STATUS_PAGE_DIALOG = "dialog-open-status-page"
 STATUS_PAGE_UPDATE = "status-page-update"
-
-@admin.register(StatusPage)
-class StatusPageAdmin(admin.ModelAdmin):
-    list_display = ("incident_summary", "statuspage_incident_id")
-
-    def incident_summary(self, obj):
-        return obj.incident.summary
-
 
 @incident_command(
     ["statuspage", "sp"], helptext="Update the statuspage for this incident"
