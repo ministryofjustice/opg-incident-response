@@ -116,7 +116,7 @@ locals {
       },
       {
         name  = "SITE_URL",
-        value = "${local.dns_prefix}.${data.aws_route53_zone.opg_service_justice_gov_uk.name}"
+        value = "https://${local.dns_prefix}.${data.aws_route53_zone.opg_service_justice_gov_uk.name}"
       }
     ],
     secrets     = [{
