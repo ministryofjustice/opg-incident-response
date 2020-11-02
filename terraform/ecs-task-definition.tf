@@ -128,6 +128,10 @@ locals {
         valueFrom = aws_secretsmanager_secret.slack_signing_key.arn
       },
       {
+        name      = "SLACK_TEAM_ID",
+        valueFrom = aws_secretsmanager_secret.slack_team_id.arn
+      },
+      {
         name      = "DB_PASSWORD",
         valueFrom = aws_secretsmanager_secret.database_password.arn
       },

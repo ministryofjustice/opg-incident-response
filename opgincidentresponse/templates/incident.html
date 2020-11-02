@@ -38,7 +38,7 @@
                         {{ incident.reporter.full_name }}
                     </dd>
                     <dd class="govuk-summary-list__actions">
-                        <a class="govuk-link" href="slack://user?team=T02DYEB3A&amp;id={{ incident.reporter.external_id }}">
+                        <a class="govuk-link" href="{{ incident.reporter.external_id | slack_dm_link }}">
                             Slack
                         </a>
                     </dd>
@@ -52,7 +52,7 @@
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         {% if incident.lead %}
-                            <a class="govuk-link" href="slack://user?team=T02DYEB3A&amp;id={{ incident.reporter.external_id }}">
+                            <a class="govuk-link" href="{{ incident.reporter.external_id | slack_dm_link }}">
                                 Slack
                             </a>
                         {% endif %}
@@ -129,7 +129,7 @@
 
             {% if incident.comms_channel %}
             <p class="govuk-body">
-                <a class="govuk-link" href="slack://channel?team=T02DYEB3A&amp;id={{ incident.comms_channel.channel_id }}">
+                <a class="govuk-link" href="{{ incident.comms_channel.channel_id | slack_channel_link }}">
                     #{{ incident.comms_channel.channel_name }}
                 </a>
                 on Slack

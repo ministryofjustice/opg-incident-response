@@ -1,6 +1,7 @@
 import re
 
 from django import template
+from django.conf import settings
 from response.core.models import ExternalUser
 
 register = template.Library()
@@ -24,3 +25,11 @@ def slack_format(value):
         value = value.replace('<' + match + '>', '<a class="govuk-link" href="' + link + '">' + (label if label else link) + '</a>')
 
     return value.replace('\n', '<br />')
+
+@register.filter
+def slack_dm_link(id):
+    return 'slack://user?team=' + settings.SLACK_TEAM_ID + '&id=' + id
+
+@register.filter
+def slack_channel_link(id):
+    return 'slack://channel?team=' + settings.SLACK_TEAM_ID + '&id=' + id
