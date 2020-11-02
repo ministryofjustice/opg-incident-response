@@ -20,7 +20,9 @@
             {% for incident in incidents %}
                 <tr class="govuk-table__row">
                     <th scope="row" class="govuk-table__header">
-                        {{ incident.summary }}
+                        <a class="govuk-link" href="/incident/{{ incident.id }}">
+                            {{ incident.summary }}
+                        </a>
                     </th>
                     <td class="govuk-table__header">
                         {% if incident.status_text != "resolved" %}
