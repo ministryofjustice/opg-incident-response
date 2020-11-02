@@ -8,6 +8,11 @@ resource "aws_secretsmanager_secret" "slack_signing_key" {
   tags = local.tags
 }
 
+resource "aws_secretsmanager_secret" "slack_team_id" {
+  name = "response/${terraform.workspace}/slack-team-id"
+  tags = local.tags
+}
+
 resource "aws_secretsmanager_secret" "database_password" {
   name = "response/${terraform.workspace}/rds-password"
   tags = local.tags
