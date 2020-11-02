@@ -1,3 +1,11 @@
+FROM node:14.13.1-alpine3.12 as asset-env
+
+WORKDIR /app
+
+COPY nginx/webpack .
+
+RUN yarn && yarn build
+
 FROM nginx:stable-alpine
 
 # Add Confd to configure nginx on start
@@ -15,6 +23,8 @@ RUN wget -q -O /usr/local/bin/waitforit https://github.com/maxcnunes/waitforit/r
 COPY nginx/etc /etc
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY opgincidentresponse/static /app/opgincidentresponse/static
+COPY --from=node /home/node /app/opgincidentresponse/static
+COPY --from=asset-env /app/build /app/opgincidentresponse/static
 
 
 RUN mkdir -p /var/www/public
