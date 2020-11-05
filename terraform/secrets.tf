@@ -46,3 +46,8 @@ resource "aws_secretsmanager_secret" "statuspage_io_api_key" {
   name = "response/${terraform.workspace}/statuspageio-api-key"
   tags = local.tags
 }
+
+resource "aws_secretsmanager_secret" "pagerduty_api_key" {
+  name = "response/${terraform.workspace}/pagerduty-api-key"
+  tags = local.tags
+}
