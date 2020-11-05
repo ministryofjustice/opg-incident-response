@@ -5,8 +5,7 @@ from datetime import datetime
 
 from response.core.models import Incident
 from response.slack import block_kit, dialog_builder
-from response.slack.decorators import headline_post_action
-from response.slack.decorators import ActionContext, action_handler, dialog_handler
+from response.slack.decorators import ActionContext, action_handler, dialog_handler, headline_post_action
 from opgincidentresponse.models import PagerDutySpecialist
 from opgincidentresponse.actions.pagerduty import page_specialist
 
