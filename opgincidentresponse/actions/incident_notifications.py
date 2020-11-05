@@ -4,7 +4,7 @@ from response.slack.decorators import recurring_notification, single_notificatio
 
 
 @single_notification()
-def take_a_break(incident: Incident):
+def incident_response_process(incident: Incident):
     comms_channel = CommsChannel.objects.get(incident=incident)
     comms_channel.post_in_channel("📗 You can find our Incident Response process here https://ministryofjustice.github.io/opg-technical-guidance/incidents/incident-response-process/#incident-response-process")
 
