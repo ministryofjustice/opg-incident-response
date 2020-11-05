@@ -103,19 +103,35 @@
             </div>
 
             <h2 class="govuk-heading-l">Timeline</h2>
+            <div class="moj-timeline">
+                {% if events %}
+                {% for event in events %}
+                <div class="moj-timeline__item">
+                    <div class="moj-timeline__header">
+                        <h2 class="moj-timeline__title">Timeline Event</h2>
 
-            {% if events %}
-                <ul class="govuk-list govuk-list--bullet">
-                    {% for event in events %}
-                        <li>
-                            {{event.author.display_name}} at <strong>{{ event.timestamp | date:"j F Y, g:iA" }}</strong>
-                            <p>{{ event.text | unslackify | slack_format | safe }}</p>
-                        </li>
-                    {% endfor %}
-                </ul>
-            {% else %}
-                <p class="govuk-body">No events yet, pin a message in Slack to add one</p>
-            {% endif %}
+                        <p class="moj-timeline__byline">by {{event.author.display_name}}</p>
+
+                    </div>
+
+                    <p class="moj-timeline__date">
+                    <time datetime="2019-06-14T14:01:00.000Z">{{ event.timestamp | date:"j F Y, g:iA" }}</time>
+                    </p>
+
+                    <div class="moj-timeline__description">
+                        <p>{{ event.text | unslackify | slack_format | safe }}</p>
+                    </div>
+                </div>
+                {% endfor %}
+                {% else %}
+                <div class="moj-timeline__item">
+                    <div class="moj-timeline__header">
+                        <h2 class="moj-timeline__title">No events yet, pin a message in Slack to add one</h2>
+                        <p class="moj-timeline__byline">by OPG Response Bot</p>
+                    </div>
+                </div>
+                {% endif %}
+            </div>
         </div>
 
         <div class="govuk-grid-column-one-third">
