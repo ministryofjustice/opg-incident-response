@@ -115,7 +115,7 @@
                     </div>
 
                     <p class="moj-timeline__date">
-                    <time datetime="2019-06-14T14:01:00.000Z">{{ event.timestamp | date:"j F Y, g:iA" }}</time>
+                    <time datetime="{{ event.timestamp | date:"c" }}">{{ event.timestamp | date:"j F Y, g:iA" }}</time>
                     </p>
 
                     <div class="moj-timeline__description">
