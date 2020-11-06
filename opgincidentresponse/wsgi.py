@@ -12,3 +12,4 @@ from .actions.incident_commands import *
 from .actions.incident_notifications import *
 from .actions.keyword_handlers import *
 from .actions.statuspage import *
+from .actions.pagerduty import *

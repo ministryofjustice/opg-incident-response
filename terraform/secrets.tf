@@ -8,6 +8,11 @@ resource "aws_secretsmanager_secret" "slack_signing_key" {
   tags = local.tags
 }
 
+resource "aws_secretsmanager_secret" "slack_team_id" {
+  name = "response/${terraform.workspace}/slack-team-id"
+  tags = local.tags
+}
+
 resource "aws_secretsmanager_secret" "database_password" {
   name = "response/${terraform.workspace}/rds-password"
   tags = local.tags
@@ -39,5 +44,10 @@ resource "aws_secretsmanager_secret" "statuspage_io_page_id" {
 
 resource "aws_secretsmanager_secret" "statuspage_io_api_key" {
   name = "response/${terraform.workspace}/statuspageio-api-key"
+  tags = local.tags
+}
+
+resource "aws_secretsmanager_secret" "pagerduty_api_key" {
+  name = "response/${terraform.workspace}/pagerduty-api-key"
   tags = local.tags
 }
