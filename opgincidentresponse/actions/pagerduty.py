@@ -13,10 +13,14 @@ logger = logging.getLogger(__name__)
 
 pypd.api_key = settings.PAGERDUTY_API_KEY
 
+def incident_key(incident):
+    return f"opg-incident-{incident.pk}"
+
+
 def page_specialist(incident: Incident, specialist: PagerDutySpecialist, message: str):
     logger.debug(f"Handling `page_specialist` on Incident {incident.id}")
 
-    key = "1"
+    key = incident_key(incident)
     logger.debug(
         f"About to call PagerDuty's API: 'pypd.Incident.find(incident_key={key})`"
     )
@@ -29,28 +33,15 @@ def page_specialist(incident: Incident, specialist: PagerDutySpecialist, message
     message = f"{message}. Please join us in #{comms_channel.channel_name}"
 
     try:
-        if pd_incident:
-            logger.debug(
-                f"Existing pagerduty incident found so reassigning to the specialists"
-            )
-
-            from_user = pypd.User.find_one(email=settings.PAGERDUTY_EMAIL)
-            pd_incident.add_responders(
-                settings.PAGERDUTY_EMAIL,
-                from_user.id,
-                message,
-                escalation_policy_ids=[specialist.escalation_policy],
-            )
-        else:
-            logger.debug(
-                f"No existing pagerduty incident so triggering one directly for the specialists"
-            )
-            trigger_incident(
-                message,
-                key,
-                incident.report or "",
-                escalation_policy=specialist.escalation_policy,
-            )
+        logger.debug(
+            f"triggering an incident for the incident leads"
+        )
+        trigger_incident(
+            message,
+            key,
+            incident.report or "",
+            escalation_policy=specialist.escalation_policy,
+        )
         comms_channel.post_in_channel(
             f"We've sent a page to {specialist.name} with the message: \n>{message}"
         )

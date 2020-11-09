@@ -22,11 +22,11 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "add-pagerduty-integration-c0206c2"
+  default = "fix-pagerduty-7bbc71b"
 }
 
 variable "response_tag"{
-  default = "add-pagerduty-integration-c0206c2"
+  default = "fix-pagerduty-7bbc71b"
 }
 
 locals {
