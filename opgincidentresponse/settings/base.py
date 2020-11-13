@@ -29,7 +29,6 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     'django.contrib.sites',
     "after_response",
-    "rest_framework",
     "bootstrap4",
     "response.apps.ResponseConfig",
     'health_check',
@@ -147,19 +146,6 @@ USE_TZ = False
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-# Django Rest Framework
-# https://www.django-rest-framework.org/
-
-REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 100,
-    # Use Django's standard `django.contrib.auth` permissions.
-    # Change to IsAuthenticatedOrReadOnly for read-only unauthenticated access
-    # or see the Django Rest Framework docs for more options:
-    # https://www.django-rest-framework.org/api-guide/permissions/#setting-the-permission-policy
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
-}
 
 # Markdown Filter
 
