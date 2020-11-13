@@ -72,10 +72,22 @@ class StatusPage(models.Model):
     @staticmethod
     def get_components():
         options = []
-        for component in statuspage_client().components.list():
-            options.append( (component.name, component.id) )
 
-        return options
+        components = statuspage_client().components.list()
+
+        for component in components:
+            if component.group:
+                continue
+
+            name = component.name
+
+            if component.group_id:
+                group_name = [c.name for c in components if c.id == component.group_id][0]
+                name = f"{group_name} — {name}"
+
+            options.append( (name, component.id) )
+
+        return sorted(options, key=lambda t: t[0].lower())
 
 @admin.register(StatusPage)
 class StatusPageAdmin(admin.ModelAdmin):
