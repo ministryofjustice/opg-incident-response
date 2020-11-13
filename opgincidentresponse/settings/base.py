@@ -212,14 +212,46 @@ def get_env_var(setting, warn_only=False):
 
     return value
 
+# Environment variables
 
-SLACK_TOKEN = get_env_var("SLACK_TOKEN")
-SLACK_CLIENT = SlackClient(SLACK_TOKEN)
+## Social auth (for GitHub login)
 
 SOCIAL_AUTH_GITHUB_ORG_KEY = get_env_var("SOCIAL_AUTH_GITHUB_KEY")
 SOCIAL_AUTH_GITHUB_ORG_SECRET = get_env_var("SOCIAL_AUTH_GITHUB_SECRET")
 SOCIAL_AUTH_GITHUB_ORG_NAME = "ministryofjustice"
 SOCIAL_AUTH_GITHUB_ORG_SCOPE = ["read:org"]
+
+## Slack
+
+SLACK_TOKEN = get_env_var("SLACK_TOKEN")
+SLACK_CLIENT = SlackClient(SLACK_TOKEN)
+
+SLACK_SIGNING_SECRET = get_env_var("SLACK_SIGNING_SECRET")
+SLACK_TEAM_ID = get_env_var("SLACK_TEAM_ID")
+INCIDENT_CHANNEL_NAME = get_env_var("INCIDENT_CHANNEL_NAME")
+INCIDENT_REPORT_CHANNEL_NAME = get_env_var("INCIDENT_REPORT_CHANNEL_NAME")
+INCIDENT_BOT_NAME = get_env_var("INCIDENT_BOT_NAME")
+
+INCIDENT_BOT_ID = os.getenv("INCIDENT_BOT_ID") or SLACK_CLIENT.get_user_id(
+    INCIDENT_BOT_NAME
+)
+INCIDENT_CHANNEL_ID = os.getenv("INCIDENT_CHANNEL_ID") or SLACK_CLIENT.get_channel_id(
+    INCIDENT_CHANNEL_NAME
+)
+INCIDENT_REPORT_CHANNEL_ID = os.getenv(
+    "INCIDENT_REPORT_CHANNEL_ID"
+) or SLACK_CLIENT.get_channel_id(INCIDENT_REPORT_CHANNEL_NAME)
+
+## Statuspage
+
+STATUSPAGEIO_API_KEY = get_env_var("STATUSPAGEIO_API_KEY")
+STATUSPAGEIO_PAGE_ID = get_env_var("STATUSPAGEIO_PAGE_ID")
+
+## PagerDuty
+
+PAGERDUTY_API_KEY = get_env_var("PAGERDUTY_API_KEY")
+PAGERDUTY_SERVICE = get_env_var("PAGERDUTY_SERVICE")
+PAGERDUTY_EMAIL = get_env_var("PAGERDUTY_EMAIL")
 
 LOGIN_URL = "login/github-org"
 
