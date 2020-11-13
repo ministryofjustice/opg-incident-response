@@ -95,10 +95,6 @@ locals {
         value = "opg-incident"
       },
       {
-        name  = "POSTGRES",
-        value = "True"
-      },
-      {
         name  = "DB_HOST",
         value = aws_rds_cluster.db.endpoint
       },
