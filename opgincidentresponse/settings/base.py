@@ -235,3 +235,6 @@ LOGIN_URL = "login/github-org"
 # Whether to use https://pypi.org/project/bleach/ to strip potentially dangerous
 # HTML input in string fields
 RESPONSE_SANITIZE_USER_INPUT = True
+
+# Whether users need to log in to access Response
+RESPONSE_LOGIN_REQUIRED = True
