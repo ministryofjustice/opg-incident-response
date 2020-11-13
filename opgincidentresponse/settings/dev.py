@@ -16,33 +16,9 @@ if os.environ.get("POSTGRES"):
         }
     }
 
-
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "simple": {
-            "format": " {levelname:5s} - {module:10.15s} - {message}",
-            "style": "{",
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "simple",
-        }
-    },
-    "loggers": {
-        "": {
-            "handlers": ["console"],
-            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
-            "propagate": False,
-        }
-    },
-}
-
 RESPONSE_LOGIN_REQUIRED = False
+
+SLACK_API_MOCK = os.getenv("SLACK_API_MOCK", None)
 
 SLACK_TOKEN = get_env_var("SLACK_TOKEN")
 SLACK_SIGNING_SECRET = get_env_var("SLACK_SIGNING_SECRET")
@@ -50,8 +26,6 @@ SLACK_TEAM_ID = get_env_var("SLACK_TEAM_ID")
 INCIDENT_CHANNEL_NAME = get_env_var("INCIDENT_CHANNEL_NAME")
 INCIDENT_REPORT_CHANNEL_NAME = get_env_var("INCIDENT_REPORT_CHANNEL_NAME")
 INCIDENT_BOT_NAME = get_env_var("INCIDENT_BOT_NAME")
-
-SLACK_API_MOCK = os.getenv("SLACK_API_MOCK", None)
 
 INCIDENT_BOT_ID = os.getenv("INCIDENT_BOT_ID") or SLACK_CLIENT.get_user_id(
     INCIDENT_BOT_NAME

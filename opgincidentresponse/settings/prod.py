@@ -20,31 +20,6 @@ if os.environ.get("POSTGRES"):
         }
     }
 
-LOGGING = {
-    "version": 1,
-    "disable_existing_loggers": False,
-    "formatters": {
-        "simple": {
-            "format": " {levelname:5s} - {module:10.15s} - {message}",
-            "style": "{",
-        }
-    },
-    "handlers": {
-        "console": {
-            "level": "INFO",
-            "class": "logging.StreamHandler",
-            "formatter": "simple",
-        }
-    },
-    "loggers": {
-        "": {
-            "handlers": ["console"],
-            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
-            "propagate": False,
-        }
-    },
-}
-
 SLACK_TOKEN = get_env_var("SLACK_TOKEN")
 SLACK_SIGNING_SECRET = get_env_var("SLACK_SIGNING_SECRET")
 SLACK_TEAM_ID = get_env_var("SLACK_TEAM_ID")
