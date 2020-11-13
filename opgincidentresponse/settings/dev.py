@@ -2,7 +2,7 @@ import os
 
 from .base import *  # noqa: F401, F403
 
-SITE_URL = "http://localhost:8000"
+SITE_URL = "http://localhost"
 
 DATABASES = {
     "default": {
