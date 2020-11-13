@@ -4,6 +4,12 @@ import os
 from django.core.exceptions import ImproperlyConfigured
 
 from response.slack.client import SlackClient
+from pathlib import Path
+from dotenv import load_dotenv
+
+current_path = Path(os.path.dirname(os.path.realpath(__file__)))
+env_path = current_path / "../../.env"
+load_dotenv(dotenv_path=env_path)
 
 logger = logging.getLogger(__name__)
 
