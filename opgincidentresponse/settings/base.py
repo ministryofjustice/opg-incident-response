@@ -27,7 +27,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django.contrib.sites',
     "after_response",
     "bootstrap4",
     "response.apps.ResponseConfig",
@@ -84,8 +83,6 @@ AUTHENTICATION_BACKENDS = [
     'social_core.backends.github.GithubOrganizationOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 ]
-
-SITE_ID = 2
 
 # Logging
 
