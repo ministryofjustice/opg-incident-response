@@ -167,9 +167,12 @@ def update_status_page(
         "name": submission["name"],
         "status": submission["incident_status"],
         "message": submission["message"] or "",
-        "component_ids": [submission["component_id"]],
         "component_status": submission["component_status"],
     }
+
+    if submission["component_id"]:
+        statuspage_incident["component_ids"] = [submission["component_id"]]
+
     if submission["impact_override"]:
         statuspage_incident["impact_override"] = submission["impact_override"]
 
