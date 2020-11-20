@@ -22,4 +22,4 @@ echo "[INFO] Generate Static Files"
 python3 manage.py collectstatic --no-input
 
 echo "[INFO] Starting Server"
-gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000
+gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000 --reload
