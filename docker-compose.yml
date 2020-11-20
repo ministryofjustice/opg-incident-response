@@ -7,7 +7,7 @@ services:
       dockerfile: Dockerfile.response
     image: response
     entrypoint: bash
-    command: /app/startup.sh
+    command: /app/startup.sh --watch
     expose:
       - 8000
     depends_on:
