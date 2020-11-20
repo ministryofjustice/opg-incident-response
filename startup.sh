@@ -21,5 +21,10 @@ python3 manage.py migrate --noinput
 echo "[INFO] Generate Static Files"
 python3 manage.py collectstatic --no-input
 
-echo "[INFO] Starting Server"
-gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000
+if [[ $1 == '--watch' ]] ; then
+    echo "[INFO] Starting Server in watch mode"
+    gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000 --reload
+else
+    echo "[INFO] Starting Server"
+    gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000
+fi
