@@ -22,11 +22,11 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "add-pagerduty-integration-c0206c2"
+  default = "fix-pagerduty-7bbc71b"
 }
 
 variable "response_tag"{
-  default = "add-pagerduty-integration-c0206c2"
+  default = "fix-pagerduty-7bbc71b"
 }
 
 locals {
@@ -93,10 +93,6 @@ locals {
       {
         name  = "INCIDENT_REPORT_CHANNEL_NAME",
         value = "opg-incident"
-      },
-      {
-        name  = "POSTGRES",
-        value = "True"
       },
       {
         name  = "DB_HOST",

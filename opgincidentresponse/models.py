@@ -41,7 +41,7 @@ class StatusPage(models.Model):
             self.statuspage_incident_id = response["id"]
             self.save()
 
-        if kwargs['component_ids']:
+        if 'component_ids' in kwargs and kwargs['component_ids']:
                 if kwargs['status'] == 'resolved':
                     status = 'operational'
                 else:
@@ -56,14 +56,18 @@ class StatusPage(models.Model):
         if self.statuspage_incident_id:
             for incident in statuspage_client().incidents.list():
                 if incident["id"] == self.statuspage_incident_id:
-                    return {
+                    obj = {
                         "name": incident["name"],
                         "status": incident["status"],
                         "message": incident["incident_updates"][0]["body"],
                         "impact_override": incident["impact_override"],
-                        "component_id": incident["components"][0]["id"],
-                        "component_status": incident["components"][0]["status"],
                     }
+
+                    if len(incident["components"]) > 0:
+                        obj["component_id"] = incident["components"][0]["id"]
+                        obj["component_status"] = incident["components"][0]["status"]
+
+                    return obj
             raise StatusPageError(
                 f"Statuspage incident with id {self.statuspage_incident_id} not found"
             )
@@ -72,10 +76,22 @@ class StatusPage(models.Model):
     @staticmethod
     def get_components():
         options = []
-        for component in statuspage_client().components.list():
-            options.append( (component.name, component.id) )
 
-        return options
+        components = statuspage_client().components.list()
+
+        for component in components:
+            if component.group:
+                continue
+
+            name = component.name
+
+            if component.group_id:
+                group_name = [c.name for c in components if c.id == component.group_id][0]
+                name = f"{group_name} — {name}"
+
+            options.append( (name, component.id) )
+
+        return sorted(options, key=lambda t: t[0].lower())
 
 @admin.register(StatusPage)
 class StatusPageAdmin(admin.ModelAdmin):

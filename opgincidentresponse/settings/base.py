@@ -9,10 +9,6 @@ logger = logging.getLogger(__name__)
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
-
-# Quick-start development settings - unsuitable for production
-# See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
-
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = os.environ.get("SECRET_KEY")
 
@@ -20,7 +16,6 @@ SECRET_KEY = os.environ.get("SECRET_KEY")
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-
 
 # Application definition
 
@@ -31,9 +26,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    'django.contrib.sites',
     "after_response",
-    "rest_framework",
     "bootstrap4",
     "response.apps.ResponseConfig",
     'health_check',
@@ -90,12 +83,31 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-SITE_ID = 2
+# Logging
 
-SOCIALACCOUNT_PROVIDERS = {
-    'auth0': {
-        'AUTH0_URL': 'https://ministryofjustice.auth0.com',
-    }
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "simple": {
+            "format": " {levelname:5s} - {module:10.15s} - {message}",
+            "style": "{",
+        }
+    },
+    "handlers": {
+        "console": {
+            "level": "INFO",
+            "class": "logging.StreamHandler",
+            "formatter": "simple",
+        }
+    },
+    "loggers": {
+        "": {
+            "handlers": ["console"],
+            "level": os.getenv("DJANGO_LOG_LEVEL", "INFO"),
+            "propagate": False,
+        }
+    },
 }
 
 # Password validation
@@ -130,19 +142,6 @@ USE_TZ = False
 
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
-
-# Django Rest Framework
-# https://www.django-rest-framework.org/
-
-REST_FRAMEWORK = {
-    "DEFAULT_PAGINATION_CLASS": "rest_framework.pagination.LimitOffsetPagination",
-    "PAGE_SIZE": 100,
-    # Use Django's standard `django.contrib.auth` permissions.
-    # Change to IsAuthenticatedOrReadOnly for read-only unauthenticated access
-    # or see the Django Rest Framework docs for more options:
-    # https://www.django-rest-framework.org/api-guide/permissions/#setting-the-permission-policy
-    "DEFAULT_PERMISSION_CLASSES": ["rest_framework.permissions.IsAuthenticated"],
-}
 
 # Markdown Filter
 
@@ -194,17 +193,47 @@ def get_env_var(setting, warn_only=False):
 
     return value
 
+# Environment variables
 
-SLACK_TOKEN = get_env_var("SLACK_TOKEN")
-SLACK_CLIENT = SlackClient(SLACK_TOKEN)
+## Social auth (for GitHub login)
 
 SOCIAL_AUTH_GITHUB_ORG_KEY = get_env_var("SOCIAL_AUTH_GITHUB_KEY")
 SOCIAL_AUTH_GITHUB_ORG_SECRET = get_env_var("SOCIAL_AUTH_GITHUB_SECRET")
 SOCIAL_AUTH_GITHUB_ORG_NAME = "ministryofjustice"
 SOCIAL_AUTH_GITHUB_ORG_SCOPE = ["read:org"]
 
+## Slack
+
+SLACK_TOKEN = get_env_var("SLACK_TOKEN")
+SLACK_CLIENT = SlackClient(SLACK_TOKEN)
+
+SLACK_SIGNING_SECRET = get_env_var("SLACK_SIGNING_SECRET")
+SLACK_TEAM_ID = get_env_var("SLACK_TEAM_ID")
+
+INCIDENT_CHANNEL_NAME = get_env_var("INCIDENT_CHANNEL_NAME")
+INCIDENT_REPORT_CHANNEL_NAME = get_env_var("INCIDENT_REPORT_CHANNEL_NAME")
+INCIDENT_BOT_NAME = get_env_var("INCIDENT_BOT_NAME")
+
+INCIDENT_BOT_ID = os.getenv("INCIDENT_BOT_ID") or SLACK_CLIENT.get_user_id(INCIDENT_BOT_NAME)
+INCIDENT_CHANNEL_ID = SLACK_CLIENT.get_channel_id(INCIDENT_CHANNEL_NAME)
+INCIDENT_REPORT_CHANNEL_ID = SLACK_CLIENT.get_channel_id(INCIDENT_REPORT_CHANNEL_NAME)
+
+## Statuspage
+
+STATUSPAGEIO_API_KEY = get_env_var("STATUSPAGEIO_API_KEY")
+STATUSPAGEIO_PAGE_ID = get_env_var("STATUSPAGEIO_PAGE_ID")
+
+## PagerDuty
+
+PAGERDUTY_API_KEY = get_env_var("PAGERDUTY_API_KEY")
+PAGERDUTY_SERVICE = get_env_var("PAGERDUTY_SERVICE")
+PAGERDUTY_EMAIL = get_env_var("PAGERDUTY_EMAIL")
+
 LOGIN_URL = "login/github-org"
 
 # Whether to use https://pypi.org/project/bleach/ to strip potentially dangerous
 # HTML input in string fields
 RESPONSE_SANITIZE_USER_INPUT = True
+
+# Whether users need to log in to access Response
+RESPONSE_LOGIN_REQUIRED = True

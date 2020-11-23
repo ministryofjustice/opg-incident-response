@@ -8,9 +8,8 @@ from decorator_include import decorator_include
 from . import views
 
 urlpatterns = [
-    path("", views.home),
-    path("incident/<int:incident_id>/", views.incident),
-    path("old/", decorator_include(login_required, "response.ui.urls")),
+    path("", views.home, name="home"),
+    path("incident/<int:incident_id>/", views.incident, name="incident_doc"),
     url("", include('social_django.urls', namespace='social')),
     path("admin/", admin.site.urls),
     url(r'^ht/', include('health_check.urls')),
