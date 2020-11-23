@@ -2,7 +2,6 @@ import logging
 import os
 
 from django.core.exceptions import ImproperlyConfigured
-
 from response.slack.client import SlackClient
 
 logger = logging.getLogger(__name__)
