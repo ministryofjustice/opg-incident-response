@@ -52,7 +52,7 @@
                     </dd>
                     <dd class="govuk-summary-list__actions">
                         {% if incident.lead %}
-                            <a class="govuk-link" href="{{ incident.reporter.external_id | slack_dm_link }}">
+                            <a class="govuk-link" href="{{ incident.lead.external_id | slack_dm_link }}">
                                 Slack
                             </a>
                         {% endif %}
