@@ -22,11 +22,11 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "fix-pagerduty-7bbc71b"
+  default = "20a37244741c7b6b5833e43b3eb70bb678c38fb0"
 }
 
 variable "response_tag"{
-  default = "fix-pagerduty-7bbc71b"
+  default = "20a37244741c7b6b5833e43b3eb70bb678c38fb0"
 }
 
 locals {
