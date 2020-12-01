@@ -21,7 +21,7 @@
                 <tr class="govuk-table__row">
                     <th scope="row" class="govuk-table__header">
                         <a class="govuk-link" href="/incident/{{ incident.id }}">
-                            {{ incident.summary }}
+                            {{ incident.report | unslackify }}
                         </a>
                     </th>
                     <td class="govuk-table__header">
