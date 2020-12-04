@@ -3,7 +3,7 @@ name: Terraform Apply
 on:
   push:
     branches:
-      - master
+      - main
     paths:
         - 'terraform/*'
 defaults:
@@ -21,7 +21,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
@@ -32,5 +32,5 @@ jobs:
         run: cd terraform && terraform init
 
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/master' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: cd terraform && terraform apply --auto-approve
