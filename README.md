@@ -8,6 +8,13 @@ To start the application locally, copy `env.dev.example` to `.env` and configure
 
 You will need to configure a Slack app following the instructions below, and can then start the application with `docker-compose up -d`.
 
+
+## Versions and Releases
+
+This project uses [SemVer for](https://semver.org) versoning.
+
+By default, any merge to main will be a MINOR release. You can control which version number to increment by add #major, #minor or #patch to the commit message that does into main.
+
 ### Configuring Slack
 
 In order to avoid polluting our real Slack workspace, and to give you full control over permissions, you should configure your local copy of the app with [your own Slack workspace][slack-create].
