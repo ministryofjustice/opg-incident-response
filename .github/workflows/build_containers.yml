@@ -76,7 +76,7 @@ jobs:
           RESPONSE_ECR_REPOSITORY: opg-incident-response
           NGINX_ECR_REPOSITORY: incident-response/nginx
           IMAGE_TAG: ${{ steps.create_tag.outputs.new_tag }}
-        if: github.ref != 'refs/heads/main' && github.event_name == 'push'
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         run: |
           docker build -f Dockerfile.response -t $ECR_REGISTRY/$RESPONSE_ECR_REPOSITORY:$IMAGE_TAG .
           docker push $ECR_REGISTRY/$RESPONSE_ECR_REPOSITORY:$IMAGE_TAG
