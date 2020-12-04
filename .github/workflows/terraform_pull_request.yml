@@ -3,7 +3,7 @@ name: Terraform Plan & Validate
 on:
   pull_request:
     branches:
-      - master
+      - main
     paths:
       - 'terraform/*'
 
@@ -22,7 +22,7 @@ jobs:
 
     steps:
       - name: Checkout
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
