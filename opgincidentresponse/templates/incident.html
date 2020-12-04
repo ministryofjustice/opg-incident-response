@@ -81,7 +81,7 @@
             </dl>
 
             <div class="govuk-form-group">
-                <fieldset class="govuk-fieldset">
+                <fieldset class="govuk-fieldset" data-module="app-actions" data-incident-id="{{ incident.id }}">
                     <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                         <h2 class="govuk-heading-l">Actions</h2>
                     </legend>
@@ -89,7 +89,7 @@
                         <div class="govuk-checkboxes govuk-checkboxes--small">
                             {% for action in actions %}
                                 <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="action-{{ action.id }}" name="action[{{action.id}}]" type="checkbox" {% if action.done %}checked{% endif %}>
+                                    <input class="govuk-checkboxes__input" id="action-{{ action.id }}" name="action[{{action.id}}]" value="{{ action.id }}" type="checkbox" {% if action.done %}checked{% endif %}>
                                     <label class="govuk-label govuk-checkboxes__label" for="action-{{ action.id }}">
                                         {{ action.details | slack_format | unslackify | safe }}
                                     </label>
