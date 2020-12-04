@@ -230,7 +230,7 @@ PAGERDUTY_API_KEY = get_env_var("PAGERDUTY_API_KEY")
 PAGERDUTY_SERVICE = get_env_var("PAGERDUTY_SERVICE")
 PAGERDUTY_EMAIL = get_env_var("PAGERDUTY_EMAIL")
 
-LOGIN_URL = "login/github-org"
+LOGIN_URL = "/login/github-org"
 
 # Whether to use https://pypi.org/project/bleach/ to strip potentially dangerous
 # HTML input in string fields
