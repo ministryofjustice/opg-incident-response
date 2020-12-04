@@ -33,13 +33,13 @@ module.exports = {
   },
   output: {
     filename: '[name].js',
-    path: path.resolve(__dirname, 'build')
+    path: path.resolve(__dirname, 'dist')
   },
   plugins: [
     new CopyPlugin({
       patterns: [
-        { from: 'node_modules/govuk-frontend/govuk/assets', to: path.resolve(__dirname, 'build/assets') },
-        { from: 'node_modules/@ministryofjustice/frontend/moj/assets', to: path.resolve(__dirname, 'build/assets') },
+        { from: 'node_modules/govuk-frontend/govuk/assets', to: path.resolve(__dirname, 'dist/assets') },
+        { from: 'node_modules/@ministryofjustice/frontend/moj/assets', to: path.resolve(__dirname, 'dist/assets') },
       ]
     }),
     new MiniCssExtractPlugin({
