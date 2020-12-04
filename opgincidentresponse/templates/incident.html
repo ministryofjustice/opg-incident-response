@@ -89,7 +89,7 @@
                         <div class="govuk-checkboxes govuk-checkboxes--small">
                             {% for action in actions %}
                                 <div class="govuk-checkboxes__item">
-                                    <input class="govuk-checkboxes__input" id="action-{{ action.id }}" name="action[{{action.id}}]" type="checkbox">
+                                    <input class="govuk-checkboxes__input" id="action-{{ action.id }}" name="action[{{action.id}}]" type="checkbox" {% if action.done %}checked{% endif %}>
                                     <label class="govuk-label govuk-checkboxes__label" for="action-{{ action.id }}">
                                         {{ action.details | slack_format | unslackify | safe }}
                                     </label>
