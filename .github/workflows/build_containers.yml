@@ -84,13 +84,13 @@ jobs:
           docker push $ECR_REGISTRY/$NGINX_ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Create Release
-          id: create_release
-          uses: actions/create-release@v1
-          if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-          env:
-            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          with:
-            tag_name: ${{ steps.create_tag.outputs.new_tag }}
-            release_name: ${{ steps.create_tag.outputs.new_tag }}
-            draft: false
-            prerelease: false
+        id: create_release
+        uses: actions/create-release@v1
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ steps.create_tag.outputs.new_tag }}
+          release_name: ${{ steps.create_tag.outputs.new_tag }}
+          draft: false
+          prerelease: false
