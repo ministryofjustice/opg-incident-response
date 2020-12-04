@@ -13,7 +13,7 @@ You will need to configure a Slack app following the instructions below, and can
 
 This project uses [SemVer for](https://semver.org) versoning.
 
-By default, any merge to main will be a MINOR release. You can control which version number to increment by add #major, #minor or #patch to the commit message that does into main.
+By default, any merge to main will be a MINOR release. You can control which version number to increment by add #major, #minor or #patch to the commit message that goes into main.
 
 ### Configuring Slack
 
