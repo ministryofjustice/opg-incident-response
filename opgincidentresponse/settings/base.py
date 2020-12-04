@@ -29,6 +29,7 @@ INSTALLED_APPS = [
     "after_response",
     "bootstrap4",
     "response.apps.ResponseConfig",
+    "rest_framework",
     'health_check',
     'social_django',
     'opgincidentresponse',
