@@ -17,7 +17,7 @@
                         Summary
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {% if incident.summary %}{{ incident.summary | unslackify }}{% else %}<em>None</em>{% endif %}
+                        {% if incident.summary %}{{ incident.summary | slack_format | unslackify | safe }}{% else %}<em>None</em>{% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions"></dd>
                 </div>
@@ -26,7 +26,7 @@
                         Impact
                     </dt>
                     <dd class="govuk-summary-list__value">
-                        {% if incident.impact %}{{ incident.impact | unslackify }}{% else %}<em>None</em>{% endif %}
+                        {% if incident.impact %}{{ incident.impact | slack_format | unslackify | safe }}{% else %}<em>None</em>{% endif %}
                     </dd>
                     <dd class="govuk-summary-list__actions"></dd>
                 </div>
