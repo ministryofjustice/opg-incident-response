@@ -11,6 +11,28 @@ defaults:
     shell: bash
 
 jobs:
+  pull_tag:
+    name: Pull latest tag from parameter store.
+    needs: build
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-to-assume: arn:aws:iam::997462338508:role/shared-ci
+          role-duration-seconds: 3600
+          role-session-name: GitHubActions
+      - name: Install AWS CLI
+        id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@v1
+      - name: Pull Tag from Parameter Store
+        run: |
+          echo ::set-env name=TAG_NAME::$(aws ssm get-parameter --region "eu-west-1" --name "incident-response-production-tag" --query Parameter.Value)
+
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
@@ -18,6 +40,9 @@ jobs:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
       AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
       TF_WORKSPACE: production
+    with:
+      TF_VAR_response_tag: ${{ steps.pull_tag.outputs.TAG_NAME }}
+      TF_VAR_nginx_tag: ${{ steps.pull_tag.outputs.TAG_NAME }}
 
     steps:
       - name: Checkout
