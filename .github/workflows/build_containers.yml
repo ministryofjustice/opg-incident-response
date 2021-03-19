@@ -20,6 +20,8 @@ jobs:
   build:
     name: 'Build & Push Containers'
     runs-on: ubuntu-latest
+    outputs:
+      build_tag: ${{ steps.create_tag.outputs.new_tag }}
 
     steps:
       - name: Configure AWS Credentials
@@ -115,4 +117,4 @@ jobs:
         uses: unfor19/install-aws-cli-action@v1
       - name: Push Tag to Parameter Store
         run: |
-          aws ssm put-parameter --name "incident-response-production-tag" --type "String" --value "${{needs.build.outputs.tag}}" --overwrite --region=eu-west-1
+          aws ssm put-parameter --name "incident-response-production-tag" --type "String" --value "${{ needs.build.outputs.build_tag }}" --overwrite --region=eu-west-1
