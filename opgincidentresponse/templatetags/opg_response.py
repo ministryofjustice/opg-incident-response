@@ -32,6 +32,10 @@ def slack_format(value):
     return value.replace('\n', '<br />')
 
 @register.filter
+def escape_quote(value):
+    return value.replace('"', '&quot;')
+
+@register.filter
 def slack_dm_link(id):
     return 'slack://user?team=' + settings.SLACK_TEAM_ID + '&id=' + id
 
