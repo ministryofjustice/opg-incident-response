@@ -23,9 +23,9 @@ jobs:
         uses: lewagon/wait-on-check-action@v0.2
         with:
           ref: main
-          check-name: 'Store Tag in Parameter Store'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 20
+          running-workflow-name: 'Pull latest tag from parameter store.'
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
