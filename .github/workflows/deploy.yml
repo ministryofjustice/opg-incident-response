@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-    paths:
-        - 'terraform/*'
+
 defaults:
   run:
     shell: bash
@@ -31,10 +30,11 @@ jobs:
         uses: unfor19/install-aws-cli-action@v1
       - name: Pull Tag from Parameter Store
         run: |
-          echo ::set-env name=TAG_NAME::$(aws ssm get-parameter --region "eu-west-1" --name "incident-response-production-tag" --query Parameter.Value)
+          echo  'TAG_NAME='$(aws ssm get-parameter --region "eu-west-1" --name "incident-response-production-tag" --query Parameter.Value) >> $GITHUB_ENV
 
   terraform:
     name: 'Terraform'
+    needs: pull_tag
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
