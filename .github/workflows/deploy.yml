@@ -14,7 +14,7 @@ jobs:
     name: Pull latest tag from parameter store.
     runs-on: ubuntu-latest
     outputs:
-      latest-tag: ${{ steps.output_tag.tag }}
+      latest-tag: ${{ steps.output_tag.outputs.tag }}
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
       - uses: actions/checkout@v2
