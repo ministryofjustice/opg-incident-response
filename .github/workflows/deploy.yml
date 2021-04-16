@@ -1,4 +1,4 @@
-name: Terraform Apply
+name: Deploy
 
 on:
   push:
@@ -23,7 +23,7 @@ jobs:
         uses: lewagon/wait-on-check-action@v0.2
         with:
           ref: main
-          check-name: 'Build'
+          check-name: 'Store Tag in Parameter Store'
           repo-token: ${{ secrets.GITHUB_TOKEN }}
           wait-interval: 20
 
