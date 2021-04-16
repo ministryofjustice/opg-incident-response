@@ -4,8 +4,7 @@ on:
   push:
     branches:
       - main
-    paths:
-        - 'terraform/*'
+
 defaults:
   run:
     shell: bash
@@ -13,10 +12,19 @@ defaults:
 jobs:
   pull_tag:
     name: Pull latest tag from parameter store.
-    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Wait for build checks
+        uses: lewagon/wait-on-check-action@v0.2
+        with:
+          ref: main
+          check-name: 'Build & Push Containers'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 20
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
@@ -31,10 +39,11 @@ jobs:
         uses: unfor19/install-aws-cli-action@v1
       - name: Pull Tag from Parameter Store
         run: |
-          echo ::set-env name=TAG_NAME::$(aws ssm get-parameter --region "eu-west-1" --name "incident-response-production-tag" --query Parameter.Value)
+          echo  'TAG_NAME='$(aws ssm get-parameter --region "eu-west-1" --name "incident-response-production-tag" --query Parameter.Value) >> $GITHUB_ENV
 
   terraform:
     name: 'Terraform'
+    needs: pull_tag
     runs-on: ubuntu-latest
     env:
       AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
