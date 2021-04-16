@@ -16,7 +16,10 @@ def slack_format(value):
     user_links = re.findall(r"&lt;@(U.+?)&gt;", value)
 
     for user_id in user_links:
-        user = ExternalUser.objects.get(external_id=user_id)
+        try:
+            user = ExternalUser.objects.get(external_id=user_id)
+        except:
+            user = ExternalUser(external_id=user_id, full_name='@' + user_id)
 
         value = value.replace('&lt;@' + user_id + '&gt;', '<a class="govuk-link" href="slack://user?team=T02DYEB3A&amp;id=' + user.external_id + '">' + user.full_name + '</a>')
 
