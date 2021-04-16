@@ -12,10 +12,19 @@ defaults:
 jobs:
   pull_tag:
     name: Pull latest tag from parameter store.
-    needs: build
     runs-on: ubuntu-latest
     if: github.ref == 'refs/heads/main' && github.event_name == 'push'
     steps:
+      - uses: actions/checkout@v2
+
+      - name: Wait for build checks
+        uses: lewagon/wait-on-check-action@v0.2
+        with:
+          ref: main
+          check-name: 'Build & Push Containers'
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+          wait-interval: 20
+
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
         with:
