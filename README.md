@@ -39,7 +39,7 @@ To connect to GitHub, you'll need to create a GitHub OAuth App and set the envir
 
 As with Slack, local development shouldn't interfere with our real Statuspage so you'll need to set up your own account. You should then set `STATUSPAGEIO_API_KEY` to [your API key][statuspage-api-key] and `STATUSPAGEIO_PAGE_ID` to your team ID.
 
-### Environment variables
+### Environment variables
 
 | Variable                     | Real value required?           | Details                                                                                             |
 | ---------------------------- | ------------------------------ | --------------------------------------------------------------------------------------------------- |
