@@ -90,7 +90,7 @@
                             {% for action in actions %}
                                 <div class="govuk-checkboxes__item">
                                     <input class="govuk-checkboxes__input" id="action-{{ action.id }}" name="action[{{action.id}}]" value="{{ action.id }}" type="checkbox" {% if action.done %}checked{% endif %}>
-                                    <label class="govuk-label govuk-checkboxes__label" for="action-{{ action.id }}">
+                                    <label class="govuk-label govuk-checkboxes__label" for="action-{{ action.id }}" data-raw="{{ action.details | safe | escape_quote | safe }}">
                                         {{ action.details | slack_format | unslackify | safe }}
                                     </label>
                                 </div>
