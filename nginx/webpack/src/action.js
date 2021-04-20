@@ -36,7 +36,7 @@ Actions.prototype.handleClickLabel = function handleClickLabel(event) {
   const checkbox = document.getElementById(event.target.getAttribute('for'));
   const actionId = checkbox.value;
 
-  const description = prompt('Enter a new action description', event.target.getAttribute('data-raw'));
+  const description = prompt('Enter a new action description\n\nTag a user with <@SlackIdOrName>', event.target.getAttribute('data-raw'));
 
   if (description) {
     const form = new FormData();

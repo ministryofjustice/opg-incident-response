@@ -2,6 +2,7 @@ import re
 
 from django import template
 from django.conf import settings
+from django.db.models import Q
 from response.core.models import ExternalUser
 
 register = template.Library()
@@ -13,11 +14,13 @@ def slack_format(value):
 
     value = value.replace('<', '&lt;').replace('>', '&gt;')
 
-    user_links = re.findall(r"&lt;@(U.+?)&gt;", value)
+    user_links = re.findall(r"&lt;@(.+?)&gt;", value)
 
     for user_id in user_links:
         try:
-            user = ExternalUser.objects.get(external_id=user_id)
+            user = ExternalUser.objects.get(
+                Q(external_id=user_id) | Q(display_name__iexact=user_id) | Q(full_name__iexact=user_id)
+            )
         except:
             user = ExternalUser(external_id=user_id, full_name='@' + user_id)
 
