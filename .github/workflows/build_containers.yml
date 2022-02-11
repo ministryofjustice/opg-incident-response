@@ -30,7 +30,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
-          role-to-assume: arn:aws:iam::311462405659:role/shared-ci
+          role-to-assume: arn:aws:iam::311462405659:role/incident-response-ci
           role-duration-seconds: 3600
           role-session-name: GitHubActions
 
@@ -109,7 +109,7 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: eu-west-1
-          role-to-assume: arn:aws:iam::997462338508:role/shared-ci
+          role-to-assume: arn:aws:iam::997462338508:role/incident-response-ci
           role-duration-seconds: 3600
           role-session-name: GitHubActions
       - name: Install AWS CLI
