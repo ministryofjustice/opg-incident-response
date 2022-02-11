@@ -27,11 +27,11 @@ locals {
 }
 
 variable "default_role" {
-  default = "shared-ci"
+  default = "incident-response-ci"
 }
 
 variable "management_role" {
-  default = "shared-ci"
+  default = "incident-response-ci"
 }
 
 variable "accounts" {
