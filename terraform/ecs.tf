@@ -1,6 +1,5 @@
 resource "aws_ecs_cluster" "cluster" {
   name = "incident-response"
-  tags = local.tags
 }
 
 resource "aws_ecs_service" "service" {
@@ -32,7 +31,6 @@ resource "aws_ecs_service" "service" {
 resource "aws_security_group" "ecs_service" {
   name_prefix = "ecs_service-"
   vpc_id      = data.aws_vpc.default.id
-  tags        = local.tags
 
   lifecycle {
     create_before_destroy = true

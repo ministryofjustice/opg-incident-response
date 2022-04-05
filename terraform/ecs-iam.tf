@@ -2,7 +2,6 @@
 resource "aws_iam_role" "response_primary" {
   name_prefix        = "response-primary-"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_policy.json
-  tags               = local.tags
 }
 
 resource "aws_iam_role_policy" "response_primary" {
@@ -31,7 +30,6 @@ data "aws_iam_policy_document" "response_primary" {
 resource "aws_iam_role" "execution_role" {
   name_prefix        = "execution_role-"
   assume_role_policy = data.aws_iam_policy_document.ecs_tasks_assume_policy.json
-  tags               = local.tags
 }
 
 resource "aws_iam_role_policy" "execution_role" {
