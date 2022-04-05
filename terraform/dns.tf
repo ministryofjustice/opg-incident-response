@@ -23,7 +23,6 @@ resource "aws_route53_record" "response" {
 resource "aws_acm_certificate" "response" {
   domain_name       = aws_route53_record.response.fqdn
   validation_method = "DNS"
-  tags              = local.tags
 
   lifecycle {
     create_before_destroy = true

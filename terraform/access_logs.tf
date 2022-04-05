@@ -24,15 +24,20 @@ data "aws_iam_policy_document" "loadbalancer" {
 
 resource "aws_s3_bucket" "access_log" {
   bucket        = "incident-response-${terraform.workspace}-lb-access-log"
-  acl           = "private"
-  tags          = local.tags
   force_destroy = true
+}
 
-  server_side_encryption_configuration {
-    rule {
-      apply_server_side_encryption_by_default {
-        sse_algorithm = "aws:kms"
-      }
+resource "aws_s3_bucket_acl" "access_log" {
+  bucket = aws_s3_bucket.access_log.id
+  acl    = "private"
+}
+
+resource "aws_s3_bucket_server_side_encryption_configuration" "access_log" {
+  bucket = aws_s3_bucket.access_log.bucket
+
+  rule {
+    apply_server_side_encryption_by_default {
+      sse_algorithm = "aws:kms"
     }
   }
 }

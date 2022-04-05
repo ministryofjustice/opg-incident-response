@@ -3,7 +3,6 @@ resource "aws_lb" "loadbalancer" {
   internal           = false
   load_balancer_type = "application"
   subnets            = data.aws_subnet.public.*.id
-  tags               = local.tags
 
   security_groups = [
     aws_security_group.incident_response_loadbalancer.id,
@@ -22,7 +21,6 @@ resource "aws_lb_target_group" "tg" {
   vpc_id               = data.aws_vpc.default.id
   deregistration_delay = 0
   depends_on           = [aws_lb.loadbalancer]
-  tags                 = local.tags
 
   health_check {
     protocol            = "HTTP"
@@ -72,7 +70,6 @@ resource "aws_security_group" "incident_response_loadbalancer" {
   name_prefix = "incident-response-lb-"
   description = "Allow inbound traffic"
   vpc_id      = data.aws_vpc.default.id
-  tags        = local.tags
 
   lifecycle {
     create_before_destroy = true

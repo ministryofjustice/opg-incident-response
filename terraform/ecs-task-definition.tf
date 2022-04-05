@@ -25,57 +25,57 @@ variable "nginx_tag" {
   default = "v1.4.0"
 }
 
-variable "response_tag"{
+variable "response_tag" {
   default = "v1.4.0"
 }
 
 locals {
 
-    nginx = jsonencode({
-      cpu       = 0,
-      essential = true,
-      image     = "${data.aws_ecr_repository.nginx.repository_url}:${var.nginx_tag}",
-      name      = "nginx",
-      mountPoints = [],
-      portMappings = [{
-        containerPort = 80,
-        hostPort      = 80,
-        protocol      = "tcp"
-      }],
-      logConfiguration = {
-        logDriver = "awslogs",
-        options = {
-          awslogs-group        = aws_cloudwatch_log_group.response.name,
-          awslogs-region       = "eu-west-1",
-          awslogs-stream-prefix = "nginx"
-        }
+  nginx = jsonencode({
+    cpu         = 0,
+    essential   = true,
+    image       = "${data.aws_ecr_repository.nginx.repository_url}:${var.nginx_tag}",
+    name        = "nginx",
+    mountPoints = [],
+    portMappings = [{
+      containerPort = 80,
+      hostPort      = 80,
+      protocol      = "tcp"
+    }],
+    logConfiguration = {
+      logDriver = "awslogs",
+      options = {
+        awslogs-group         = aws_cloudwatch_log_group.response.name,
+        awslogs-region        = "eu-west-1",
+        awslogs-stream-prefix = "nginx"
+      }
+    },
+    environment = [
+      {
+        name  = "APP_HOST",
+        value = "localhost"
       },
-      environment = [
-        {
-          name  = "APP_HOST",
-          value = "localhost"
-        },
-        {
-          name  = "APP_PORT",
-          value = "8000"
-        }
-      ]
-    })
+      {
+        name  = "APP_PORT",
+        value = "8000"
+      }
+    ]
+  })
 
   response = jsonencode({
-    cpu          = 0,
-    essential    = true,
-    image        = "${data.aws_ecr_repository.response.repository_url}:${var.response_tag}",
+    cpu         = 0,
+    essential   = true,
+    image       = "${data.aws_ecr_repository.response.repository_url}:${var.response_tag}",
     mountPoints = [],
-    name         = "response",
+    name        = "response",
     portMappings = [{
       containerPort = 8000,
       hostPort      = 8000,
       protocol      = "tcp"
     }],
     environment = [{
-        name  = "DJANGO_SETTINGS_MODULE",
-        value = "opgincidentresponse.settings.prod"
+      name  = "DJANGO_SETTINGS_MODULE",
+      value = "opgincidentresponse.settings.prod"
       },
       {
         name  = "INCIDENT_BOT_NAME",
@@ -123,9 +123,9 @@ locals {
         value = "thomas.withers@digital.justice.gov.uk"
       }
     ],
-    secrets     = [{
-        name      = "SLACK_TOKEN",
-        valueFrom = aws_secretsmanager_secret.slack_token.arn
+    secrets = [{
+      name      = "SLACK_TOKEN",
+      valueFrom = aws_secretsmanager_secret.slack_token.arn
       },
       {
         name      = "SLACK_SIGNING_SECRET",
