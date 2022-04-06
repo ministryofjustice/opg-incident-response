@@ -25,6 +25,6 @@ server {
         proxy_redirect off;
     }
 
-    # Comply with https://ministryofjustice.github.io/security-guidance/contact/implement-security-txt/#implementing-securitytxt
-    rewrite ^/.well_known/security.txt$ https://raw.githubusercontent.com/ministryofjustice/security-guidance/master/contact/vulnerability-disclosure-security.txt permanent;
+    # Comply with https://security-guidance.service.justice.gov.uk/implement-security-txt/#implementing-securitytxt
+    rewrite ^/.well_known/security.txt$ https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt permanent;
 }
