@@ -26,5 +26,5 @@ server {
     }
 
     # Comply with https://security-guidance.service.justice.gov.uk/implement-security-txt/#implementing-securitytxt
-    rewrite ^/.well_known/security.txt$ https://raw.githubusercontent.com/ministryofjustice/security-guidance/main/contact/vulnerability-disclosure-security.txt permanent;
+    rewrite ^/.well_known/security.txt$ https://security-guidance.service.justice.gov.uk/.well-known/security.txt permanent;
 }
