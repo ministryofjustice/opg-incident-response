@@ -1,4 +1,4 @@
-Django==2.2.28
+Django==4.0.5
 django-after-response==0.2.2
 django-incident-response==0.5.1
 django-health-check==3.16.5
