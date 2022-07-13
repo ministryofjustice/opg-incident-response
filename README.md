@@ -8,7 +8,6 @@ To start the application locally, copy `env.dev.example` to `.env` and configure
 
 You will need to configure a Slack app following the instructions below, and can then start the application with `docker-compose up -d`.
 
-
 ## Versions and Releases
 
 This project uses [SemVer for](https://semver.org) versoning.
