@@ -8,6 +8,7 @@ To start the application locally, copy `env.dev.example` to `.env` and configure
 
 You will need to configure a Slack app following the instructions below, and can then start the application with `docker-compose up -d`.
 
+Note if you are using ngrok, they have now introduced auth tokens so you'll need to add one to the `ngrok.yml` in the ngrok container
 
 ## Versions and Releases
 
