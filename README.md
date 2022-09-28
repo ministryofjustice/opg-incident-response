@@ -14,13 +14,13 @@ Note if you are using ngrok, they have now introduced auth tokens so you'll need
 
 This project uses [SemVer for](https://semver.org) versoning.
 
-By default, any merge to main will be a MINOR release. You can control which version number to increment by add #major, #minor or #patch to the commit message that goes into main.
+By default, any merge to main will be a MINOR release. You can control which version number to increment by add `#major`, `#minor` or `#patch` to the commit message that goes into main.
 
 ### Configuring Slack
 
-In order to avoid polluting our real Slack workspace, and to give you full control over permissions, you should configure your local copy of the app with [your own Slack workspace][slack-create].
+In order to avoid polluting our real Slack workspace, and to give you full control over permissions, you should configure your local copy of the app with [your own Slack workspace](#slack-create).
 
-You now need to [create a Slack app][slack-app-create] and [configure it][slack-app-config]. Note that you'll need your public ngrok URL to configure endpoints for Slack to use, which you can find by running `docker-compose logs ngrok`.
+You now need to [create a Slack app](#slack-app-create) and [configure it](#slack-app-config). Note that you'll need your public ngrok URL to configure endpoints for Slack to use, which you can find by running `docker-compose logs ngrok`.
 
 After you've configured your app, Slack will provide you with bot OAuth token (starting `xoxb-`) and a signing secret, which should be used for the `SLACK_TOKEN` and `SLACK_SIGNING_SECRET` environment variables, respectively. You'll also need to set `SLACK_TEAM_ID` to the team ID of your Slack workspace.
 
@@ -38,7 +38,7 @@ To connect to GitHub, you'll need to create a GitHub OAuth App and set the envir
 
 #### Statuspage
 
-As with Slack, local development shouldn't interfere with our real Statuspage so you'll need to set up your own account. You should then set `STATUSPAGEIO_API_KEY` to [your API key][statuspage-api-key] and `STATUSPAGEIO_PAGE_ID` to your team ID.
+As with Slack, local development shouldn't interfere with our real Statuspage so you'll need to set up your own account. You should then set `STATUSPAGEIO_API_KEY` to [your API key](#statuspage-api-key) and `STATUSPAGEIO_PAGE_ID` to your team ID.
 
 ### Environment variables
 
@@ -60,8 +60,24 @@ As with Slack, local development shouldn't interfere with our real Statuspage so
 | PAGERDUTY_EMAIL              | Only if testing PagerDuty      | Provided by Pagerduty                                                                               |
 | PAGERDUTY_SERVICE            | Only if testing PagerDuty      | Provided by Pagerduty                                                                               |
 
-[django-createsuperuser]: https://docs.djangoproject.com/en/3.1/ref/django-admin/#createsuperuser
-[slack-create]: https://slack.com/get-started#/create
-[slack-app-create]: https://github.com/monzo/response/blob/master/docs/slack_app_create.md
-[slack-app-config]: https://github.com/monzo/response/blob/master/docs/slack_app_config.md
-[statuspage-api-key]: https://support.atlassian.com/statuspage/docs/create-and-manage-api-keys/
+## Resources
+
+### django-createsuperuser
+
+[https://docs.djangoproject.com/en/3.1/ref/django-admin/#createsuperuser](https://docs.djangoproject.com/en/3.1/ref/django-admin/#createsuperuser)
+
+### slack-create
+
+[https://slack.com/get-started#/create](https://slack.com/get-started#/create)
+
+### slack-app-create
+
+[https://github.com/monzo/response/blob/master/docs/slack_app_create.md](https://github.com/monzo/response/blob/master/docs/slack_app_create.md)
+
+### slack-app-config
+
+[https://github.com/monzo/response/blob/master/docs/slack_app_config.md](https://github.com/monzo/response/blob/master/docs/slack_app_config.md)
+
+### statuspage-api-key
+
+[https://support.atlassian.com/statuspage/docs/create-and-manage-api-keys/](https://support.atlassian.com/statuspage/docs/create-and-manage-api-keys/)
