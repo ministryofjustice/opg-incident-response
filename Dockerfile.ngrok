@@ -1,0 +1,3 @@
+FROM gtriggiano/ngrok-tunnel
+RUN echo "authtoken: ${NGROK_TOKEN}" >> ngrok.yml
+CMD ["npm", "start"]
