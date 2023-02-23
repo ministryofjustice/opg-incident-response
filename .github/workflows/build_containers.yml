@@ -17,8 +17,22 @@ defaults:
     shell: bash
 
 jobs:
+  build-containers:
+    name: 'Build container only'
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Build
+        run: |
+          docker build -f Dockerfile.response
+          docker build -f Dockerfile.nginx
+          
+
   build:
     name: 'Build & Push Containers'
+    if: ${{ github.actor != 'dependabot[bot]' }}
     runs-on: ubuntu-latest
     outputs:
       build_tag: ${{ steps.create_tag.outputs.new_tag }}
