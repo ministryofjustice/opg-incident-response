@@ -36,10 +36,6 @@ GitHub signin is turned off in dev mode, but you can enable it by enabling the `
 
 To connect to GitHub, you'll need to create a GitHub OAuth App and set the environment variables `SOCIAL_AUTH_GITHUB_KEY` and `SOCIAL_AUTH_GITHUB_SECRET` to its the app's key and secret respectively. There is already an app called "opg-response-development" which is set up in the ministryofjustice organization for local development.
 
-#### Statuspage
-
-As with Slack, local development shouldn't interfere with our real Statuspage so you'll need to set up your own account. You should then set `STATUSPAGEIO_API_KEY` to [your API key](#statuspage-api-key) and `STATUSPAGEIO_PAGE_ID` to your team ID.
-
 ### Environment variables
 
 | Variable                     | Real value required?           | Details                                                                                             |
@@ -54,8 +50,6 @@ As with Slack, local development shouldn't interfere with our real Statuspage so
 | INCIDENT_BOT_NAME            | Yes                            | The name of your test app                                                                           |
 | INCIDENT_CHANNEL_NAME        | Yes                            | The channel to post new live incidents to                                                           |
 | INCIDENT_REPORT_CHANNEL_NAME | Yes                            | The channel to post new incident reports to                                                         |
-| STATUSPAGEIO_API_KEY         | Only if testing Statuspage     | Provided by Statuspage                                                                              |
-| STATUSPAGEIO_PAGE_ID         | Only if testing Statuspage     | Provided by Statuspage                                                                              |
 | PAGERDUTY_API_KEY            | Only if testing PagerDuty      | Provided by Pagerduty                                                                               |
 | PAGERDUTY_EMAIL              | Only if testing PagerDuty      | Provided by Pagerduty                                                                               |
 | PAGERDUTY_SERVICE            | Only if testing PagerDuty      | Provided by Pagerduty                                                                               |
