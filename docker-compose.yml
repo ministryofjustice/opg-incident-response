@@ -55,11 +55,13 @@ services:
       - postgres_data:/var/lib/postgresql/data/
 
   ngrok:
-    image: gtriggiano/ngrok-tunnel
+    image: ngrok/ngrok:latest
+    restart: unless-stopped
+    command:
+      - "http"
+      - "http://response:8000"
     container_name: ngrok
-    environment:
-      TARGET_HOST: "response"
-      TARGET_PORT: 8000
+    env_file: .env
     ports:
       - "4040:4040"
     depends_on:
