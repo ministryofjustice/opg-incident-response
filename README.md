@@ -8,7 +8,7 @@ To start the application locally, copy `env.dev.example` to `.env` and configure
 
 You will need to configure a Slack app following the instructions below, and can then start the application with `docker-compose up -d`.
 
-Note if you are using ngrok, they have now introduced auth tokens so you'll need to add one to the `ngrok.yml` in the ngrok container
+Note if you are using ngrok, they have now introduced auth tokens. You can add an NGROK_AUTHTOKEN to your local .env file and it will be passed down to the container so you don't risk commiting it. 
 
 ## Versions and Releases
 
@@ -20,7 +20,7 @@ By default, any merge to main will be a MINOR release. You can control which ver
 
 In order to avoid polluting our real Slack workspace, and to give you full control over permissions, you should configure your local copy of the app with [your own Slack workspace](#slack-create).
 
-You now need to [create a Slack app](#slack-app-create) and [configure it](#slack-app-config). Note that you'll need your public ngrok URL to configure endpoints for Slack to use, which you can find by running `docker-compose logs ngrok`.
+You now need to [create a Slack app](#slack-app-create) and [configure it](#slack-app-config). Note that you'll need your public ngrok URL to configure endpoints for Slack to use, which you can find by visiting the ngrok admin page which is visible on ```localhost:4040``` once you have run ```docker-compose up```.
 
 After you've configured your app, Slack will provide you with bot OAuth token (starting `xoxb-`) and a signing secret, which should be used for the `SLACK_TOKEN` and `SLACK_SIGNING_SECRET` environment variables, respectively. You'll also need to set `SLACK_TEAM_ID` to the team ID of your Slack workspace.
 
@@ -71,7 +71,3 @@ To connect to GitHub, you'll need to create a GitHub OAuth App and set the envir
 ### slack-app-config
 
 [https://github.com/monzo/response/blob/master/docs/slack_app_config.md](https://github.com/monzo/response/blob/master/docs/slack_app_config.md)
-
-### statuspage-api-key
-
-[https://support.atlassian.com/statuspage/docs/create-and-manage-api-keys/](https://support.atlassian.com/statuspage/docs/create-and-manage-api-keys/)
