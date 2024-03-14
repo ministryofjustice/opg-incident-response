@@ -8,7 +8,7 @@ To start the application locally, copy `env.dev.example` to `.env` and configure
 
 You will need to configure a Slack app following the instructions below, and can then start the application with `docker-compose up -d`.
 
-Note if you are using ngrok, they have now introduced auth tokens so you'll need to add one to the `ngrok.yml` in the ngrok container
+Note if you are using ngrok, they have now introduced auth tokens. You can add an NGROK_AUTHTOKEN to your local .env file and it will be passed down to the container so you don't risk commiting it. 
 
 ## Versions and Releases
 
@@ -20,7 +20,7 @@ By default, any merge to main will be a MINOR release. You can control which ver
 
 In order to avoid polluting our real Slack workspace, and to give you full control over permissions, you should configure your local copy of the app with [your own Slack workspace](#slack-create).
 
-You now need to [create a Slack app](#slack-app-create) and [configure it](#slack-app-config). Note that you'll need your public ngrok URL to configure endpoints for Slack to use, which you can find by running `docker-compose logs ngrok`.
+You now need to [create a Slack app](#slack-app-create) and [configure it](#slack-app-config). Note that you'll need your public ngrok URL to configure endpoints for Slack to use, which you can find by visiting the ngrok admin page which is visible on ```localhost:4040``` once you have run ```docker-compose up```.
 
 After you've configured your app, Slack will provide you with bot OAuth token (starting `xoxb-`) and a signing secret, which should be used for the `SLACK_TOKEN` and `SLACK_SIGNING_SECRET` environment variables, respectively. You'll also need to set `SLACK_TEAM_ID` to the team ID of your Slack workspace.
 
@@ -36,10 +36,6 @@ GitHub signin is turned off in dev mode, but you can enable it by enabling the `
 
 To connect to GitHub, you'll need to create a GitHub OAuth App and set the environment variables `SOCIAL_AUTH_GITHUB_KEY` and `SOCIAL_AUTH_GITHUB_SECRET` to its the app's key and secret respectively. There is already an app called "opg-response-development" which is set up in the ministryofjustice organization for local development.
 
-#### Statuspage
-
-As with Slack, local development shouldn't interfere with our real Statuspage so you'll need to set up your own account. You should then set `STATUSPAGEIO_API_KEY` to [your API key](#statuspage-api-key) and `STATUSPAGEIO_PAGE_ID` to your team ID.
-
 ### Environment variables
 
 | Variable                     | Real value required?           | Details                                                                                             |
@@ -54,8 +50,6 @@ As with Slack, local development shouldn't interfere with our real Statuspage so
 | INCIDENT_BOT_NAME            | Yes                            | The name of your test app                                                                           |
 | INCIDENT_CHANNEL_NAME        | Yes                            | The channel to post new live incidents to                                                           |
 | INCIDENT_REPORT_CHANNEL_NAME | Yes                            | The channel to post new incident reports to                                                         |
-| STATUSPAGEIO_API_KEY         | Only if testing Statuspage     | Provided by Statuspage                                                                              |
-| STATUSPAGEIO_PAGE_ID         | Only if testing Statuspage     | Provided by Statuspage                                                                              |
 | PAGERDUTY_API_KEY            | Only if testing PagerDuty      | Provided by Pagerduty                                                                               |
 | PAGERDUTY_EMAIL              | Only if testing PagerDuty      | Provided by Pagerduty                                                                               |
 | PAGERDUTY_SERVICE            | Only if testing PagerDuty      | Provided by Pagerduty                                                                               |
@@ -77,7 +71,3 @@ As with Slack, local development shouldn't interfere with our real Statuspage so
 ### slack-app-config
 
 [https://github.com/monzo/response/blob/master/docs/slack_app_config.md](https://github.com/monzo/response/blob/master/docs/slack_app_config.md)
-
-### statuspage-api-key
-
-[https://support.atlassian.com/statuspage/docs/create-and-manage-api-keys/](https://support.atlassian.com/statuspage/docs/create-and-manage-api-keys/)
