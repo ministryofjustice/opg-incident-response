@@ -47,12 +47,17 @@ services:
     tty: true
 
   db:
-    image: "postgres:11.2"
+    image: "postgres:12"
     container_name: postgres
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data/
+      - postgres_data_12_vol:/var/lib/postgresql/data/
+    environment:
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      PGPASSWORD: postgres
 
   ngrok:
     image: ngrok/ngrok:latest
@@ -68,5 +73,5 @@ services:
       - response
 
 volumes:
-  postgres_data:
+  postgres_data_12_vol:
   pypd:
