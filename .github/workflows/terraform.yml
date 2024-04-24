@@ -129,5 +129,4 @@ jobs:
 
       - name: Apply ${{ matrix.environment }}
         if: github.ref == 'refs/heads/main'
-        run:  echo "IM DOING AN APPLY!"
-        # run:  terraform apply -parallelism=200 -lock-timeout=300s ${{ env.TF_WORKSPACE }}.plan
+        run:  terraform apply -parallelism=200 -lock-timeout=300s ${{ env.TF_WORKSPACE }}.plan
