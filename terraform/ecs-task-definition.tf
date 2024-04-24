@@ -22,11 +22,13 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "v1.4.0"
+  default = "v1.117.0"
+  type    = string
 }
 
 variable "response_tag" {
-  default = "v1.4.0"
+  default = "v1.117.0"
+  type    = string
 }
 
 locals {
