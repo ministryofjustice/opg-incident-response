@@ -2,7 +2,7 @@ resource "aws_lb" "loadbalancer" {
   name               = "incident-response-${terraform.workspace}"
   internal           = false
   load_balancer_type = "application"
-  subnets            = data.aws_subnet.public.*.id
+  subnets            = data.aws_subnets.public.ids
 
   security_groups = [
     aws_security_group.incident_response_loadbalancer.id,
