@@ -42,8 +42,3 @@ resource "aws_security_group_rule" "response_rds_ecs_task" {
   source_security_group_id = aws_security_group.ecs_service.id
   description              = "Response RDS inbound from Response ECS tasks"
 }
-
-resource "aws_db_subnet_group" "data_persitance_subnet_group" {
-  name       = "data-persitance-subnet-${terraform.workspace}"
-  subnet_ids = data.aws_subnet_ids.data_persitance.ids
-}
