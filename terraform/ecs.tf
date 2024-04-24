@@ -3,13 +3,14 @@ resource "aws_ecs_cluster" "cluster" {
 }
 
 resource "aws_ecs_service" "service" {
-  name             = "response"
-  cluster          = aws_ecs_cluster.cluster.id
-  task_definition  = aws_ecs_task_definition.response.arn
-  desired_count    = 1
-  launch_type      = "FARGATE"
-  platform_version = "1.4.0"
-  depends_on       = [aws_lb.loadbalancer]
+  name                  = "response"
+  cluster               = aws_ecs_cluster.cluster.id
+  task_definition       = aws_ecs_task_definition.response.arn
+  desired_count         = 1
+  launch_type           = "FARGATE"
+  platform_version      = "1.4.0"
+  depends_on            = [aws_lb.loadbalancer]
+  wait_for_steady_state = true
 
   deployment_controller {
     type = "ECS"
@@ -17,7 +18,7 @@ resource "aws_ecs_service" "service" {
 
   network_configuration {
     security_groups  = [aws_security_group.ecs_service.id]
-    subnets          = data.aws_subnet.private.*.id
+    subnets          = data.aws_subnets.private.ids
     assign_public_ip = false
   }
 

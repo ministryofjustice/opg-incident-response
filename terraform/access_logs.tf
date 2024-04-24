@@ -27,9 +27,24 @@ resource "aws_s3_bucket" "access_log" {
   force_destroy = true
 }
 
-resource "aws_s3_bucket_acl" "access_log" {
+resource "aws_s3_bucket_ownership_controls" "bucket_object_ownership" {
   bucket = aws_s3_bucket.access_log.id
-  acl    = "private"
+  rule {
+    object_ownership = "BucketOwnerEnforced"
+  }
+}
+
+resource "aws_s3_bucket_lifecycle_configuration" "bucket" {
+  bucket = aws_s3_bucket.access_log.id
+
+  rule {
+    id     = "ExpireObjectsAfter13Months"
+    status = "Enabled"
+
+    expiration {
+      days = 400
+    }
+  }
 }
 
 resource "aws_s3_bucket_server_side_encryption_configuration" "access_log" {
@@ -40,6 +55,15 @@ resource "aws_s3_bucket_server_side_encryption_configuration" "access_log" {
       sse_algorithm = "aws:kms"
     }
   }
+}
+
+resource "aws_s3_bucket_public_access_block" "public_access_policy" {
+  bucket = aws_s3_bucket.access_log.id
+
+  block_public_acls       = true
+  block_public_policy     = true
+  ignore_public_acls      = true
+  restrict_public_buckets = true
 }
 
 resource "aws_s3_bucket_policy" "access_log" {
