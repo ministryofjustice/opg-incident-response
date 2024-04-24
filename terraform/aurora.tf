@@ -45,5 +45,5 @@ resource "aws_security_group_rule" "response_rds_ecs_task" {
 
 resource "aws_db_subnet_group" "data_persitance_subnet_group" {
   name       = "data-persitance-subnet-${terraform.workspace}"
-  subnet_ids = data.aws_subnet_ids.data_persitance.ids
+  subnet_ids = data.aws_subnets.data_persistence.ids
 }

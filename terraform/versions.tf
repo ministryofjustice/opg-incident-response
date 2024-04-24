@@ -10,7 +10,8 @@ terraform {
 
   required_providers {
     aws = {
-      source = "hashicorp/aws"
+      source  = "hashicorp/aws"
+      version = ">= 5.42.0"
     }
   }
   required_version = ">= 1.8.1"
@@ -20,7 +21,7 @@ provider "aws" {
   region = "eu-west-1"
 
   assume_role {
-    role_arn     = "arn:aws:iam::${lookup(var.accounts, terraform.workspace)}:role/${var.default_role}"
+    role_arn     = "arn:aws:iam::${lookup(local.accounts, terraform.workspace, local.accounts["development"])}:role/${var.default_role}"
     session_name = "terraform-session"
   }
 

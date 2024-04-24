@@ -1,6 +1,11 @@
+locals {
+  dns_prefix = lookup(local.dns_prefixes, terraform.workspace, "incident")
+  dns_suffix = "opg.service.justice.gov.uk"
+  dns_name   = "${local.dns_prefix}.${local.dns_suffix}"
+}
 data "aws_route53_zone" "opg_service_justice_gov_uk" {
   provider = aws.management
-  name     = "opg.service.justice.gov.uk"
+  name     = local.dns_suffix
 }
 
 resource "aws_route53_record" "response" {
@@ -21,7 +26,7 @@ resource "aws_route53_record" "response" {
 }
 
 resource "aws_acm_certificate" "response" {
-  domain_name       = aws_route53_record.response.fqdn
+  domain_name       = local.dns_name
   validation_method = "DNS"
 
   lifecycle {
@@ -44,7 +49,6 @@ resource "aws_route53_record" "validation" {
   type            = each.value.type
   provider        = aws.management
   zone_id         = data.aws_route53_zone.opg_service_justice_gov_uk.id
-  depends_on      = [aws_acm_certificate.response]
 }
 
 resource "aws_acm_certificate_validation" "response" {

@@ -52,6 +52,10 @@ jobs:
         with:
           terraform_version: 1.8.1
           terraform_wrapper: false
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setup TFLint
+        with:
+          tflint_version: v0.50.1
 
       - name: Configure AWS Credentials For Terraform
         uses: aws-actions/configure-aws-credentials@v1
@@ -61,14 +65,18 @@ jobs:
           aws-region: eu-west-1
           role-session-name: GitHubActionsTerraform
 
+      - name: Terraform Format
+        run: terraform fmt --check --recursive 
+
+      - name: TF Lint
+        run: tflint --recursive
+
       - name: Terraform Init
         run: terraform init
 
       - name: Terraform Validate
         run: terraform validate
 
-      - name: Terraform Format
-        run: terraform fmt --check --recursive 
            
   plan-and-apply:
     name: Plan ${{ matrix.environment }}
