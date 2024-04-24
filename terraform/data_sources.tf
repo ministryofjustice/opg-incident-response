@@ -26,18 +26,6 @@ data "aws_subnets" "private" {
   }
 }
 
-data "aws_subnets" "data_persistence" {
-  filter {
-    name   = "vpc-id"
-    values = [data.aws_vpc.default.id]
-  }
-
-  filter {
-    name   = "tag:Name"
-    values = ["persistence"]
-  }
-}
-
 data "aws_caller_identity" "current" {}
 
 data "aws_kms_key" "rds" {
