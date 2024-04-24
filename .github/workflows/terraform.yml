@@ -1,0 +1,132 @@
+name: Terraform Lint, Plan, Apply
+
+on:  
+  pull_request:
+    branches:
+      - main
+    paths:
+      - 'terraform/*'
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+defaults:
+  run:
+    shell: bash
+    working-directory: terraform
+
+jobs:
+  pull-tag:
+    name: Pull latest tag from parameter store.
+    runs-on: ubuntu-latest
+    outputs:
+      latest-tag: ${{ steps.output_tag.outputs.tag }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-to-assume: arn:aws:iam::997462338508:role/incident-response-ci
+          role-duration-seconds: 3600
+          role-session-name: GitHubActions
+      - name: Install AWS CLI
+        id: install-aws-cli
+        uses: unfor19/install-aws-cli-action@v1
+      - name: Pull Tag from Parameter Store
+        run: |
+          echo  'TAG_NAME='$(aws ssm get-parameter --region "eu-west-1" --name "incident-response-production-tag" --query Parameter.Value) >> $GITHUB_ENV
+      - name: Output Tag
+        id: output_tag
+        run: echo "::set-output name=tag::${{ env.TAG_NAME }}"
+
+  lint-and-validate:
+    name: Terraform Lint & Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.8.1
+          terraform_wrapper: false
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setup TFLint
+        with:
+          tflint_version: v0.50.1
+
+      - name: Configure AWS Credentials For Terraform
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-session-name: GitHubActionsTerraform
+
+      - name: Terraform Format
+        run: terraform fmt --check --recursive 
+
+      - name: TF Lint
+        run: tflint --recursive
+
+      - name: Terraform Init
+        run: terraform init
+
+      - name: Terraform Validate
+        run: terraform validate
+
+           
+  plan-and-apply:
+    name: Plan ${{ matrix.environment }}
+    runs-on: ubuntu-latest
+    needs: 
+      - lint-and-validate
+      - pull-tag
+    env:
+      TF_VAR_response_tag: ${{ needs.pull-tag.outputs.latest-tag }}
+      TF_VAR_nginx_tag: ${{ needs.pull-tag.outputs.latest-tag }}
+    strategy:
+      max-parallel: 1
+      matrix:
+        include:
+          - environment: "Development"
+            workspace_environment: "development"
+
+          - environment: "Production"
+            workspace_environment: "production"
+
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.8.1
+          terraform_wrapper: false
+
+      - name: Configure AWS Credentials For Terraform
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: eu-west-1
+          role-session-name: GitHubActionsTerraform
+
+      - name: Setup
+        run: echo TF_WORKSPACE=${{ matrix.workspace_environment }} >> $GITHUB_ENV
+
+      - name: Init
+        run: terraform init
+
+      - name: Plan
+        run: terraform plan --lock-timeout=300s --parallelism=200 --out=${{ env.TF_WORKSPACE }}.plan > ${{ env.TF_WORKSPACE }}.log
+
+      - name: Output Plan
+        run: cat ${{ env.TF_WORKSPACE }}.log
+
+      - name: Output ConcisePlan
+        run: cat ${{ env.TF_WORKSPACE }}.log | grep '\.' | grep '#' || true
+
+      - name: Apply ${{ matrix.environment }}
+        if: github.ref == 'refs/heads/main'
+        run:  terraform apply -parallelism=200 -lock-timeout=300s ${{ env.TF_WORKSPACE }}.plan
