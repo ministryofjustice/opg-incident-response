@@ -23,7 +23,7 @@ data "aws_iam_policy_document" "loadbalancer" {
 }
 
 resource "aws_s3_bucket" "access_log" {
-  bucket        = "incident-response-${terraform.workspace}-lb-access-log"
+  bucket        = "incident-response-${local.environment}-lb-access-log"
   force_destroy = true
 }
 

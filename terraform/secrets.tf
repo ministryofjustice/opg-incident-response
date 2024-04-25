@@ -1,17 +1,17 @@
 resource "aws_secretsmanager_secret" "slack_token" {
-  name = "response/${terraform.workspace}/slack-token"
+  name = "response/${local.environment}/slack-token"
 }
 
 resource "aws_secretsmanager_secret" "slack_signing_key" {
-  name = "response/${terraform.workspace}/slack-signing-key"
+  name = "response/${local.environment}/slack-signing-key"
 }
 
 resource "aws_secretsmanager_secret" "slack_team_id" {
-  name = "response/${terraform.workspace}/slack-team-id"
+  name = "response/${local.environment}/slack-team-id"
 }
 
 resource "aws_secretsmanager_secret" "database_password" {
-  name = "response/${terraform.workspace}/rds-password"
+  name = "response/${local.environment}/rds-password"
 }
 
 data "aws_secretsmanager_secret_version" "database_password" {
@@ -19,25 +19,25 @@ data "aws_secretsmanager_secret_version" "database_password" {
 }
 
 resource "aws_secretsmanager_secret" "django_secret_key" {
-  name = "response/${terraform.workspace}/django-secret-key"
+  name = "response/${local.environment}/django-secret-key"
 }
 
 resource "aws_secretsmanager_secret" "github_client_id" {
-  name = "response/${terraform.workspace}/github-client-id"
+  name = "response/${local.environment}/github-client-id"
 }
 
 resource "aws_secretsmanager_secret" "github_client_secret" {
-  name = "response/${terraform.workspace}/github-client-secret"
+  name = "response/${local.environment}/github-client-secret"
 }
 
 resource "aws_secretsmanager_secret" "statuspage_io_page_id" {
-  name = "response/${terraform.workspace}/statuspageio-page-id"
+  name = "response/${local.environment}/statuspageio-page-id"
 }
 
 resource "aws_secretsmanager_secret" "statuspage_io_api_key" {
-  name = "response/${terraform.workspace}/statuspageio-api-key"
+  name = "response/${local.environment}/statuspageio-api-key"
 }
 
 resource "aws_secretsmanager_secret" "pagerduty_api_key" {
-  name = "response/${terraform.workspace}/pagerduty-api-key"
+  name = "response/${local.environment}/pagerduty-api-key"
 }

@@ -21,7 +21,7 @@ provider "aws" {
   region = "eu-west-1"
 
   assume_role {
-    role_arn     = "arn:aws:iam::${lookup(local.accounts, terraform.workspace, local.accounts["development"])}:role/${var.default_role}"
+    role_arn     = "arn:aws:iam::${lookup(local.accounts, local.environment, local.accounts["development"])}:role/${var.default_role}"
     session_name = "terraform-session"
   }
 

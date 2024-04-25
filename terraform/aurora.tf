@@ -1,5 +1,5 @@
 resource "aws_rds_cluster" "db" {
-  cluster_identifier           = "response-${terraform.workspace}"
+  cluster_identifier           = "response-${local.environment}"
   apply_immediately            = true
   availability_zones           = ["eu-west-1a", "eu-west-1b", "eu-west-1c"]
   backup_retention_period      = 14
@@ -8,7 +8,7 @@ resource "aws_rds_cluster" "db" {
   deletion_protection          = true
   engine                       = "aurora-postgresql"
   engine_mode                  = "serverless"
-  final_snapshot_identifier    = "response-${terraform.workspace}-final-snapshot"
+  final_snapshot_identifier    = "response-${local.environment}-final-snapshot"
   kms_key_id                   = data.aws_kms_key.rds.arn
   master_username              = "response"
   master_password              = data.aws_secretsmanager_secret_version.database_password.secret_string
@@ -27,10 +27,10 @@ resource "aws_rds_cluster" "db" {
 }
 
 resource "aws_security_group" "response_rds" {
-  name        = "response-rds-${terraform.workspace}"
+  name        = "response-rds-${local.environment}"
   description = "response rds access"
   vpc_id      = data.aws_vpc.default.id
-  tags        = { "Name" = "response-api-${terraform.workspace}" }
+  tags        = { "Name" = "response-api-${local.environment}" }
 }
 
 resource "aws_security_group_rule" "response_rds_ecs_task" {
