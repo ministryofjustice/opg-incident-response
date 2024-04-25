@@ -5,12 +5,14 @@ locals {
       incident_bot_id       = "A070M293JRY"
       incident_bot_name     = "opg-incident-response-development"
       incident_channel_name = "incident-response"
+      number_of_tasks       = 0
     }
     production = {
       django_settings       = "opgincidentresponse.settings.prod"
       incident_bot_id       = "A01CXL45ZE1"
       incident_bot_name     = "opgincidentresponse"
       incident_channel_name = "opg-incident"
+      number_of_tasks       = 1
     }
   }
 }
@@ -92,23 +94,23 @@ locals {
     }],
     environment = [{
       name  = "DJANGO_SETTINGS_MODULE",
-      value = local.config[terraform.workspace]["django_settings"]
+      value = local.config[local.environment]["django_settings"]
       },
       {
         name  = "INCIDENT_BOT_NAME",
-        value = local.config[terraform.workspace]["incident_bot_name"]
+        value = local.config[local.environment]["incident_bot_name"]
       },
       {
         name  = "INCIDENT_BOT_ID",
-        value = local.config[terraform.workspace]["incident_bot_id"]
+        value = local.config[local.environment]["incident_bot_id"]
       },
       {
         name  = "INCIDENT_CHANNEL_NAME",
-        value = local.config[terraform.workspace]["incident_channel_name"]
+        value = local.config[local.environment]["incident_channel_name"]
       },
       {
         name  = "INCIDENT_REPORT_CHANNEL_NAME",
-        value = local.config[terraform.workspace]["incident_channel_name"]
+        value = local.config[local.environment]["incident_channel_name"]
       },
       {
         name  = "DB_HOST",

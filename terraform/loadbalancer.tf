@@ -1,5 +1,5 @@
 resource "aws_lb" "loadbalancer" {
-  name               = "incident-response-${terraform.workspace}"
+  name               = "incident-response-${local.environment}"
   internal           = false
   load_balancer_type = "application"
   subnets            = data.aws_subnets.public.ids
