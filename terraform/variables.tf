@@ -9,11 +9,13 @@ locals {
     "production"  = "incident"
   }
 
+  environment = terraform.workspace == "production" ? "production" : "development"
+
   mandatory_moj_tags = {
     business-unit    = "OPG"
     application      = "opg-incident-response"
-    environment-name = terraform.workspace
-    is-production    = tostring(terraform.workspace == "production" ? true : false)
+    environment-name = local.environment
+    is-production    = tostring(local.environment == "production" ? true : false)
     owner            = "OPG Webops: opgteam@digital.justice.gov.uk"
   }
 

@@ -33,5 +33,5 @@ data "aws_kms_key" "rds" {
 }
 
 data "aws_db_subnet_group" "data_persitance_subnet_group" {
-  name = "data-persitance-subnet-${terraform.workspace}"
+  name = "data-persitance-subnet-${local.environment}"
 }

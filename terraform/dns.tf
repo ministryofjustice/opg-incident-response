@@ -1,5 +1,5 @@
 locals {
-  dns_prefix = lookup(local.dns_prefixes, terraform.workspace, "incident")
+  dns_prefix = lookup(local.dns_prefixes, local.environment, "incident")
   dns_suffix = "opg.service.justice.gov.uk"
   dns_name   = "${local.dns_prefix}.${local.dns_suffix}"
 }
