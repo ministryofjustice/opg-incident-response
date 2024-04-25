@@ -1,4 +1,19 @@
-
+locals {
+  config = {
+    development = {
+      django_settings       = "opgincidentresponse.settings.aws-dev"
+      incident_bot_id       = "A070M293JRY"
+      incident_bot_name     = "opg-incident-response-development"
+      incident_channel_name = "incident-response"
+    }
+    production = {
+      django_settings       = "opgincidentresponse.settings.prod"
+      incident_bot_id       = "A01CXL45ZE1"
+      incident_bot_name     = "opgincidentresponse"
+      incident_channel_name = "opg-incident"
+    }
+  }
+}
 resource "aws_ecs_task_definition" "response" {
   family                   = "response"
   requires_compatibilities = ["FARGATE"]
@@ -77,24 +92,23 @@ locals {
     }],
     environment = [{
       name  = "DJANGO_SETTINGS_MODULE",
-      value = "opgincidentresponse.settings.prod"
+      value = local.config[terraform.workspace]["django_settings"]
       },
       {
         name  = "INCIDENT_BOT_NAME",
-        value = "opgincidentresponse"
+        value = local.config[terraform.workspace]["incident_bot_name"]
       },
-
       {
         name  = "INCIDENT_BOT_ID",
-        value = "A01CXL45ZE1"
+        value = local.config[terraform.workspace]["incident_bot_id"]
       },
       {
         name  = "INCIDENT_CHANNEL_NAME",
-        value = "opg-incident"
+        value = local.config[terraform.workspace]["incident_channel_name"]
       },
       {
         name  = "INCIDENT_REPORT_CHANNEL_NAME",
-        value = "opg-incident"
+        value = local.config[terraform.workspace]["incident_channel_name"]
       },
       {
         name  = "DB_HOST",
