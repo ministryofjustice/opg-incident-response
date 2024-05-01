@@ -47,12 +47,12 @@ services:
     tty: true
 
   db:
-    image: "postgres:12"
+    image: "postgres:13"
     container_name: postgres
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data_12_vol:/var/lib/postgresql/data/
+      - postgres_data_13_vol:/var/lib/postgresql/data/
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
@@ -73,5 +73,5 @@ services:
       - response
 
 volumes:
-  postgres_data_12_vol:
+  postgres_data_13_vol:
   pypd:
