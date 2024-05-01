@@ -6,7 +6,7 @@ resource "aws_ecs_service" "service" {
   name                  = "response"
   cluster               = aws_ecs_cluster.cluster.id
   task_definition       = aws_ecs_task_definition.response.arn
-  desired_count         = local.config[local.environment]["number_of_tasks"]
+  desired_count         = 1
   launch_type           = "FARGATE"
   platform_version      = "1.4.0"
   depends_on            = [aws_lb.loadbalancer]

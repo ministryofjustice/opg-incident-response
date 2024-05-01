@@ -1,18 +1,14 @@
 locals {
   config = {
     development = {
-      django_settings       = "opgincidentresponse.settings.aws-dev"
       incident_bot_id       = "A070M293JRY"
       incident_bot_name     = "opg-incident-response-development"
       incident_channel_name = "incident-response"
-      number_of_tasks       = 0
     }
     production = {
-      django_settings       = "opgincidentresponse.settings.prod"
       incident_bot_id       = "A01CXL45ZE1"
       incident_bot_name     = "opgincidentresponse"
       incident_channel_name = "opg-incident"
-      number_of_tasks       = 1
     }
   }
 }
@@ -39,12 +35,12 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "v1.117.0"
+  default = "v1.127.1"
   type    = string
 }
 
 variable "response_tag" {
-  default = "v1.117.0"
+  default = "v1.127.1"
   type    = string
 }
 
@@ -94,7 +90,7 @@ locals {
     }],
     environment = [{
       name  = "DJANGO_SETTINGS_MODULE",
-      value = local.config[local.environment]["django_settings"]
+      value = "opgincidentresponse.settings.prod"
       },
       {
         name  = "INCIDENT_BOT_NAME",
