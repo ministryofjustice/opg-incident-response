@@ -1,6 +1,6 @@
 Django==4.2
 django-after-response==0.2.2
-git+https://github.com/ministryofjustice/opg-response.git@10bcb5dcdaf380d9ca20687526a8e798395ab2fc#egg=django-incident-response
+git+https://github.com/ministryofjustice/opg-response.git@41a534aa7751b8b0d3d50a8839fa74fb71405975#egg=django-incident-response
 django-health-check==3.18.1
 django-decorator-include
 pytest-mock
