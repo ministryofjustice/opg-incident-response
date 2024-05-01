@@ -4,6 +4,19 @@ locals {
     production  = 997462338508
   }
 
+  config = {
+    development = {
+      incident_bot_id       = "A070M293JRY"
+      incident_bot_name     = "opg-incident-response-development"
+      incident_channel_name = "incident-response"
+    }
+    production = {
+      incident_bot_id       = "A01CXL45ZE1"
+      incident_bot_name     = "opgincidentresponse"
+      incident_channel_name = "opg-incident"
+    }
+  }
+
   dns_prefixes = {
     "development" = "dev.incident"
     "production"  = "incident"
