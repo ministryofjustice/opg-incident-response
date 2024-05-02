@@ -6,11 +6,15 @@ locals {
 
   config = {
     development = {
+      cluster_endpoint      = aws_rds_cluster.cluster.endpoint
+      cluster_ssl_mode      = "require"
       incident_bot_id       = "A070M293JRY"
       incident_bot_name     = "opg-incident-response-development"
       incident_channel_name = "incident-response"
     }
     production = {
+      cluster_endpoint      = aws_rds_cluster.db.endpoint
+      cluster_ssl_mode      = "disable"
       incident_bot_id       = "A01CXL45ZE1"
       incident_bot_name     = "opgincidentresponse"
       incident_channel_name = "opg-incident"

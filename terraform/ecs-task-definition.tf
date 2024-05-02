@@ -96,7 +96,7 @@ locals {
       },
       {
         name  = "DB_HOST",
-        value = aws_rds_cluster.db.endpoint
+        value = local.config[local.environment]["cluster_endpoint"]
       },
       {
         name  = "DB_NAME",
@@ -108,7 +108,7 @@ locals {
       },
       {
         name  = "DB_SSL_MODE",
-        value = "disable"
+        value = local.config[local.environment]["cluster_ssl_mode"]
       },
       {
         name  = "SITE_URL",
