@@ -11,7 +11,6 @@ DATABASES = {
         "PORT": os.getenv("DB_PORT", "5432"),
         "USER": os.getenv("DB_USER", "postgres"),
         "NAME": os.getenv("DB_NAME", "postgres"),
-        "PASSWORD": os.environ.get("DB_PASSWORD", "postgres"),
     }
 }
 
