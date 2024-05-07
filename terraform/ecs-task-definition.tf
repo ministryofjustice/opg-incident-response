@@ -21,12 +21,12 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "v1.129.0"
+  default = "v1.130.0"
   type    = string
 }
 
 variable "response_tag" {
-  default = "v1.129.0"
+  default = "v1.130.0"
   type    = string
 }
 
@@ -96,7 +96,7 @@ locals {
       },
       {
         name  = "DB_HOST",
-        value = local.config[local.environment]["cluster_endpoint"]
+        value = aws_rds_cluster.cluster.endpoint
       },
       {
         name  = "DB_NAME",
@@ -108,7 +108,7 @@ locals {
       },
       {
         name  = "DB_SSL_MODE",
-        value = local.config[local.environment]["cluster_ssl_mode"]
+        value = "require"
       },
       {
         name  = "SITE_URL",
