@@ -13,8 +13,8 @@ locals {
       incident_channel_name = "incident-response"
     }
     production = {
-      cluster_endpoint      = aws_rds_cluster.db.endpoint
-      cluster_ssl_mode      = "disable"
+      cluster_endpoint      = aws_rds_cluster.cluster.endpoint #aws_rds_cluster.db.endpoint
+      cluster_ssl_mode      = "require"
       incident_bot_id       = "A01CXL45ZE1"
       incident_bot_name     = "opgincidentresponse"
       incident_channel_name = "opg-incident"
