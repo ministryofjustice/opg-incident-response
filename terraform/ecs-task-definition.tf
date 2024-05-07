@@ -20,22 +20,12 @@ data "aws_ecr_repository" "nginx" {
   provider = aws.management
 }
 
-variable "nginx_tag" {
-  default = "v1.130.0"
-  type    = string
-}
-
-variable "response_tag" {
-  default = "v1.130.0"
-  type    = string
-}
-
 locals {
 
   nginx = jsonencode({
     cpu         = 0,
     essential   = true,
-    image       = "${data.aws_ecr_repository.nginx.repository_url}:${var.nginx_tag}",
+    image       = "${data.aws_ecr_repository.nginx.repository_url}:${var.app_tag}",
     name        = "nginx",
     mountPoints = [],
     portMappings = [{
@@ -73,7 +63,7 @@ locals {
   response = jsonencode({
     cpu         = 0,
     essential   = true,
-    image       = "${data.aws_ecr_repository.response.repository_url}:${var.response_tag}",
+    image       = "${data.aws_ecr_repository.response.repository_url}:${var.app_tag}",
     mountPoints = [],
     name        = "response",
     portMappings = [{

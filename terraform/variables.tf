@@ -37,6 +37,11 @@ locals {
   tags = merge(local.mandatory_moj_tags, local.optional_tags)
 }
 
+variable "app_tag" {
+  default = "v1.131.0"
+  type    = string
+}
+
 variable "default_role" {
   default = "incident-response-ci"
   type    = string
