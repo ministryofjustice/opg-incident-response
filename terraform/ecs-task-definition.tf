@@ -43,6 +43,13 @@ locals {
       hostPort      = 80,
       protocol      = "tcp"
     }],
+    healthCheck = {
+      command     = ["CMD-SHELL", "curl -f http://localhost/nginx-health || exit 1"],
+      startPeriod = 30,
+      interval    = 15,
+      timeout     = 10,
+      retries     = 3
+    },
     logConfiguration = {
       logDriver = "awslogs",
       options = {
@@ -74,6 +81,13 @@ locals {
       hostPort      = 8000,
       protocol      = "tcp"
     }],
+    healthCheck = {
+      command     = ["CMD-SHELL", "curl -f http://localhost:8000/ht/ || exit 1"],
+      startPeriod = 30,
+      interval    = 15,
+      timeout     = 10,
+      retries     = 3
+    },
     environment = [{
       name  = "DJANGO_SETTINGS_MODULE",
       value = "opgincidentresponse.settings.prod"
