@@ -33,6 +33,10 @@ locals {
       hostPort      = 80,
       protocol      = "tcp"
     }],
+    dependsOn = [{
+      containerName = "response",
+      condition     = "HEALTHY"
+    }],
     healthCheck = {
       command     = ["CMD-SHELL", "curl -f http://localhost/nginx-health || exit 1"],
       startPeriod = 30,
