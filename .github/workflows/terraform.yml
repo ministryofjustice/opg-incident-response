@@ -92,8 +92,7 @@ jobs:
       - lint-and-validate
       - pull-tag
     env:
-      TF_VAR_response_tag: ${{ needs.pull-tag.outputs.latest-tag }}
-      TF_VAR_nginx_tag: ${{ needs.pull-tag.outputs.latest-tag }}
+      TF_VAR_app_tag: ${{ needs.pull-tag.outputs.latest-tag }}
     strategy:
       max-parallel: 1
       matrix:

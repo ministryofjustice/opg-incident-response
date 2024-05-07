@@ -20,22 +20,12 @@ data "aws_ecr_repository" "nginx" {
   provider = aws.management
 }
 
-variable "nginx_tag" {
-  default = "v1.129.0"
-  type    = string
-}
-
-variable "response_tag" {
-  default = "v1.129.0"
-  type    = string
-}
-
 locals {
 
   nginx = jsonencode({
     cpu         = 0,
     essential   = true,
-    image       = "${data.aws_ecr_repository.nginx.repository_url}:${var.nginx_tag}",
+    image       = "${data.aws_ecr_repository.nginx.repository_url}:${var.app_tag}",
     name        = "nginx",
     mountPoints = [],
     portMappings = [{
@@ -43,6 +33,13 @@ locals {
       hostPort      = 80,
       protocol      = "tcp"
     }],
+    healthCheck = {
+      command     = ["CMD-SHELL", "curl -f http://localhost/nginx-health || exit 1"],
+      startPeriod = 30,
+      interval    = 15,
+      timeout     = 10,
+      retries     = 3
+    },
     logConfiguration = {
       logDriver = "awslogs",
       options = {
@@ -66,7 +63,7 @@ locals {
   response = jsonencode({
     cpu         = 0,
     essential   = true,
-    image       = "${data.aws_ecr_repository.response.repository_url}:${var.response_tag}",
+    image       = "${data.aws_ecr_repository.response.repository_url}:${var.app_tag}",
     mountPoints = [],
     name        = "response",
     portMappings = [{
@@ -74,6 +71,13 @@ locals {
       hostPort      = 8000,
       protocol      = "tcp"
     }],
+    healthCheck = {
+      command     = ["CMD-SHELL", "curl -f http://localhost:8000/ht/ || exit 1"],
+      startPeriod = 30,
+      interval    = 15,
+      timeout     = 10,
+      retries     = 3
+    },
     environment = [{
       name  = "DJANGO_SETTINGS_MODULE",
       value = "opgincidentresponse.settings.prod"
@@ -96,7 +100,7 @@ locals {
       },
       {
         name  = "DB_HOST",
-        value = local.config[local.environment]["cluster_endpoint"]
+        value = aws_rds_cluster.cluster.endpoint
       },
       {
         name  = "DB_NAME",
@@ -108,7 +112,7 @@ locals {
       },
       {
         name  = "DB_SSL_MODE",
-        value = local.config[local.environment]["cluster_ssl_mode"]
+        value = "require"
       },
       {
         name  = "SITE_URL",
