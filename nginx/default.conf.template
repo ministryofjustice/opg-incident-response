@@ -1,6 +1,6 @@
 
 upstream response {
-    server {{getv "/app/host" }}:{{getv "/app/port" }};
+    server ${APP_HOST}:${APP_PORT};
 }
 
 server {
