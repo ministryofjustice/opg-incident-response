@@ -21,12 +21,12 @@ data "aws_ecr_repository" "nginx" {
 }
 
 variable "nginx_tag" {
-  default = "v1.129.0"
+  default = "v1.130.0"
   type    = string
 }
 
 variable "response_tag" {
-  default = "v1.129.0"
+  default = "v1.130.0"
   type    = string
 }
 
@@ -43,6 +43,13 @@ locals {
       hostPort      = 80,
       protocol      = "tcp"
     }],
+    healthCheck = {
+      command     = ["CMD-SHELL", "curl -f http://localhost/nginx-health || exit 1"],
+      startPeriod = 30,
+      interval    = 15,
+      timeout     = 10,
+      retries     = 3
+    },
     logConfiguration = {
       logDriver = "awslogs",
       options = {
@@ -74,6 +81,13 @@ locals {
       hostPort      = 8000,
       protocol      = "tcp"
     }],
+    healthCheck = {
+      command     = ["CMD-SHELL", "curl -f http://localhost:8000/ht/ || exit 1"],
+      startPeriod = 30,
+      interval    = 15,
+      timeout     = 10,
+      retries     = 3
+    },
     environment = [{
       name  = "DJANGO_SETTINGS_MODULE",
       value = "opgincidentresponse.settings.prod"
@@ -96,7 +110,7 @@ locals {
       },
       {
         name  = "DB_HOST",
-        value = local.config[local.environment]["cluster_endpoint"]
+        value = aws_rds_cluster.cluster.endpoint
       },
       {
         name  = "DB_NAME",
@@ -108,7 +122,7 @@ locals {
       },
       {
         name  = "DB_SSL_MODE",
-        value = local.config[local.environment]["cluster_ssl_mode"]
+        value = "require"
       },
       {
         name  = "SITE_URL",

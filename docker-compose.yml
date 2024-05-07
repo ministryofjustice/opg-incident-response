@@ -11,8 +11,15 @@ services:
     expose:
       - 8000
     depends_on:
-      - db
+      db:
+        condition: service_healthy
     env_file: .env
+    healthcheck:
+      test: curl -f http://localhost:8000/ht/ || exit 1
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     volumes:
       - ./:/app
       - ../:/response
@@ -26,15 +33,22 @@ services:
       context: .
       dockerfile: Dockerfile.nginx
     image: response-nginx
+    depends_on:
+      response:
+        condition: service_healthy
     environment:
       APP_HOST: response
       APP_PORT: 8000
+    healthcheck:
+      test: curl -f http://localhost/nginx-health || exit 1
+      interval: 15s
+      timeout: 10s
+      retries: 3
+      start_period: 30s
     volumes:
       - ./nginx/webpack/dist:/app/opgincidentresponse/static
     ports:
       - 80:80
-    depends_on:
-      - response
 
   cron:
     build:
@@ -49,6 +63,11 @@ services:
   db:
     image: "postgres:13"
     container_name: postgres
+    healthcheck:
+      test: pg_isready --username=api --dbname=api
+      interval: 10s
+      timeout: 5s
+      retries: 5
     ports:
       - "5432:5432"
     volumes:
@@ -70,7 +89,8 @@ services:
     ports:
       - "4040:4040"
     depends_on:
-      - response
+      response:
+        condition: service_healthy
 
 volumes:
   postgres_data_13_vol:
