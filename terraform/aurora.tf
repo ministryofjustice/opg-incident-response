@@ -64,3 +64,20 @@ resource "aws_rds_cluster_instance" "cluster_instances" {
     ]
   }
 }
+
+resource "aws_security_group" "response_rds" {
+  name        = "response-rds-${local.environment}"
+  description = "response rds access"
+  vpc_id      = data.aws_vpc.default.id
+  tags        = { "Name" = "response-api-${local.environment}" }
+}
+
+resource "aws_security_group_rule" "response_rds_ecs_task" {
+  type                     = "ingress"
+  from_port                = 5432
+  to_port                  = 5432
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.response_rds.id
+  source_security_group_id = aws_security_group.ecs_service.id
+  description              = "Response RDS inbound from Response ECS tasks"
+}
