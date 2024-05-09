@@ -5,7 +5,7 @@ resource "aws_rds_cluster" "db" {
   backup_retention_period      = 14
   database_name                = "response"
   db_subnet_group_name         = data.aws_db_subnet_group.data_persitance_subnet_group.name
-  deletion_protection          = true
+  deletion_protection          = false
   engine                       = "aurora-postgresql"
   engine_mode                  = "serverless"
   final_snapshot_identifier    = "response-${local.environment}-final-snapshot"
