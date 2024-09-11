@@ -4,7 +4,7 @@ git+https://github.com/ministryofjustice/opg-response.git@9d8dc7673aed3790d49a79
 django-health-check==3.18.3
 django-decorator-include
 pytest-mock
-pytest-django==4.8.0
+pytest-django==4.9.0
 python-dotenv==1.0.1
 gunicorn==22.0.0
 psycopg2-binary==2.9.9
