@@ -38,16 +38,16 @@ locals {
 }
 
 variable "app_tag" {
-  default = "v1.131.0"
+  default = "v1.143.0-DDLS-362.0"
   type    = string
 }
 
 variable "default_role" {
-  default = "incident-response-ci"
+  default = "operator"
   type    = string
 }
 
 variable "management_role" {
-  default = "incident-response-ci"
+  default = "operator"
   type    = string
 }
