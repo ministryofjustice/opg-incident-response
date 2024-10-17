@@ -1,4 +1,12 @@
 terraform {
+  required_version = "1.9.7"
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.42.0"
+    }
+  }
+
   backend "s3" {
     bucket         = "opg.terraform.state"
     key            = "opg-incident-response/terraform.tfstate"
@@ -7,14 +15,6 @@ terraform {
     role_arn       = "arn:aws:iam::311462405659:role/incident-response-ci"
     dynamodb_table = "remote_lock"
   }
-
-  required_providers {
-    aws = {
-      source  = "hashicorp/aws"
-      version = ">= 5.42.0"
-    }
-  }
-  required_version = ">= 1.8.1"
 }
 
 provider "aws" {

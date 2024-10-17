@@ -1,0 +1,74 @@
+name: "[Workflow] Path to Live"
+
+concurrency:
+  group: pull-request-workflow
+
+on:
+  push:
+    branches:
+      - main # match main
+
+permissions:
+  id-token: write
+  contents: write
+  security-events: write
+  pull-requests: read
+  actions: none
+  checks: none
+  deployments: none
+  issues: none
+  packages: none
+  repository-projects: none
+  statuses: none
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  workflow_variables:
+    runs-on: ubuntu-latest
+    name: output workflow variables
+    outputs:
+      parsed_branch: main
+      build_identifier: main
+      version_tag: ${{ steps.semver_tag.outputs.created_tag }}
+    steps:
+      - uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # pin@v3
+
+      - name: generate semver tag for release
+        id: semver_tag
+        uses: ministryofjustice/opg-github-actions/.github/actions/semver-tag@v3.1.0
+        with:
+          prerelease: false
+          default_bump: "minor"
+
+  build_scan_push_containers:
+    name: Docker Build, Scan and Push
+    uses: ./.github/workflows/_build.yml
+    needs: [workflow_variables]
+    with:
+      tag: ${{ needs.workflow_variables.outputs.version_tag }}
+      branch_name: ${{ needs.workflow_variables.outputs.parsed_branch }}
+
+  deploy_to_production_environment:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    name: Deploy to Production Environment
+    needs: [
+      workflow_variables,
+      build_scan_push_containers
+    ]
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      workspace: production
+      image_tag: ${{ needs.workflow_variables.outputs.version_tag }}
+      account_name: production
+      apply: true
+
+  end_of_pr_workflow:
+    name: End of PR Workflow
+    runs-on: ubuntu-latest
+    needs: [workflow_variables,deploy_to_production_environment]
+    steps:
+      - name: End of PR Workflow
+        run: echo "${{ needs.workflow_variables.outputs.version_tag }} tested, built and deployed to Production"
