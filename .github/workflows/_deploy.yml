@@ -1,0 +1,102 @@
+on:
+  workflow_call:
+    inputs:
+      workspace:
+        description: "Terraform workspace"
+        required: true
+        type: string
+      image_tag:
+        description: "Image tag to use"
+        required: false
+        type: string
+        default: ""
+      apply:
+        description: "Whether to apply terraform"
+        required: false
+        type: boolean
+        default: false
+      account_name:
+        required: false
+        type: string
+        default: development
+        description: "Account to get credentials for"
+
+jobs:
+  terraform_workflow:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@eef61447b9ff4aafe5dcd4e0bbf5d482be7e7871 # pin@v3
+
+      - uses: unfor19/install-aws-cli-action@46282f151073130d90347412d9c4ef0640177f22 # pin@v1.0.3
+
+      - id: terraform_version
+        name: get terraform version
+        uses: ministryofjustice/opg-github-actions/.github/actions/terraform-version@v3.0.8
+        with:
+          terraform_directory: terraform
+
+      - uses: hashicorp/setup-terraform@1b93182764c8332e7679b2393cb307cbe7baf9dc # pin@v2.0.0
+        with:
+          terraform_version: ${{ steps.terraform_version.outputs.version }}
+          terraform_wrapper: false
+
+      - uses: terraform-linters/setup-tflint@v4
+        name: Setup TFLint
+        with:
+          tflint_version: v0.50.1
+
+      - name: configure OIDC AWS credentials for terraform
+        uses: aws-actions/configure-aws-credentials@2cefa29f8797029f898b1baeff3e21a144128687 # pin@v1.7.0
+        with:
+          role-to-assume: "arn:aws:iam::631181914621:role/oidc-incident-response-${{ inputs.account_name }}"
+          role-session-name: github-actions-terraform-incident-response
+          role-duration-seconds: 7400
+          aws-region: eu-west-1
+
+      - name: terraform format
+        run: terraform fmt --check --recursive
+        working-directory: terraform
+
+      - name: TF Lint
+        run: tflint --recursive
+        working-directory: terraform
+
+      - name: terraform init for environment
+        env:
+          TF_WORKSPACE: ${{ inputs.workspace }}
+        run: terraform init -input=false
+        working-directory: terraform
+
+      - name: terraform plan
+        env:
+          TF_WORKSPACE: ${{ inputs.workspace }}
+          TF_VAR_app_tag: ${{ inputs.image_tag }}
+        run: |
+          pwd
+          terraform workspace show
+          terraform plan --lock-timeout=300s --parallelism=200 --out=${TF_WORKSPACE}.plan > ${TF_WORKSPACE}.log
+        working-directory: terraform
+
+      - name: output plan
+        env:
+          TF_WORKSPACE: ${{ inputs.workspace }}
+        run: |
+          pwd
+          ls -alt
+          cat ${TF_WORKSPACE}.log
+        working-directory: terraform
+
+      - name: output concise plan
+        env:
+          TF_WORKSPACE: ${{ inputs.workspace }}
+        run: cat ${TF_WORKSPACE}.log | grep '\.' | grep '#' || true
+        working-directory: terraform
+
+      - name: terraform apply
+        if: inputs.apply
+        env:
+          TF_WORKSPACE: ${{ inputs.workspace }}
+          TF_VAR_app_tag: ${{ inputs.image_tag }}
+          CI: true
+        run: terraform apply -parallelism=200 -lock-timeout=300s ${{ env.TF_WORKSPACE }}.plan
+        working-directory: terraform
