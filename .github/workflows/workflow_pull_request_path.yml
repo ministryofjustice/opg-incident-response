@@ -1,0 +1,77 @@
+name: "[Workflow] Pull request to branch"
+
+concurrency:
+  group: path-to-live-workflow
+
+on:
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  id-token: write
+  contents: write
+  security-events: write
+  pull-requests: read
+  actions: none
+  checks: none
+  deployments: none
+  issues: none
+  packages: none
+  repository-projects: none
+  statuses: none
+
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  workflow_variables:
+    runs-on: ubuntu-latest
+    name: output workflow variables
+    outputs:
+      parsed_branch: ${{ steps.branch_name.outputs.safe }}
+      version_tag: ${{ steps.semver_tag.outputs.created_tag }}
+    steps:
+      - uses: actions/checkout@9a9194f87191a7e9055e3e9b95b8cfb13023bb08 # pin@v3
+
+      - name: generate safe branch name
+        id: branch_name
+        uses: ministryofjustice/opg-github-actions/.github/actions/branch-name@v3.1.0
+
+      - name: generate semver tag for pull request
+        id: semver_tag
+        uses: ministryofjustice/opg-github-actions/.github/actions/semver-tag@v3.1.0
+        with:
+          prerelease: true
+          default_bump: "minor"
+
+  build_scan_push_containers:
+    name: Docker Build, Scan and Push
+    uses: ./.github/workflows/_build.yml
+    needs: [workflow_variables]
+    with:
+      tag: ${{ needs.workflow_variables.outputs.version_tag }}
+      branch_name: ${{ needs.workflow_variables.outputs.parsed_branch }}
+
+  deploy_to_development_environment:
+    if: ${{ github.actor != 'dependabot[bot]' }}
+    name: Deploy to Development Environment
+    needs: [
+      workflow_variables,
+      build_scan_push_containers
+    ]
+    uses: ./.github/workflows/_deploy.yml
+    with:
+      workspace: development
+      image_tag: ${{ needs.workflow_variables.outputs.version_tag }}
+      account_name: development
+      apply: true
+
+  end_of_pr_workflow:
+    name: End of PR Workflow
+    runs-on: ubuntu-latest
+    needs: [workflow_variables,deploy_to_development_environment]
+    steps:
+      - name: End of PR Workflow
+        run: echo "${{ needs.workflow_variables.outputs.version_tag }} tested, built and deployed to Development"
