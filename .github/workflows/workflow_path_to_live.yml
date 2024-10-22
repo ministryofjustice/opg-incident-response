@@ -51,7 +51,6 @@ jobs:
       branch_name: ${{ needs.workflow_variables.outputs.parsed_branch }}
 
   deploy_to_production_environment:
-    if: ${{ github.actor != 'dependabot[bot]' }}
     name: Deploy to Production Environment
     needs: [
       workflow_variables,
@@ -64,10 +63,20 @@ jobs:
       account_name: production
       apply: true
 
+  smoke_test:
+    name: Check Website Availability
+    needs: [
+      workflow_variables,
+      deploy_to_production_environment
+    ]
+    uses: ./.github/workflows/_smoke.yml
+    with:
+      url: https://incident.opg.service.justice.gov.uk/ht/
+
   end_of_pr_workflow:
     name: End of PR Workflow
     runs-on: ubuntu-latest
-    needs: [workflow_variables,deploy_to_production_environment]
+    needs: [workflow_variables,smoke_test]
     steps:
       - name: End of PR Workflow
         run: echo "${{ needs.workflow_variables.outputs.version_tag }} tested, built and deployed to Production"
