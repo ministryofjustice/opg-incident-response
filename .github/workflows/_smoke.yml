@@ -1,0 +1,27 @@
+name: "[Smoke] Check Web Site Is Functional"
+
+defaults:
+  run:
+    shell: bash
+
+on:
+  workflow_call:
+    inputs:
+      url:
+        description: "URL to run the smoke test against"
+        required: true
+        type: string
+
+jobs:
+  smoke:
+    runs-on: ubuntu-latest
+    steps:
+      - name: check site availability
+        id: smoke
+        env:
+          URL: ${{ inputs.url }}
+        run: |
+          curl -o /dev/null -s -w "%{http_code}" ${URL} | grep -q 200 || exit 1
+
+
+
