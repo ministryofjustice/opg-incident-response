@@ -74,7 +74,7 @@ jobs:
       url: https://incident.opg.service.justice.gov.uk/ht/
 
   end_of_pr_workflow:
-    name: End of PR Workflow
+    name: end of workflow
     runs-on: ubuntu-latest
     needs: [workflow_variables,smoke_test]
     steps:
