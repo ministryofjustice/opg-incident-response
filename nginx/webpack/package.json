@@ -7,16 +7,16 @@
     "watch": "webpack --watch"
   },
   "dependencies": {
-    "@ministryofjustice/frontend": "^0.0.21",
+    "@ministryofjustice/frontend": "^0.2.0",
     "govuk-frontend": "^3.9.0"
   },
   "devDependencies": {
-    "@babel/core": "7.21.3",
+    "@babel/core": "7.25.8",
     "@babel/preset-env": "^7.11.5",
     "babel-loader": "^8.1.0",
     "copy-webpack-plugin": "^6.1.1",
     "css-loader": "5.2",
-    "mini-css-extract-plugin": "2.5.1",
+    "mini-css-extract-plugin": "2.9.1",
     "sass": "^1.26.11",
     "sass-loader": "^10.0.2",
     "webpack": "^5.94.0",
