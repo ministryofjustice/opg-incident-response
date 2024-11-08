@@ -2,7 +2,7 @@
 .envrc
 .DS_Store
 postgres_data
-opgincidentresponse/static
+opgincidentresponse/static/
 
 __pycache__
 /static/
