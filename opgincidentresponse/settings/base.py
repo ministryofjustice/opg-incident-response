@@ -26,7 +26,6 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    "after_response",
     "bootstrap4",
     "response.apps.ResponseConfig",
     "rest_framework",
