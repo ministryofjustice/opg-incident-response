@@ -62,7 +62,7 @@ jobs:
 
       - name: configure OIDC AWS credentials for ECR push
         if: ${{ github.actor != 'dependabot[bot]' }}
-        uses: aws-actions/configure-aws-credentials@2cefa29f8797029f898b1baeff3e21a144128687 # pin@v1.7.0
+        uses: aws-actions/configure-aws-credentials@97834a484a5ab3c40fa9e2eb40fcf8041105a573 # pin@v1.7.0
         with:
           role-to-assume: arn:aws:iam::311462405659:role/incident-response-gh-actions-ecr-push
           role-session-name: github-actions-ecr-push
