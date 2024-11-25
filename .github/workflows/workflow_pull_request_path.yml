@@ -55,7 +55,6 @@ jobs:
       branch_name: ${{ needs.workflow_variables.outputs.parsed_branch }}
 
   deploy_to_development_environment:
-    if: ${{ github.actor != 'dependabot[bot]' }}
     name: Deploy to Development Environment
     needs: [
       workflow_variables,
@@ -69,7 +68,6 @@ jobs:
       apply: true
 
   smoke_test:
-    if: ${{ github.actor != 'dependabot[bot]' }}
     name: Check Website Availability
     needs: [
       workflow_variables,

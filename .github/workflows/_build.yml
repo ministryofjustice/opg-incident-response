@@ -61,7 +61,6 @@ jobs:
         uses: unfor19/install-aws-cli-action@46282f151073130d90347412d9c4ef0640177f22 # pin@v1.0.3
 
       - name: configure OIDC AWS credentials for ECR push
-        if: ${{ github.actor != 'dependabot[bot]' }}
         uses: aws-actions/configure-aws-credentials@97834a484a5ab3c40fa9e2eb40fcf8041105a573 # pin@v1.7.0
         with:
           role-to-assume: arn:aws:iam::311462405659:role/incident-response-gh-actions-ecr-push
@@ -109,7 +108,6 @@ jobs:
         run: echo "Tag to use - ${IMAGE_TAG}"
 
       - name: tag and push container
-        if: ${{ github.actor != 'dependabot[bot]' }}
         env:
           ECR_REGISTRY: ${{ steps.login_ecr.outputs.registry }}
           IMAGE_TAG: ${{ inputs.tag }}
