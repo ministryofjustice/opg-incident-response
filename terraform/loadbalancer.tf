@@ -13,6 +13,16 @@ resource "aws_lb" "loadbalancer" {
   }
 }
 
+resource "aws_wafv2_web_acl_association" "shared_waf" {
+  resource_arn = aws_lb.loadbalancer.arn
+  web_acl_arn  = data.aws_wafv2_web_acl.shared.arn
+}
+
+data "aws_wafv2_web_acl" "shared" {
+  name  = "shared-${terraform.workspace}-web-acl"
+  scope = "REGIONAL"
+}
+
 resource "aws_lb_target_group" "tg" {
   name_prefix          = "respon"
   port                 = 80
