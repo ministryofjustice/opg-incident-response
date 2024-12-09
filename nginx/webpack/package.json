@@ -7,7 +7,7 @@
     "watch": "webpack --watch"
   },
   "dependencies": {
-    "@ministryofjustice/frontend": "^0.2.0",
+    "@ministryofjustice/frontend": "^1.0.0",
     "govuk-frontend": "^3.9.0"
   },
   "devDependencies": {
