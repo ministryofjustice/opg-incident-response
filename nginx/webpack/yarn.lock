@@ -882,11 +882,12 @@
     "@jridgewell/resolve-uri" "3.1.0"
     "@jridgewell/sourcemap-codec" "1.4.14"
 
-"@ministryofjustice/frontend@^0.2.0":
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-0.2.6.tgz#95ff647e2cd23db291650447fdea33d89fc4d84a"
-  integrity sha512-Q7VxqmOm/uFUpD2/EZjVgaAJ2EgKjNWZPFQN74HkSQ24ZK+tQERGfWkw5DM8molmtnwNns9XBL3E0lVJ/moJnA==
+"@ministryofjustice/frontend@^2.0.0":
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/@ministryofjustice/frontend/-/frontend-2.2.5.tgz#e4371759f915db8d0677c03daee72c5cb6ddbd8e"
+  integrity sha512-UR8WTME0vrYhtCxBESd0XaAvfjdi9UujieeooQj1ddQKdcfI/wkXUMJO8hWWvXjeqRxfKB2v62rw1mSRc+Yqrw==
   dependencies:
+    govuk-frontend "^5.0.0"
     moment "^2.27.0"
 
 "@nodelib/fs.scandir@2.1.5":
@@ -1694,6 +1695,11 @@ govuk-frontend@^3.9.0:
   version "3.15.0"
   resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-3.15.0.tgz#47c9cc41c8100ee28bc3aaf9a29a0c62d88070c9"
   integrity sha512-kInDei8hrkMcrW7yC2EwhbSNBOBBPTdLxIDAye2G7KNrD9cyvNAfd0KchrfP/nWBOzu67ANoz2rtoRDLWiBN2w==
+
+govuk-frontend@^5.0.0:
+  version "5.7.1"
+  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-5.7.1.tgz#d4c561ebf8c0b76130f31df8c2e4d70d340cd63f"
+  integrity sha512-jF1cq5rn57kxZmJRprUZhTQ31zaBBK4b5AyeJaPX3Yhg22lk90Mx/dQLvOk/ycV3wM7e0y+s4IPvb2fFaPlCGg==
 
 graceful-fs@^4.1.2, graceful-fs@^4.2.11, graceful-fs@^4.2.4:
   version "4.2.11"
