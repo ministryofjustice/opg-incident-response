@@ -1,18 +1,20 @@
 terraform {
-  required_version = "1.9.8"
+  required_version = "1.10.3"
   required_providers {
     aws = {
       source  = "hashicorp/aws"
-      version = "5.75.0"
+      version = "5.82.2"
     }
   }
 
   backend "s3" {
-    bucket         = "opg.terraform.state"
-    key            = "opg-incident-response/terraform.tfstate"
-    encrypt        = true
-    region         = "eu-west-1"
-    role_arn       = "arn:aws:iam::311462405659:role/incident-response-ci"
+    bucket  = "opg.terraform.state"
+    key     = "opg-incident-response/terraform.tfstate"
+    encrypt = true
+    region  = "eu-west-1"
+    assume_role = {
+      role_arn = "arn:aws:iam::311462405659:role/incident-response-ci"
+    }
     dynamodb_table = "remote_lock"
   }
 }

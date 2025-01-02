@@ -8,7 +8,7 @@ resource "aws_rds_cluster" "cluster" {
   deletion_protection             = true
   engine                          = "aurora-postgresql"
   engine_mode                     = "provisioned"
-  engine_version                  = "13.12"
+  engine_version                  = "13.16"
   enabled_cloudwatch_logs_exports = ["postgresql"]
   final_snapshot_identifier       = "response-${local.environment}-final-snapshot"
   kms_key_id                      = data.aws_kms_key.rds.arn
@@ -21,15 +21,14 @@ resource "aws_rds_cluster" "cluster" {
   vpc_security_group_ids          = [aws_security_group.response_rds.id]
 
   serverlessv2_scaling_configuration {
-    min_capacity = 0.5
+    min_capacity = 0
     max_capacity = 4
   }
 
   lifecycle {
     prevent_destroy = true
     ignore_changes = [
-      engine_version,
-      global_cluster_identifier
+      engine_version
     ]
   }
 }
