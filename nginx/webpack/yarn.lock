@@ -1716,15 +1716,10 @@ globby@^11.0.1:
     merge2 "^1.4.1"
     slash "^3.0.0"
 
-"govuk-frontend@^3.0.0 || ^4.0.0":
+"govuk-frontend@^3.0.0 || ^4.0.0", govuk-frontend@^4.0.0:
   version "4.9.0"
   resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-4.9.0.tgz#a09068130fa087e67de25956940cb8280a364372"
   integrity sha512-zfX+GBUKpWBeV6JwCIawEuI8VRWlskH8Ok8aNUjKOvzo3zIaNbcrv4IOwgy+oSnMoGh67Eeh+vb7+9GFxN2fNg==
-
-govuk-frontend@^3.9.0:
-  version "3.15.0"
-  resolved "https://registry.yarnpkg.com/govuk-frontend/-/govuk-frontend-3.15.0.tgz#47c9cc41c8100ee28bc3aaf9a29a0c62d88070c9"
-  integrity sha512-kInDei8hrkMcrW7yC2EwhbSNBOBBPTdLxIDAye2G7KNrD9cyvNAfd0KchrfP/nWBOzu67ANoz2rtoRDLWiBN2w==
 
 graceful-fs@^4.1.2, graceful-fs@^4.2.11, graceful-fs@^4.2.4:
   version "4.2.11"
