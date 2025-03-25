@@ -1,4 +1,5 @@
-FROM python:3.13-slim
+#pinned to known working older sha version
+FROM python:3.13-slim@sha256:f3614d98f38b0525d670f287b0474385952e28eb43016655dd003d0e28cf8652
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
@@ -10,7 +11,8 @@ WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
 
-RUN pip install --upgrade setuptools
+#pinned to known working version 
+RUN pip install setuptools==75.3.1
 RUN pip install -r requirements.txt
 
 COPY . /app/
