@@ -1,5 +1,5 @@
 #pinned to known working older sha version
-FROM python:3.13-slim@sha256:f3614d98f38b0525d670f287b0474385952e28eb43016655dd003d0e28cf8652
+FROM python:3.13-slim@sha256:f2fdaec50160418e0c2867ba3e254755edd067171725886d5d303fd7057bbf81
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
