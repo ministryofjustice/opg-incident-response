@@ -33,11 +33,11 @@ jobs:
       parsed_branch: main
       version_tag: ${{ steps.semver_tag.outputs.created_tag }}
     steps:
-      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+      - uses: actions/checkout@08eba0b27e820071cde6df949e0beb9ba4906955 # v4.3.0
 
       - name: generate semver tag for release
         id: semver_tag
-        uses: ministryofjustice/opg-github-actions/.github/actions/semver-tag@9698787723a6a964ef9816066d9299568d8d359e # v3.1.0
+        uses: ministryofjustice/opg-github-actions/.github/actions/semver-tag@ea1e81f43e7593acd74cc114085930f5f54914a2 # v3.1.7
         with:
           prerelease: false
           default_bump: "minor"
