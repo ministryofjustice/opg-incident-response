@@ -8,5 +8,5 @@ pytest-django==4.11.1
 python-dotenv==1.1.1
 gunicorn==23.0.0
 psycopg2-binary==2.9.11
-social-auth-app-django==5.6.0
+social-auth-app-django==5.4.2
 pypd==1.1.0
