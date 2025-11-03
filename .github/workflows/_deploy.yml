@@ -40,7 +40,7 @@ jobs:
           terraform_version: ${{ steps.terraform_version.outputs.version }}
           terraform_wrapper: false
 
-      - uses: terraform-linters/setup-tflint@90f302c255ef959cbfb4bd10581afecdb7ece3e6 # v4.1.1
+      - uses: terraform-linters/setup-tflint@4cb9feea73331a35b422df102992a03a44a3bb33 # v6.2.1
         name: Setup TFLint
         with:
           tflint_version: v0.50.1
