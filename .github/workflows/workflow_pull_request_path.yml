@@ -37,11 +37,11 @@ jobs:
 
       - name: generate safe branch name
         id: branch_name
-        uses: ministryofjustice/opg-github-actions/.github/actions/branch-name@ea1e81f43e7593acd74cc114085930f5f54914a2 # v3.1.7
+        uses: ministryofjustice/opg-github-actions/.github/actions/branch-name@4f345be3f706950d1fdc05bc86383967a149bd99 # v4.3.4
 
       - name: generate semver tag for pull request
         id: semver_tag
-        uses: ministryofjustice/opg-github-actions/.github/actions/semver-tag@ea1e81f43e7593acd74cc114085930f5f54914a2 # v3.1.7
+        uses: ministryofjustice/opg-github-actions/.github/actions/semver-tag@4f345be3f706950d1fdc05bc86383967a149bd99 # v4.3.4
         with:
           prerelease: true
           default_bump: "minor"
