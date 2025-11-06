@@ -38,7 +38,7 @@ locals {
 }
 
 variable "app_tag" {
-  default = "v1.131.0"
+  default = "v1.147.0"
   type    = string
 }
 
