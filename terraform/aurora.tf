@@ -8,7 +8,7 @@ resource "aws_rds_cluster" "cluster" {
   deletion_protection             = true
   engine                          = "aurora-postgresql"
   engine_mode                     = "provisioned"
-  engine_version                  = "13.16"
+  engine_version                  = "14"
   enabled_cloudwatch_logs_exports = ["postgresql"]
   final_snapshot_identifier       = "response-${local.environment}-final-snapshot"
   kms_key_id                      = data.aws_kms_key.rds.arn
