@@ -61,7 +61,7 @@ services:
     tty: true
 
   db:
-    image: "postgres:13"
+    image: "postgres:14"
     container_name: postgres
     healthcheck:
       test: pg_isready --username=api --dbname=api
@@ -71,7 +71,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data_13_vol:/var/lib/postgresql/data/
+      - postgres_data_14_vol:/var/lib/postgresql/data/
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
@@ -93,5 +93,5 @@ services:
         condition: service_healthy
 
 volumes:
-  postgres_data_13_vol:
+  postgres_data_14_vol:
   pypd:
