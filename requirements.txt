@@ -1,4 +1,4 @@
-Django==5.2.9
+Django==6.0
 django-after-response==0.2.2
 git+https://github.com/ministryofjustice/opg-response.git@361ae5fdf967eaf1b90860e9249b91a529d82c71#egg=django-incident-response
 django-health-check==3.20.0
