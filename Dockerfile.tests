@@ -1,4 +1,4 @@
-FROM python:3.11-slim
+FROM python:3.12-slim
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     netcat-openbsd \
@@ -12,7 +12,9 @@ COPY response /app/response
 COPY requirements.txt /app/requirements.txt
 COPY requirements-dev.txt /app/requirements-dev.txt
 COPY pytest.ini /app/pytest.ini
+COPY manage.py /app/manage.py
 
+RUN pip install --upgrade setuptools
 RUN pip install -r requirements-dev.txt
 
 CMD [ "pytest"]
