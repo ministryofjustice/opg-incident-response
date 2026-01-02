@@ -6,7 +6,12 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-COPY . /app/
+COPY tests /app/tests
+COPY testcfg /app/testcfg
+COPY response /app/response
+COPY requirements.txt /app/requirements.txt
+COPY requirements-dev.txt /app/requirements-dev.txt
+COPY pytest.ini /app/pytest.ini
 
 RUN pip install -r requirements-dev.txt
 
