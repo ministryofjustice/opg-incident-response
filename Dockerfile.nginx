@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY nginx/webpack .
 
-RUN yarn --immutable && yarn build
+RUN yarn  --immutable --frozen-lockfile --ignore-scripts && yarn build
 
 FROM nginx:stable-alpine
 
