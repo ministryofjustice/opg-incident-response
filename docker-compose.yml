@@ -1,4 +1,3 @@
-version: '3'
 services:
 
   response:
@@ -91,6 +90,15 @@ services:
     depends_on:
       response:
         condition: service_healthy
+  
+  assets:
+    image: node:lts-alpine3.23@sha256:c921b97d4b74f51744057454b306b418cf693865e73b8100559189605f6955b8
+    volumes:
+      - ./nginx/webpack:/app
+    working_dir: /app
+    command: sh -c "yarn --immutable --frozen-lockfile --ignore-scripts && yarn build"
+    
+
 
 volumes:
   postgres_data_14_vol:
