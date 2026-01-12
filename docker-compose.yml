@@ -60,7 +60,7 @@ services:
     tty: true
 
   db:
-    image: "postgres:14"
+    image: "postgres:16"
     container_name: postgres
     healthcheck:
       test: pg_isready --username=api --dbname=api
