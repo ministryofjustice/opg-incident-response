@@ -25,10 +25,10 @@
                         </a>
                     </th>
                     <td class="govuk-table__header">
-                        {% if incident.status_text != "resolved" %}
-                            <strong class="govuk-tag govuk-tag--red">{{ incident.status_text|upper }} - {{ incident.severity_text }}</strong>
+                        {% if incident.is_closed %}
+                            <strong class="govuk-tag govuk-tag--grey">{{ incident.status_text|upper }} - {{ incident.severity_text }}</strong>
                         {% else %}
-                            <strong class="govuk-tag govuk-tag--grey">Resolved - {{ incident.severity_text }}</strong>
+                            <strong class="govuk-tag govuk-tag--red">{{ incident.status_text|upper }} - {{ incident.severity_text }}</strong>
                         {% endif %}
                     </td>
                     <td class="govuk-table__cell">
