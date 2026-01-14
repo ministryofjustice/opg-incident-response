@@ -135,12 +135,16 @@
         </div>
 
         <div class="govuk-grid-column-one-third">
-            {% if incident.status_text == "resolved" %}
-                <p class="govuk-body">Status: <strong class="govuk-tag">{{ incident.status_text|upper }}</strong></p>
-                <p class="govuk-body">Severity: <strong class="govuk-tag govuk-tag--grey">{{ incident.severity_text }}</strong></p>
+            {% if incident.is_closed %}
+                <p class="govuk-body">Status: <strong class="govuk-tag govuk-tag--grey">{{ incident.status_text|upper }}</strong></p>
             {% else %}
                 <p class="govuk-body">Status: <strong class="govuk-tag govuk-tag--red">{{ incident.status_text|upper }}</strong></p>
-                <p class="govuk-body">Severity: <strong class="govuk-tag">{{ incident.severity_text }}</strong></p>
+            {% endif %}
+
+            {% if incident.severity_text == "critical" or incident.severity_text == "major" %}
+                <p class="govuk-body">Severity: <strong class="govuk-tag govuk-tag--red">{{ incident.severity_text }}</strong></p>
+            {% else %}
+                <p class="govuk-body">Severity: <strong class="govuk-tag govuk-tag--grey">{{ incident.severity_text }}</strong></p>
             {% endif %}
 
             {% if incident.comms_channel %}
