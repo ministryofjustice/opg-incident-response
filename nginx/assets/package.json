@@ -1,0 +1,23 @@
+{
+  "name": "opg-incident-response",
+  "version": "0.1.0",
+  "license": "MIT",
+  "scripts": {
+    "build": "npm run build:js && npm run build:css && npm run build:assets",
+    "build:js": "esbuild --bundle main.js --minify --outdir=dist --sourcemap --resolve-extensions=.mjs,.js",
+    "build:css": "sass --load-path . --style compressed main.scss dist/all.css",
+    "build:assets": "mkdir -p dist/assets/images dist/assets/fonts && cp node_modules/govuk-frontend/dist/govuk/assets/images/* node_modules/@ministryofjustice/frontend/moj/assets/images/* dist/assets/images && cp node_modules/govuk-frontend/dist/govuk/assets/fonts/* dist/assets/fonts",
+    "lint": "prettier --check .",
+    "prettier": "prettier --write .",
+    "watch": "npm run build:js --watch=forever & npm run build:css --watch"
+  },
+  "dependencies": {
+    "@ministryofjustice/frontend": "^8.0.0",
+    "govuk-frontend": "^5.0.0"
+  },
+  "devDependencies": {
+    "esbuild": "^0.27.0",
+    "prettier": "^3.0.0",
+    "sass": "^1.26.11"
+  }
+}

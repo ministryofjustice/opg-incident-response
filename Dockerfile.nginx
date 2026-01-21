@@ -2,7 +2,7 @@ FROM node:lts-alpine3.23@sha256:c921b97d4b74f51744057454b306b418cf693865e73b8100
 
 WORKDIR /app
 
-COPY nginx/webpack .
+COPY nginx/assets .
 
 RUN yarn  --immutable --frozen-lockfile --ignore-scripts && yarn build
 

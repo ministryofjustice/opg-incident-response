@@ -1,5 +1,5 @@
-import { nodeListForEach } from 'govuk-frontend/govuk/common'
 import api from './lib/api';
+import { nodeListForEach } from './lib/nodeListForEach';
 
 function Actions ($module) {
   this.$module = $module;

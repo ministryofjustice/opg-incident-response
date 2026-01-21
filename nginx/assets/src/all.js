@@ -1,4 +1,4 @@
-import { nodeListForEach } from 'govuk-frontend/govuk/common'
+import { nodeListForEach } from './lib/nodeListForEach.js';
 import Actions from './action.js'
 
 function initAll() {
