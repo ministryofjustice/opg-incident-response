@@ -92,7 +92,7 @@ services:
         condition: service_healthy
 
   assets:
-    image: node:lts-alpine3.23@sha256:c921b97d4b74f51744057454b306b418cf693865e73b8100559189605f6955b8
+    image: node:lts-alpine3.23@sha256:931d7d57f8c1fd0e2179dbff7cc7da4c9dd100998bc2b32afc85142d8efbc213
     volumes:
       - ./nginx/assets:/app
     working_dir: /app
