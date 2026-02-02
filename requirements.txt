@@ -3,7 +3,7 @@ django-after-response==0.2.2
 django-health-check==3.20.8
 django-decorator-include==3.3
 python-dotenv==1.2.1
-gunicorn==23.0.0
+gunicorn==24.1.1
 psycopg2-binary==2.9.11
 social-auth-app-django==5.7.0
 pypd==1.1.0
