@@ -1,4 +1,4 @@
-FROM python:3.14-slim@sha256:1f741aef81d09464251f4c52c83a02f93ece0a636db125d411bd827bf381a763
+FROM python:3.14-slim@sha256:0c6bb259d537411417dd3b0052730e237ec0b8bd66aeaf64f1804a142d5c23ae
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     netcat-openbsd \
