@@ -4,7 +4,7 @@ pytest==8.4.2
 pytest-env==0.8.2
 pytest-pythonpath==0.7.4
 pytest-watch==4.2.0
-pytest-randomly==3.16.0
+pytest-randomly==4.0.1
 factory-boy>=3.0.0
 faker>=2.0.0
 pytest-mock==3.15.1
