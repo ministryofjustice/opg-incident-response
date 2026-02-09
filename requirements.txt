@@ -1,6 +1,6 @@
 Django==5.2.11
 django-after-response==0.2.2
-django-health-check==3.21.0
+django-health-check==3.23.3
 django-decorator-include==3.3
 python-dotenv==1.2.1
 gunicorn==23.0.0
