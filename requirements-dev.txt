@@ -1,7 +1,7 @@
 -r requirements.txt
 # Testing
 pytest==8.4.2
-pytest-env==0.8.2
+pytest-env==1.2.0
 pytest-pythonpath==0.7.4
 pytest-watch==4.2.0
 pytest-randomly==3.16.0
