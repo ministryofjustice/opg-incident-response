@@ -12,7 +12,7 @@
     "watch": "npm run build:js --watch=forever & npm run build:css --watch"
   },
   "dependencies": {
-    "@ministryofjustice/frontend": "^8.0.0",
+    "@ministryofjustice/frontend": "^9.0.0",
     "govuk-frontend": "^5.0.0"
   },
   "devDependencies": {
