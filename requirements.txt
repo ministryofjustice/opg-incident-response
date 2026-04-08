@@ -1,4 +1,4 @@
-Django==5.2.12
+Django==5.2.13
 django-after-response==0.2.2
 django-health-check==3.24.0
 django-decorator-include==3.3
