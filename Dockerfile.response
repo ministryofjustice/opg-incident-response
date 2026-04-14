@@ -4,7 +4,6 @@ FROM python:3.14-slim@sha256:0c6bb259d537411417dd3b0052730e237ec0b8bd66aeaf64f18
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     netcat-openbsd \
-    git \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
