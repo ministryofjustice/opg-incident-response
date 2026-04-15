@@ -175,7 +175,7 @@ pyjwt==2.12.1
     #   social-auth-core
 pypd==1.1.0
     # via -r requirements.txt
-pytest==8.4.2
+pytest==9.0.3
     # via
     #   -r requirements-dev.in
     #   pytest-django
