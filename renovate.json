@@ -42,7 +42,7 @@
         "Renovate"
     ],
     "prCreation": "immediate",
-    "stabilityDays": 3
+    "stabilityDays": 7
   },
   "vulnerabilityAlerts": {
     "enabled": false
