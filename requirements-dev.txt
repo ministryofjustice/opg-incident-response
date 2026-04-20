@@ -111,7 +111,7 @@ flake8-tidy-imports==2.0.0
     # via -r requirements-dev.in
 flake8-tuple==0.4.1
     # via -r requirements-dev.in
-gunicorn==23.0.0
+gunicorn==25.3.0
     # via -r requirements.txt
 idna==3.11
     # via
