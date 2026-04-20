@@ -101,7 +101,7 @@ flake8-comprehensions==2.3.0
     # via -r requirements-dev.in
 flake8-debugger==3.2.1
     # via -r requirements-dev.in
-flake8-isort==2.9.1
+flake8-isort==6.1.2
     # via -r requirements-dev.in
 flake8-mutable==1.2.0
     # via -r requirements-dev.in
