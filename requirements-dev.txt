@@ -14,7 +14,7 @@ black==26.3.1
     # via
     #   -r requirements-dev.in
     #   flake8-black
-bleach==3.3.1
+bleach==4.1.0
     # via -r requirements.txt
 bleach-allowlist==1.0.3
     # via -r requirements.txt
