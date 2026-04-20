@@ -45,7 +45,7 @@ defusedxml==0.7.1
     #   -r requirements.txt
     #   python3-openid
     #   social-auth-core
-django==5.2.13
+django==6.0.4
     # via
     #   -r requirements.txt
     #   django-after-response
