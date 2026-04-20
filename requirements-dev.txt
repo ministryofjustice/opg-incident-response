@@ -119,7 +119,7 @@ idna==3.11
     #   requests
 iniconfig==2.3.0
     # via pytest
-isort==4.3.21
+isort==6.1.0
     # via
     #   -r requirements-dev.in
     #   flake8-isort
