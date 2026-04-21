@@ -63,7 +63,7 @@ django-decorator-include==3.3
     # via -r requirements.txt
 django-health-check==3.24.0
     # via -r requirements.txt
-djangorestframework==3.15.2
+djangorestframework==3.17.1
     # via -r requirements.txt
 docopt==0.6.2
     # via pytest-watch
@@ -71,7 +71,7 @@ emoji-data-python==1.6.0
     # via -r requirements.txt
 factory-boy==3.3.3
     # via -r requirements-dev.in
-faker==40.13.0
+faker==40.15.0
     # via
     #   -r requirements-dev.in
     #   factory-boy
@@ -125,9 +125,9 @@ isort==4.3.21
     #   flake8-isort
 jsonfield==3.2.0
     # via -r requirements.txt
-markdown2==2.5.4
+markdown2==2.5.5
     # via -r requirements.txt
-mccabe==0.6.1
+mccabe==0.7.0
     # via flake8
 mypy-extensions==1.1.0
     # via black
@@ -136,7 +136,7 @@ oauthlib==3.3.1
     #   -r requirements.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==26.0
+packaging==26.1
     # via
     #   -r requirements.txt
     #   black
@@ -157,7 +157,7 @@ psutil==7.2.2
     #   django-health-check
 psycopg2-binary==2.9.11
     # via -r requirements.txt
-pycodestyle==2.7.0
+pycodestyle==2.14.0
     # via
     #   flake8
     #   flake8-debugger
@@ -165,7 +165,7 @@ pycparser==3.0
     # via
     #   -r requirements.txt
     #   cffi
-pyflakes==2.3.1
+pyflakes==2.5.0
     # via flake8
 pygments==2.20.0
     # via pytest
@@ -265,7 +265,7 @@ webencodings==0.5.1
     # via
     #   -r requirements.txt
     #   bleach
-websocket-client==0.54.0
+websocket-client==0.59.0
     # via
     #   -r requirements.txt
     #   slackclient
