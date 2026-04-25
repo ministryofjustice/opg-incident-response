@@ -20,7 +20,7 @@ bleach-allowlist==1.0.3
     # via -r requirements.txt
 cached-property==1.5.2
     # via flake8-comprehensions
-certifi==2026.2.25
+certifi==2026.4.22
     # via
     #   -r requirements.txt
     #   requests
@@ -32,7 +32,7 @@ charset-normalizer==3.4.7
     # via
     #   -r requirements.txt
     #   requests
-click==8.3.2
+click==8.3.3
     # via black
 colorama==0.4.6
     # via pytest-watch
@@ -63,7 +63,7 @@ django-decorator-include==3.3
     # via -r requirements.txt
 django-health-check==3.24.0
     # via -r requirements.txt
-djangorestframework==3.15.2
+djangorestframework==3.17.1
     # via -r requirements.txt
 docopt==0.6.2
     # via pytest-watch
@@ -71,7 +71,7 @@ emoji-data-python==1.6.0
     # via -r requirements.txt
 factory-boy==3.3.3
     # via -r requirements-dev.in
-faker==40.13.0
+faker==40.15.0
     # via
     #   -r requirements-dev.in
     #   factory-boy
@@ -113,7 +113,7 @@ flake8-tuple==0.4.1
     # via -r requirements-dev.in
 gunicorn==23.0.0
     # via -r requirements.txt
-idna==3.11
+idna==3.12
     # via
     #   -r requirements.txt
     #   requests
@@ -125,9 +125,9 @@ isort==4.3.21
     #   flake8-isort
 jsonfield==3.2.0
     # via -r requirements.txt
-markdown2==2.5.4
+markdown2==2.5.5
     # via -r requirements.txt
-mccabe==0.6.1
+mccabe==0.7.0
     # via flake8
 mypy-extensions==1.1.0
     # via black
@@ -136,7 +136,7 @@ oauthlib==3.3.1
     #   -r requirements.txt
     #   requests-oauthlib
     #   social-auth-core
-packaging==26.0
+packaging==26.1
     # via
     #   -r requirements.txt
     #   black
@@ -155,9 +155,9 @@ psutil==7.2.2
     # via
     #   -r requirements.txt
     #   django-health-check
-psycopg2-binary==2.9.11
+psycopg2-binary==2.9.12
     # via -r requirements.txt
-pycodestyle==2.7.0
+pycodestyle==2.14.0
     # via
     #   flake8
     #   flake8-debugger
@@ -165,7 +165,7 @@ pycparser==3.0
     # via
     #   -r requirements.txt
     #   cffi
-pyflakes==2.3.1
+pyflakes==2.5.0
     # via flake8
 pygments==2.20.0
     # via pytest
@@ -227,9 +227,9 @@ six==1.17.0
     #   websocket-client
 slackclient==1.3.2
     # via -r requirements.txt
-social-auth-app-django==5.7.0
+social-auth-app-django==5.8.0
     # via -r requirements.txt
-social-auth-core==4.8.5
+social-auth-core==4.8.6
     # via
     #   -r requirements.txt
     #   social-auth-app-django
@@ -265,7 +265,7 @@ webencodings==0.5.1
     # via
     #   -r requirements.txt
     #   bleach
-websocket-client==0.54.0
+websocket-client==0.59.0
     # via
     #   -r requirements.txt
     #   slackclient
