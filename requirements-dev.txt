@@ -57,7 +57,7 @@ django==5.2.13
     #   social-auth-app-django
 django-after-response==0.2.2
     # via -r requirements.txt
-django-bootstrap4==25.3
+django-bootstrap4==26.1
     # via -r requirements.txt
 django-decorator-include==3.3
     # via -r requirements.txt
