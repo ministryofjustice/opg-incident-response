@@ -108,5 +108,5 @@ urllib3==2.6.3
     # via requests
 webencodings==0.5.1
     # via bleach
-websocket-client==0.54.0
+websocket-client==1.9.0
     # via slackclient

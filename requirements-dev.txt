@@ -265,7 +265,7 @@ webencodings==0.5.1
     # via
     #   -r requirements.txt
     #   bleach
-websocket-client==0.54.0
+websocket-client==1.9.0
     # via
     #   -r requirements.txt
     #   slackclient
