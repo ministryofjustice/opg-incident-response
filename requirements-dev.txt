@@ -225,7 +225,7 @@ six==1.17.0
     #   pypd
     #   slackclient
     #   websocket-client
-slackclient==1.3.2
+slackclient==2.9.4
     # via -r requirements.txt
 social-auth-app-django==5.7.0
     # via -r requirements.txt
