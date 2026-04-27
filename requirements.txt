@@ -38,7 +38,7 @@ django-bootstrap4==25.3
     # via -r requirements.in
 django-decorator-include==3.3
     # via -r requirements.in
-django-health-check==3.24.0
+django-health-check==4.4.0
     # via -r requirements.in
 djangorestframework==3.15.2
     # via -r requirements.in
