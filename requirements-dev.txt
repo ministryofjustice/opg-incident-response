@@ -18,7 +18,7 @@ bleach==3.3.1
     # via -r requirements.txt
 bleach-allowlist==1.0.3
     # via -r requirements.txt
-cached-property==1.5.2
+cached-property==2.0.1
     # via flake8-comprehensions
 certifi==2026.2.25
     # via
