@@ -47,7 +47,7 @@ jobs:
 
       - name: cache docker layers
         id: cache-docker
-        uses: actions/cache@668228422ae6a00e4ad889ee87cd7109ec5666a7 # v5.0.4
+        uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
           path: /tmp/.buildx-cache
           key: ${{ matrix.svc_name }}-${{ inputs.branch_name }}-${{ steps.cache-dates.outputs.cache_date_today }}-${{ github.sha }}
@@ -95,7 +95,7 @@ jobs:
 
       - name: ecr login
         id: login_ecr
-        uses: aws-actions/amazon-ecr-login@062b18b96a7aff071d4dc91bc00c4c1a7945b076 # v2.0.1
+        uses: aws-actions/amazon-ecr-login@19d944daaa35f0fa1d3f7f8af1d3f2e5de25c5b7 # v2.1.4
         with:
           registries: 311462405659
 
