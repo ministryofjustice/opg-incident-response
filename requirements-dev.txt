@@ -255,7 +255,7 @@ typing-extensions==4.15.0
     # via
     #   -r requirements.txt
     #   beautifulsoup4
-urllib3==2.6.3
+urllib3==2.7.0
     # via
     #   -r requirements.txt
     #   requests
