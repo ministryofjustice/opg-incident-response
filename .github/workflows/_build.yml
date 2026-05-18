@@ -58,7 +58,7 @@ jobs:
             ${{ matrix.svc_name }}-main-${{ steps.cache-dates.outputs.cache_date_yesterday }}
 
       - name: configure OIDC AWS credentials for ECR push
-        uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
+        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
         with:
           role-to-assume: arn:aws:iam::311462405659:role/incident-response-gh-actions-ecr-push
           role-session-name: github-actions-ecr-push
