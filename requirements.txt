@@ -46,7 +46,7 @@ emoji-data-python==1.6.0
     # via -r requirements.in
 gunicorn==23.0.0
     # via -r requirements.in
-idna==3.11
+idna==3.15
     # via requests
 jsonfield==3.2.0
     # via -r requirements.in
