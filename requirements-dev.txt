@@ -113,7 +113,7 @@ flake8-tuple==0.4.1
     # via -r requirements-dev.in
 gunicorn==23.0.0
     # via -r requirements.txt
-idna==3.11
+idna==3.15
     # via
     #   -r requirements.txt
     #   requests
