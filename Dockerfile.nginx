@@ -6,7 +6,7 @@ COPY nginx/assets .
 
 RUN yarn  --immutable --frozen-lockfile --ignore-scripts && yarn build
 
-FROM nginx:stable-alpine@sha256:c819f83c54b0361f5557601bf5eb4943d09360e7a7fdf426afc466570f45874d
+FROM nginx:stable-alpine@sha256:5f979dcfed4ce6461873f087e8c980d6e29b084b9e8776d9704a7e989b5f4898
 
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
