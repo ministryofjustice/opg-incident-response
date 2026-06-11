@@ -1,4 +1,5 @@
 FROM python:3.14-slim@sha256:7a500125bc50693f2214e842a621440a1b1b9cbb2188f74ab045d29ed2ea5856
+COPY --from=ghcr.io/astral-sh/uv@sha256:2381d6aa60c326b71fd40023f921a0a3b8f91b14d5db6b90402e65a635053709 /uv /uvx /bin/
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     netcat-openbsd \
@@ -6,15 +7,19 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
+ENV UV_MALWARE_CHECK=1
+ENV UV_NO_DEV=1
+ENV UV_SYSTEM_PYTHON=1
+
+COPY pyproject.toml /app/pyproject.toml
+COPY uv.lock /app/uv.lock
+
 COPY tests /app/tests
 COPY testcfg /app/testcfg
 COPY response /app/response
-COPY requirements.txt /app/requirements.txt
-COPY requirements-dev.txt /app/requirements-dev.txt
 COPY pytest.ini /app/pytest.ini
 COPY manage.py /app/manage.py
 
-RUN pip install --upgrade setuptools
-RUN pip install -r requirements-dev.txt
+RUN uv sync --locked --dev
 
-CMD [ "pytest"]
+CMD ["uv", "run", "pytest"]
