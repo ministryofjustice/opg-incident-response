@@ -1,6 +1,6 @@
 #pinned to known working older sha version
 FROM python:3.14-slim@sha256:7a500125bc50693f2214e842a621440a1b1b9cbb2188f74ab045d29ed2ea5856
-
+COPY --from=ghcr.io/astral-sh/uv@sha256:2381d6aa60c326b71fd40023f921a0a3b8f91b14d5db6b90402e65a635053709 /uv /uvx /bin/
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
     netcat-openbsd \
@@ -8,11 +8,14 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-COPY requirements.txt /app/requirements.txt
+ENV UV_MALWARE_CHECK=1
+ENV UV_NO_DEV=1
+ENV UV_SYSTEM_PYTHON=1
 
-#pinned to known working version 
-RUN pip install setuptools==75.3.1
-RUN pip install -r requirements.txt
+COPY pyproject.toml /app/pyproject.toml
+COPY uv.lock /app/uv.lock
+
+RUN uv sync --locked
 
 COPY opgincidentresponse /app/opgincidentresponse
 COPY response /app/response

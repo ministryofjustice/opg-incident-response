@@ -16,15 +16,15 @@ wait_for_db
 
 echo "[INFO] Migrating database"
 cd /app
-python3 manage.py migrate --noinput
+uv run manage.py migrate --noinput
 
 echo "[INFO] Generate Static Files"
-python3 manage.py collectstatic --no-input
+uv run manage.py collectstatic --no-input
 
 if [[ $1 == '--watch' ]] ; then
     echo "[INFO] Starting Server in watch mode"
-    gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000 --reload
+    uv run gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000 --reload
 else
     echo "[INFO] Starting Server"
-    gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000
+    uv run gunicorn opgincidentresponse.wsgi -b 0.0.0.0:8000
 fi
