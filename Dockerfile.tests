@@ -20,6 +20,6 @@ COPY response /app/response
 COPY pytest.ini /app/pytest.ini
 COPY manage.py /app/manage.py
 
-RUN uv sync --locked --dev
+RUN uv sync --locked --dev -frozen
 
 CMD ["uv", "run", "pytest"]

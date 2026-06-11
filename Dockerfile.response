@@ -15,7 +15,7 @@ ENV UV_SYSTEM_PYTHON=1
 COPY pyproject.toml /app/pyproject.toml
 COPY uv.lock /app/uv.lock
 
-RUN uv sync --locked
+RUN uv sync --locked --frozen
 
 COPY opgincidentresponse /app/opgincidentresponse
 COPY response /app/response
