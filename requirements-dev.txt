@@ -14,10 +14,6 @@ black==26.3.1
     # via
     #   -r requirements-dev.in
     #   flake8-black
-bleach==3.3.1
-    # via -r requirements.txt
-bleach-allowlist==1.0.3
-    # via -r requirements.txt
 cached-property==1.5.2
     # via flake8-comprehensions
 certifi==2026.2.25
@@ -125,7 +121,7 @@ isort==4.3.21
     #   flake8-isort
 jsonfield==3.2.0
     # via -r requirements.txt
-markdown2==2.5.4
+justhtml==2.2.0
     # via -r requirements.txt
 mccabe==0.6.1
     # via flake8
@@ -140,7 +136,6 @@ packaging==26.0
     # via
     #   -r requirements.txt
     #   black
-    #   bleach
     #   gunicorn
     #   pytest
 pathspec==1.0.4
@@ -220,7 +215,6 @@ requests-oauthlib==2.0.0
 six==1.17.0
     # via
     #   -r requirements.txt
-    #   bleach
     #   flake8-tuple
     #   pypd
     #   slackclient
@@ -261,10 +255,6 @@ urllib3==2.7.0
     #   requests
 watchdog==6.0.0
     # via pytest-watch
-webencodings==0.5.1
-    # via
-    #   -r requirements.txt
-    #   bleach
 websocket-client==0.54.0
     # via
     #   -r requirements.txt
