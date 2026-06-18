@@ -141,7 +141,7 @@ REST_FRAMEWORK = {
 
 # Markdown Filter
 
-MARKDOWN_FILTER_WHITELIST_TAGS = [
+MARKDOWN_FILTER_WHITELIST_TAGS = {
     "a",
     "p",
     "code",
@@ -152,11 +152,11 @@ MARKDOWN_FILTER_WHITELIST_TAGS = [
     "strong",
     "em",
     "img",
-]
+}
 
-MARKDOWN_FILTER_WHITELIST_ATTRIBUTES = ["src", "style"]
+MARKDOWN_FILTER_WHITELIST_ATTRIBUTES = {"src", "style"}
 
-MARKDOWN_FILTER_WHITELIST_STYLES = [
+MARKDOWN_FILTER_WHITELIST_STYLES = {
     "width",
     "height",
     "border-color",
@@ -172,7 +172,7 @@ MARKDOWN_FILTER_WHITELIST_STYLES = [
     "margin-left",
     "margin-right",
     "margin-top",
-]
+}
 
 
 def get_env_var(setting, warn_only=False):
