@@ -4,10 +4,6 @@ asgiref==3.11.1
     # via django
 beautifulsoup4==4.14.3
     # via django-bootstrap4
-bleach==3.3.1
-    # via -r requirements.in
-bleach-allowlist==1.0.3
-    # via -r requirements.in
 certifi==2026.2.25
     # via requests
 cffi==2.0.0
@@ -50,16 +46,14 @@ idna==3.15
     # via requests
 jsonfield==3.2.0
     # via -r requirements.in
-markdown2==2.5.4
+justhtml==2.2.0
     # via -r requirements.in
 oauthlib==3.3.1
     # via
     #   requests-oauthlib
     #   social-auth-core
 packaging==26.0
-    # via
-    #   bleach
-    #   gunicorn
+    # via gunicorn
 psutil==7.2.2
     # via django-health-check
 psycopg2-binary==2.9.11
@@ -86,7 +80,6 @@ requests-oauthlib==2.0.0
     # via social-auth-core
 six==1.17.0
     # via
-    #   bleach
     #   pypd
     #   slackclient
     #   websocket-client
@@ -106,7 +99,5 @@ typing-extensions==4.15.0
     # via beautifulsoup4
 urllib3==2.7.0
     # via requests
-webencodings==0.5.1
-    # via bleach
 websocket-client==0.54.0
     # via slackclient

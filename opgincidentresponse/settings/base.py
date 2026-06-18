@@ -144,42 +144,6 @@ USE_TZ = False
 STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, "static")
 
-# Markdown Filter
-
-MARKDOWN_FILTER_WHITELIST_TAGS = [
-    "a",
-    "p",
-    "code",
-    "h1",
-    "h2",
-    "ul",
-    "li",
-    "strong",
-    "em",
-    "img",
-]
-
-MARKDOWN_FILTER_WHITELIST_ATTRIBUTES = ["src", "style"]
-
-MARKDOWN_FILTER_WHITELIST_STYLES = [
-    "width",
-    "height",
-    "border-color",
-    "background-color",
-    "white-space",
-    "vertical-align",
-    "text-align",
-    "border-style",
-    "border-width",
-    "float",
-    "margin",
-    "margin-bottom",
-    "margin-left",
-    "margin-right",
-    "margin-top",
-]
-
-
 def get_env_var(setting, warn_only=False):
     value = os.getenv(setting, None)
 
@@ -226,10 +190,6 @@ PAGERDUTY_SERVICE = get_env_var("PAGERDUTY_SERVICE")
 PAGERDUTY_EMAIL = get_env_var("PAGERDUTY_EMAIL")
 
 LOGIN_URL = "/login/github-org"
-
-# Whether to use https://pypi.org/project/bleach/ to strip potentially dangerous
-# HTML input in string fields
-RESPONSE_SANITIZE_USER_INPUT = True
 
 # Whether users need to log in to access Response
 RESPONSE_LOGIN_REQUIRED = True

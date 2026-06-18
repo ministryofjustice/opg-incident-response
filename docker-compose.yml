@@ -20,8 +20,9 @@ services:
       retries: 3
       start_period: 30s
     volumes:
-      - ./:/app
-      - ../:/response
+      - ./opgincidentresponse:/app/opgincidentresponse
+      - ./response:/app/response
+      - ./startup.sh:/app/startup.sh
       - pypd:/app/pypd
     stdin_open: true
     tty: true
