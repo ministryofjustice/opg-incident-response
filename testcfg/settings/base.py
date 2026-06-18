@@ -157,5 +157,3 @@ def get_env_var(setting, warn_only=False):
 
 SLACK_TOKEN = get_env_var("SLACK_TOKEN")
 SLACK_CLIENT = SlackClient(SLACK_TOKEN)
-
-CSRF_TRUSTED_ORIGINS = ['https://marybelle-unbraved-unstubbornly.ngrok-free.dev']
