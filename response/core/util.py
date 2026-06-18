@@ -1,5 +1,6 @@
 import bleach
 import bleach_allowlist
+from bleach.css_sanitizer import CSSSanitizer
 from django.conf import settings
 from rest_framework.pagination import PageNumberPagination
 
@@ -7,11 +8,13 @@ from rest_framework.pagination import PageNumberPagination
 def sanitize(string):
     # bleach doesn't handle None so let's not pass it
     if string and getattr(settings, "RESPONSE_SANITIZE_USER_INPUT", True):
+        css_sanitizer = CSSSanitizer(allowed_css_properties=settings.MARKDOWN_FILTER_WHITELIST_STYLES)
+
         return bleach.clean(
             string,
             tags=bleach_allowlist.markdown_tags,
             attributes=bleach_allowlist.markdown_attrs,
-            styles=bleach_allowlist.all_styles,
+            css_sanitizer=css_sanitizer,
         )
 
     return string
