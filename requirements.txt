@@ -57,9 +57,7 @@ oauthlib==3.3.1
     #   requests-oauthlib
     #   social-auth-core
 packaging==26.0
-    # via
-    #   bleach
-    #   gunicorn
+    # via gunicorn
 psutil==7.2.2
     # via django-health-check
 psycopg2-binary==2.9.11
@@ -86,7 +84,6 @@ requests-oauthlib==2.0.0
     # via social-auth-core
 six==1.17.0
     # via
-    #   bleach
     #   pypd
     #   slackclient
     #   websocket-client
