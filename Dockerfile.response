@@ -1,3 +1,11 @@
+FROM node:lts-alpine3.23@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14 AS asset-env
+
+WORKDIR /app
+
+COPY nginx/assets .
+
+RUN yarn  --immutable --frozen-lockfile --ignore-scripts && yarn build
+
 #pinned to known working older sha version
 FROM python:3.14-slim@sha256:7a500125bc50693f2214e842a621440a1b1b9cbb2188f74ab045d29ed2ea5856
 
@@ -10,12 +18,15 @@ WORKDIR /app
 
 COPY requirements.txt /app/requirements.txt
 
-#pinned to known working version 
+#pinned to known working version
 RUN pip install setuptools==75.3.1
 RUN pip install -r requirements.txt
 
 COPY opgincidentresponse /app/opgincidentresponse
 COPY response /app/response
 COPY startup.sh /app/startup.sh
+COPY --from=asset-env /app/dist /app/opgincidentresponse/static
 
 CMD ["bash", "/app/startup.sh"]
+
+VOLUME ["/app/opgincidentresponse/static"]
