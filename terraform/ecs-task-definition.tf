@@ -7,6 +7,10 @@ resource "aws_ecs_task_definition" "response" {
   container_definitions    = "[${local.response}, ${local.nginx}]"
   task_role_arn            = aws_iam_role.response_primary.arn
   execution_role_arn       = aws_iam_role.execution_role.arn
+
+  volume {
+    name = "static-content"
+  }
 }
 
 
@@ -60,6 +64,12 @@ locals {
       {
         name  = "APP_PORT",
         value = "8000"
+      }
+    ],
+    mountPoints = [
+      {
+        sourceVolume  = "static-content",
+        containerPath = "/app/opgincidentresponse/static"
       }
     ]
   })
@@ -171,7 +181,13 @@ locals {
         name      = "PAGERDUTY_API_KEY"
         valueFrom = aws_secretsmanager_secret.pagerduty_api_key.arn
       },
-    ]
+    ],
+    mountPoints = [
+      {
+        sourceVolume  = "static-content",
+        containerPath = "/app/opgincidentresponse/static"
+      }
+    ],
     volumesFrom = [],
     logConfiguration = {
       logDriver = "awslogs",

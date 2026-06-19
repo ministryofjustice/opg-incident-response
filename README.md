@@ -6,9 +6,11 @@ OPG Incident Response is a Django app based on [Monzo's Response tool](https://g
 
 To start the application locally, copy `env.dev.example` to `.env` and configure the environment variables inside. All environment variables need to be set, but some can be set to nonsense values (i.e. `ENV_VAR=...`) as detailed in the table below.
 
-You will need to configure a Slack app following the instructions below, and can then start the application with `docker-compose up -d`. The app will be served by nginx on ```http://localhost:80/```
+You will need to configure a Slack app following the instructions below, and can then start the application with `make up`. The app will be served by nginx on ```http://localhost:80/```
 
-Note if you are using ngrok, they have now introduced auth tokens. You can add an NGROK_AUTHTOKEN to your local .env file and it will be passed down to the container so you don't risk commiting it. 
+### Using ngrok
+
+In order to interact with Slack services, you must use ngrok to make your local service publicly accessible. You will need to add an NGROK_AUTHTOKEN to your local .env file and it will be passed down to the container so you don't risk commiting it.
 
 ## Versions and Releases
 
@@ -58,7 +60,11 @@ To connect to GitHub, you'll need to create a GitHub OAuth App and set the envir
 
 ### django-createsuperuser
 
-[https://docs.djangoproject.com/en/3.1/ref/django-admin/#createsuperuser](https://docs.djangoproject.com/en/3.1/ref/django-admin/#createsuperuser)
+You can create a super user with Django's [createsuperuser command](https://docs.djangoproject.com/en/3.1/ref/django-admin/#createsuperuser). In local development this can be done via docker compose:
+
+```sh
+docker compose exec response python manage.py createsuperuser
+```
 
 ### slack-create
 
