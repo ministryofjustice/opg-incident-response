@@ -1,17 +1,8 @@
-FROM node:lts-alpine3.23@sha256:2bdb65ed1dab192432bc31c95f94155ca5ad7fc1392fb7eb7526ab682fa5bf14 AS asset-env
-
-WORKDIR /app
-
-COPY nginx/assets .
-
-RUN yarn  --immutable --frozen-lockfile --ignore-scripts && yarn build
-
 FROM nginx:stable-alpine@sha256:5f979dcfed4ce6461873f087e8c980d6e29b084b9e8776d9704a7e989b5f4898
 
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
-COPY opgincidentresponse/static /app/opgincidentresponse/static
-COPY --from=node /home/node /app/opgincidentresponse/static
-COPY --from=asset-env /app/dist /app/opgincidentresponse/static
+
+VOLUME ["/app/opgincidentresponse/static"]
 
 ENV TIMEOUT=20
