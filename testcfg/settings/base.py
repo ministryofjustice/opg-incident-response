@@ -48,6 +48,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "bootstrap4",
     "response.apps.ResponseConfig",
+    'opgincidentresponse',
 ]
 
 MIDDLEWARE = [
@@ -60,7 +61,7 @@ MIDDLEWARE = [
     "django.middleware.clickjacking.XFrameOptionsMiddleware",
 ]
 
-ROOT_URLCONF = "testcfg.urls"
+ROOT_URLCONF = "opgincidentresponse.urls"
 
 TEMPLATES = [
     {

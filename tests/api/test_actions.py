@@ -6,7 +6,7 @@ from django.urls import reverse
 from faker import Faker
 from rest_framework.test import force_authenticate
 
-from response import serializers
+from response.core import serializers
 from response.core.views import IncidentActionViewSet
 from response.models import Action
 from tests.factories import ActionFactory, ExternalUserFactory, IncidentFactory
@@ -130,7 +130,7 @@ def test_update_action_sanitized(arf, api_user):
 
     updated_action = Action.objects.get(pk=action.pk)
     assert (
-        updated_action.details == "&lt;iframe&gt;this should be escaped&lt;/iframe&gt;"
+        updated_action.details == "this should be escaped"
     )
 
 

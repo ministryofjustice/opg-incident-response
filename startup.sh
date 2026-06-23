@@ -18,8 +18,6 @@ echo "[INFO] Migrating database"
 cd /app
 python3 manage.py migrate --noinput
 
-echo "[INFO] Generate Static Files"
-python3 manage.py collectstatic --no-input
 
 if [[ $1 == '--watch' ]] ; then
     echo "[INFO] Starting Server in watch mode"

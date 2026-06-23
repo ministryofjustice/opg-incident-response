@@ -6,15 +6,17 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
 
 WORKDIR /app
 
-COPY tests /app/tests
-COPY testcfg /app/testcfg
-COPY response /app/response
 COPY requirements.txt /app/requirements.txt
 COPY requirements-dev.txt /app/requirements-dev.txt
-COPY pytest.ini /app/pytest.ini
-COPY manage.py /app/manage.py
 
 RUN pip install --upgrade setuptools
 RUN pip install -r requirements-dev.txt
 
-CMD [ "pytest"]
+COPY tests /app/tests
+COPY testcfg /app/testcfg
+COPY opgincidentresponse /app/opgincidentresponse
+COPY response /app/response
+COPY pytest.ini /app/pytest.ini
+COPY manage.py /app/manage.py
+
+CMD [ "pytest" ]

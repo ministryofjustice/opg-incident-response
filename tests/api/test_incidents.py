@@ -3,11 +3,13 @@ import json
 import random
 
 import pytest
+from django.test import override_settings
 from django.urls import reverse
 from faker import Faker
+from response.slack import settings
 from rest_framework.test import force_authenticate
 
-from response import serializers
+from response.core import serializers
 from response.core.views import IncidentsByMonthViewSet, IncidentViewSet
 from response.models import ExternalUser, Incident
 from tests.factories import IncidentFactory
@@ -164,17 +166,32 @@ def test_update_incident(arf, api_user, update_key, update_value):
         (
             "impact",
             "<iframe>this should be escaped</iframe>",
-            "&lt;iframe&gt;this should be escaped&lt;/iframe&gt;",
+            "this should be escaped",
         ),
         (
             "report",
             "<script>alert('certainly shouldnt let this happen')</script>",
-            "&lt;script&gt;alert('certainly shouldnt let this happen')&lt;/script&gt;",
+            "",
         ),
         (
             "summary",
             '<meta http-equiv="refresh content=0;">',
-            '&lt;meta http-equiv="refresh content=0;"&gt;',
+            "",
+        ),
+        (
+            "summary",
+            '<a href="https://bbc.co.uk/">this should be a link</a>',
+            '<a href="https://bbc.co.uk/">this should be a link</a>',
+        ),
+        (
+            "summary",
+            '<a href="javascript:alert(\'XSS\')">this should be suppressed</a>',
+            '<a>this should be suppressed</a>',
+        ),
+        (
+            "report",
+            "<strong>Basic markup</strong> should be <em>allowed</em>",
+            "<strong>Basic markup</strong>\nshould be\n<em>allowed</em>",
         ),
     ),
 )
@@ -268,9 +285,8 @@ def test_cannot_unset_severity(arf, api_user):
     ), "Got 200 response from API when we expected an error"
 
 
+@override_settings(RESPONSE_LOGIN_REQUIRED=True)
 def test_cannot_access_incident_logged_out_if_configured(client, db, settings):
-    settings.RESPONSE_LOGIN_REQUIRED = True
-
     incident = IncidentFactory()
 
     response = client.get(reverse("incident_doc", args=(incident.pk,)))
@@ -279,9 +295,8 @@ def test_cannot_access_incident_logged_out_if_configured(client, db, settings):
     assert response["location"].startswith(settings.LOGIN_URL)
 
 
+@override_settings(RESPONSE_LOGIN_REQUIRED=False)
 def test_can_access_incident_logged_out_if_configured(client, db, settings):
-    settings.RESPONSE_LOGIN_REQUIRED = False
-
     incident = IncidentFactory()
 
     response = client.get(reverse("incident_doc", args=(incident.pk,)))

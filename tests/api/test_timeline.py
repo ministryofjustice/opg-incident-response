@@ -5,7 +5,7 @@ from django.urls import reverse
 from faker import Faker
 from rest_framework.test import force_authenticate
 
-from response import serializers
+from response.core import serializers
 from response.core.views import IncidentTimelineEventViewSet
 from response.models import TimelineEvent
 from tests.factories import IncidentFactory, TimelineEventFactory
@@ -89,7 +89,7 @@ def test_list_timeline_events_by_incident(arf, api_user):
         (
             "text",
             "<script>alert('certainly shouldnt let this happen')</script>",
-            "&lt;script&gt;alert('certainly shouldnt let this happen')&lt;/script&gt;",
+            "",
         ),
     ),
 )
@@ -116,7 +116,10 @@ def test_update_timeline_event(arf, api_user, update_key, update_value, expected
     if update_key:
         new_event = TimelineEvent.objects.get(pk=event_model.pk)
 
-        expected = expected_value or update_value
+        if expected_value is None:
+            expected = update_value
+        else:
+            expected = expected_value
         assert (
             getattr(new_event, update_key) == expected
         ), "Updated value wasn't persisted to the DB"
