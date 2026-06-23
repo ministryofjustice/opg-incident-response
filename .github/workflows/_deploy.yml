@@ -25,11 +25,11 @@ jobs:
   terraform_workflow:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - id: terraform_version
         name: get terraform version
-        uses: ministryofjustice/opg-github-actions/actions/terraform-version@b605e1e2c94b399e8139c4c2be2c8730700e0004 #v4.5.2
+        uses: ministryofjustice/opg-github-actions/actions/terraform-version@77bb12e7fec3bcee9a6a35cb21361195e027a12a # v4.9.0
         with:
           terraform_directory: terraform
 
@@ -44,7 +44,7 @@ jobs:
           tflint_version: v0.50.1
 
       - name: configure OIDC AWS credentials for terraform
-        uses: aws-actions/configure-aws-credentials@d979d5b3a71173a29b74b5b88418bfda9437d885 # v6.1.1
+        uses: aws-actions/configure-aws-credentials@e7f100cf4c008499ea8adda475de1042d6975c7b # v6.2.0
         with:
           role-to-assume: "arn:aws:iam::631181914621:role/oidc-incident-response-${{ inputs.account_name }}"
           role-session-name: github-actions-terraform-incident-response
