@@ -3,3 +3,9 @@ build:
 
 up:
 	docker compose up -d nginx
+
+down:
+	docker compose down
+
+test:
+	docker compose run --build --rm tests

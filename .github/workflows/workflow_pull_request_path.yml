@@ -56,11 +56,16 @@ jobs:
       tag: ${{ needs.workflow_variables.outputs.version_tag }}
       branch_name: ${{ needs.workflow_variables.outputs.parsed_branch }}
 
+  unit_test:
+    name: Run Tests
+    uses: ./.github/workflows/_test.yml
+
   deploy_to_development_environment:
     name: Deploy to Development Environment
     needs: [
       workflow_variables,
-      build_scan_push_containers
+      build_scan_push_containers,
+      unit_test
     ]
     uses: ./.github/workflows/_deploy.yml
     with:
