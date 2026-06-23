@@ -23,7 +23,9 @@ services:
       - ./opgincidentresponse:/app/opgincidentresponse
       - ./response:/app/response
       - ./startup.sh:/app/startup.sh
+      - ./manage.py:/app/manage.py
       - pypd:/app/pypd
+      - static-content:/app/opgincidentresponse/static
     stdin_open: true
     tty: true
     restart: always
@@ -46,7 +48,7 @@ services:
       retries: 3
       start_period: 30s
     volumes:
-      - ./nginx/assets/dist:/app/opgincidentresponse/static
+      - static-content:/app/opgincidentresponse/static
     ports:
       - 80:80
 
@@ -113,3 +115,4 @@ services:
 volumes:
   postgres_data_14_vol:
   pypd:
+  static-content:
