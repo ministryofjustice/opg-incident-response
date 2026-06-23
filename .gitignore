@@ -6,7 +6,6 @@ postgres_data
 __pycache__
 /static/
 db.sqlite3
-Pipfile
 virtual-env
 *.env
 /src/
