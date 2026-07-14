@@ -7,7 +7,7 @@ COPY nginx/assets .
 RUN yarn  --immutable --frozen-lockfile --ignore-scripts && yarn build
 
 #pinned to known working older sha version
-FROM python:3.14-slim@sha256:7a500125bc50693f2214e842a621440a1b1b9cbb2188f74ab045d29ed2ea5856
+FROM python:3.14-slim@sha256:d3400aa122fa42cf0af0dbe8ec3091b047eac5c8f7e3539f7135e86d855dc015
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
