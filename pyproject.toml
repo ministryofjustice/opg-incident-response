@@ -10,7 +10,7 @@ dependencies = [
     "django-after-response==0.2.2",
     "django-bootstrap4>=0.0.7",
     "django-decorator-include==3.3",
-    "django-health-check==3.24.0",
+    "django-health-check==4.4.3",
     "djangorestframework>=3.15.2",
     "emoji-data-python==1.6.0",
     "gunicorn==23.0.0",
