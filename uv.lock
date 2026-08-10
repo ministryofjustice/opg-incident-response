@@ -662,7 +662,7 @@ dev = [
     { name = "pep8", specifier = "==1.7.1" },
     { name = "pytest", specifier = "==9.1.1" },
     { name = "pytest-django", specifier = "==4.12.0" },
-    { name = "pytest-env", specifier = "==0.8.2" },
+    { name = "pytest-env", specifier = "==1.7.0" },
     { name = "pytest-mock", specifier = "==3.15.1" },
     { name = "pytest-randomly", specifier = "==3.16.0" },
     { name = "pytest-sugar", specifier = "==1.1.1" },
@@ -845,14 +845,15 @@ wheels = [
 
 [[package]]
 name = "pytest-env"
-version = "0.8.2"
+version = "1.7.0"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "pytest" },
+    { name = "python-dotenv" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/8a/33/c298eab42c425911ce26f6cd0eff93fc54bc5c4feb517df42b7c775f562f/pytest_env-0.8.2.tar.gz", hash = "sha256:baed9b3b6bae77bd75b9238e0ed1ee6903a42806ae9d6aeffb8754cd5584d4ff", size = 7419, upload-time = "2023-06-15T22:54:39.994Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/65/49/08ee056f9cc655e437abcf2ae399884844b623223476ae6a77244131db03/pytest_env-1.7.0.tar.gz", hash = "sha256:0c1dc1101fb8d3ab3611e8f8d657ba06c3c0c167fc85c90457e5b27f2508f43e", size = 16408, upload-time = "2026-07-21T13:09:21.834Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/55/ad/2db287eb35633e4a7c5889f889262637cc1a41a4413c641f64f7d70da773/pytest_env-0.8.2-py3-none-any.whl", hash = "sha256:5e533273f4d9e6a41c3a3120e0c7944aae5674fa773b329f00a5eb1f23c53a38", size = 5274, upload-time = "2023-06-15T22:54:38.795Z" },
+    { url = "https://files.pythonhosted.org/packages/3e/fc/9f2975c41d41bf5bd9a7d0fc03085ec20052b456b079df53828ae4a1b100/pytest_env-1.7.0-py3-none-any.whl", hash = "sha256:9ee0f1fe859d23fcdb533fe2909a404b3b133d02674a56df275bbe4df4eb104b", size = 10263, upload-time = "2026-07-21T13:09:20.677Z" },
 ]
 
 [[package]]
