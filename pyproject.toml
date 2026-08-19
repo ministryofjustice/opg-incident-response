@@ -6,7 +6,7 @@ readme = "README.md"
 requires-python = ">=3.14"
 dependencies = [
     "cryptography>=2.7",
-    "django==5.2.16",
+    "django==5.2.17",
     "django-after-response==0.2.2",
     "django-bootstrap4>=0.0.7",
     "django-decorator-include==3.5",
@@ -44,7 +44,7 @@ dev = [
     "isort==8.0.1",
     "pep8==1.7.1",
     "pytest==9.1.1",
-    "pytest-django==4.12.0",
+    "pytest-django==4.14.0",
     "pytest-env==0.8.2",
     "pytest-mock==3.15.1",
     "pytest-randomly==3.16.0",
