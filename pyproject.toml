@@ -15,7 +15,7 @@ dependencies = [
     "emoji-data-python==1.6.0",
     "gunicorn==23.0.0",
     "jsonfield>=2.0.2",
-    "justhtml==2.4.1",
+    "justhtml==3.11.1",
     "psycopg2-binary==2.9.12",
     "pypd==1.1.0",
     "python-dotenv==1.2.2",
