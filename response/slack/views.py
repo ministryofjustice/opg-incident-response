@@ -56,19 +56,6 @@ def slash_command(request):
         ],
     )
 
-    if hasattr(settings, "INCIDENT_REPORT_CHANNEL_ID"):
-        dialog.add_element(
-            SelectWithOptions(
-                [
-                    ("Yes - this is a live incident happening right now", "live"),
-                    ("No - this is just a report of something that happened", "report"),
-                ],
-                label="Is this a live incident?",
-                name="incident_type",
-                optional=False,
-            )
-        )
-
     dialog.add_element(
         TextArea(
             label="Summary",
