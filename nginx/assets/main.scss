@@ -3,3 +3,34 @@ $govuk-images-path: '/static/assets/images/';
 
 @import "node_modules/govuk-frontend/dist/govuk/index";
 @import "node_modules/@ministryofjustice/frontend/moj/all";
+
+@media print {
+  // Account details and the internal-service banner are not part of an incident
+  // report, so exclude them from printed copies.
+  .moj-header__content,
+  .govuk-phase-banner {
+    display: none;
+  }
+
+  // The GOV.UK grid retains its desktop widths when printing. Stack the incident
+  // details and metadata so both use the available page width.
+  .govuk-grid-column-two-thirds,
+  .govuk-grid-column-one-third {
+    width: 100%;
+    float: none;
+  }
+
+  // Browser print settings commonly omit background colours. Use borders for the
+  // timeline rules so its structure remains visible on paper and in PDFs.
+  .moj-timeline::before {
+    width: 0;
+    border-left: 5px solid govuk-colour("black");
+    background-color: transparent;
+  }
+
+  .moj-timeline__item::before {
+    height: 0;
+    border-top: 5px solid govuk-colour("black");
+    background-color: transparent;
+  }
+}
