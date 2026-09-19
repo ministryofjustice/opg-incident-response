@@ -1,4 +1,4 @@
-FROM nginx:stable-alpine@sha256:97d490c12ba55b4946b01546d1c3ed324e8d41ab1c9fcb2a616aa470620e5b46
+FROM nginx:stable-alpine@sha256:ef8676b33d681f272ba429b27658bdd7e640963279714c96bddf1dc76307f7b6
 
 COPY nginx/default.conf.template /etc/nginx/templates/default.conf.template
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
