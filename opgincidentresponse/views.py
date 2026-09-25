@@ -42,3 +42,6 @@ def incident(request: HttpRequest, incident_id: str):
             "user_stats": user_stats,
         },
     )
+
+def login(request: HttpRequest):
+    return render(request, template_name="login.html")
