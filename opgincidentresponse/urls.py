@@ -9,6 +9,7 @@ from . import views
 
 urlpatterns = [
     path("", views.home, name="home"),
+    path("login/", views.login, name="login"),
     path("incident/<int:incident_id>/", views.incident, name="incident_doc"),
     re_path("", include('social_django.urls', namespace='social')),
     path("admin/", admin.site.urls),

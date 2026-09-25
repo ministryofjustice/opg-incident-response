@@ -94,7 +94,11 @@
 
           <ul class="moj-header__navigation-list">
             <li class="moj-header__navigation-item">
-              Signed in via GitHub as <strong>{{ backends.associated.first }}</strong>
+              {% if backends.associated.first %}
+                Signed in via GitHub as <strong>{{ backends.associated.first }}</strong>
+              {% else %}
+                <a class="moj-header__navigation-link" href="{% url 'login' %}">Sign in</a>
+              {% endif %}
             </li>
           </ul>
 
