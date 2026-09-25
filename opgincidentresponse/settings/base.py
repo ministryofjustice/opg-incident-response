@@ -189,7 +189,7 @@ PAGERDUTY_API_KEY = get_env_var("PAGERDUTY_API_KEY")
 PAGERDUTY_SERVICE = get_env_var("PAGERDUTY_SERVICE")
 PAGERDUTY_EMAIL = get_env_var("PAGERDUTY_EMAIL")
 
-LOGIN_URL = "/login/github-org"
+LOGIN_URL = "/login"
 
 # Whether users need to log in to access Response
 RESPONSE_LOGIN_REQUIRED = True
