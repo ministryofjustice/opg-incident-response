@@ -16,7 +16,7 @@ dependencies = [
     "gunicorn==23.0.0",
     "jsonfield>=2.0.2",
     "justhtml==2.4.1",
-    "psycopg2-binary==2.9.12",
+    "psycopg2-binary==2.9.13",
     "pypd==1.1.0",
     "python-dotenv==1.2.3",
     "python-slugify>=1.2.6",
