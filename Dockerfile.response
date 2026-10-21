@@ -7,7 +7,7 @@ COPY nginx/assets .
 RUN npm ci --ignore-scripts && npm run build
 
 #pinned to known working older sha version
-FROM python:3.14-slim@sha256:caaf356f40667c496d405780745b9ac25771c189a51dfcc42430d531ea09f8a2
+FROM python:3.14-slim@sha256:29e1fe7a54021a1d8990f59223f1246a4239b106895363680b23aa1265f73cb3
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     curl \
