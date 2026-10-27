@@ -63,7 +63,7 @@ services:
     tty: true
 
   db:
-    image: "postgres:14"
+    image: "postgres:14@sha256:8ab94f61668dc73bbab4dc13273ff2fc37e635536af62aef5306a49a9682a446"
     container_name: postgres
     healthcheck:
       test: pg_isready --username=api --dbname=api
@@ -81,7 +81,7 @@ services:
       PGPASSWORD: postgres
 
   ngrok:
-    image: ngrok/ngrok:latest
+    image: ngrok/ngrok:latest@sha256:ff3b5c3674432d14a786349908b7bdf28ee56c25662637afcbe7180d471993ef
     restart: unless-stopped
     command:
       - "http"
