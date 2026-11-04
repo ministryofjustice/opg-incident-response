@@ -31,7 +31,6 @@ locals {
     essential   = true,
     image       = "${data.aws_ecr_repository.nginx.repository_url}:${var.app_tag}",
     name        = "nginx",
-    mountPoints = [],
     portMappings = [{
       containerPort = 80,
       hostPort      = 80,
@@ -78,7 +77,6 @@ locals {
     cpu         = 0,
     essential   = true,
     image       = "${data.aws_ecr_repository.response.repository_url}:${var.app_tag}",
-    mountPoints = [],
     name        = "response",
     portMappings = [{
       containerPort = 8000,
