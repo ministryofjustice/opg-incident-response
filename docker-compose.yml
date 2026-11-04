@@ -63,7 +63,7 @@ services:
     tty: true
 
   db:
-    image: "postgres:14@sha256:8ab94f61668dc73bbab4dc13273ff2fc37e635536af62aef5306a49a9682a446"
+    image: "postgres:14@sha256:a26d06e6878f114ab53aace021fd9c599b498cca4c5ba2c18b34aee472f20148"
     container_name: postgres
     healthcheck:
       test: pg_isready --username=api --dbname=api
