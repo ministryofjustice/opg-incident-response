@@ -27,11 +27,10 @@ data "aws_ecr_repository" "nginx" {
 locals {
 
   nginx = jsonencode({
-    cpu         = 0,
-    essential   = true,
-    image       = "${data.aws_ecr_repository.nginx.repository_url}:${var.app_tag}",
-    name        = "nginx",
-    mountPoints = [],
+    cpu       = 0,
+    essential = true,
+    image     = "${data.aws_ecr_repository.nginx.repository_url}:${var.app_tag}",
+    name      = "nginx",
     portMappings = [{
       containerPort = 80,
       hostPort      = 80,
@@ -75,11 +74,10 @@ locals {
   })
 
   response = jsonencode({
-    cpu         = 0,
-    essential   = true,
-    image       = "${data.aws_ecr_repository.response.repository_url}:${var.app_tag}",
-    mountPoints = [],
-    name        = "response",
+    cpu       = 0,
+    essential = true,
+    image     = "${data.aws_ecr_repository.response.repository_url}:${var.app_tag}",
+    name      = "response",
     portMappings = [{
       containerPort = 8000,
       hostPort      = 8000,
