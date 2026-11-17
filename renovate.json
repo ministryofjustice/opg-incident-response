@@ -15,37 +15,30 @@
   "prConcurrentLimit": 3,
   "branchConcurrentLimit": 0,
   "separateMultipleMajor": true,
-  "lockFileMaintenance": { "enabled": false },
+  "branchNameStrict": true,
+  "configMigration": true,
+  "minimumReleaseAge": "7 days",
+  "commitMessageSuffix": " #patch",
   "packageRules": [
     {
-      "automerge": false,
       "groupName": "Patch & Minor Updates",
       "groupSlug": "all-minor-patch-updates",
-      "labels": [
-        "Dependencies",
-        "Renovate"
-      ],
       "matchUpdateTypes": [
         "minor",
         "patch"
       ],
       "prCreation": "immediate",
-      "minimumReleaseAge": "7 days",
       "matchPackageNames": [
         "*"
       ]
     }
   ],
-  "major": {
-    "automerge": false,
-    "labels": [
-        "Dependencies",
-        "Renovate"
-    ],
-    "prCreation": "immediate",
-    "minimumReleaseAge": "7 days"
-  },
   "vulnerabilityAlerts": {
-    "enabled": false
+    "groupName": "Security Alerts",
+    "minimumReleaseAge": null,
+    "rangeStrategy": "update-lockfile",
+    "commitMessagePrefix": "[SECURITY]",
+    "branchTopic": "{{{datasource}}}-{{{depName}}}-vulnerability",
+    "prCreation": "immediate"
   }
 }
