@@ -41,7 +41,7 @@ jobs:
       - uses: terraform-linters/setup-tflint@6ffdbaa3be476b3431f7275c26966ef32ff60337 # v6.3.2
         name: Setup TFLint
         with:
-          tflint_version: v0.65.0
+          tflint_version: v0.66.0
 
       - name: configure OIDC AWS credentials for terraform
         uses: aws-actions/configure-aws-credentials@e1253824e5c10ff9df46874f81ed3ec929e19cfd # v6.3.0
