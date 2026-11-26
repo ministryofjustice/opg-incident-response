@@ -549,11 +549,11 @@ wheels = [
 
 [[package]]
 name = "justhtml"
-version = "2.4.1"
+version = "3.17.1"
 source = { registry = "https://pypi.org/simple" }
-sdist = { url = "https://files.pythonhosted.org/packages/4a/59/42fa17ea72f513e8243fb53e5961b7dd5d73b643f674467e3808b78c9276/justhtml-2.4.1.tar.gz", hash = "sha256:c4e81b6129869e1c4656e994402e1f24b9d49573c2d6cda8c0e15d4169d0f604", size = 888524, upload-time = "2026-06-21T07:41:07.878Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/1d/44/9aa491139db1e708b2bbe971d0d39e75267e96b7813e72cc80e7b9242dca/justhtml-3.17.1.tar.gz", hash = "sha256:6cd82e832562dc4e1bfaa4ec605ea7bbb3abd9d7862ad93e45b2d2972d3f3088", size = 986209, upload-time = "2026-11-14T10:37:53.796Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/bb/4a/5199a0b624f361782127b0fc41eb59fa0a3b859d6727b6fdc930b123aec2/justhtml-2.4.1-py3-none-any.whl", hash = "sha256:65b4e842ca40fe1a240c3e9fe1c64dd2a02542caec6704be145e06ffc0f1c89d", size = 156840, upload-time = "2026-06-21T07:41:06.089Z" },
+    { url = "https://files.pythonhosted.org/packages/46/f5/1464ed99b632f2497a1a4bd32df72965914b37611007ab9e00f084a022ff/justhtml-3.17.1-py3-none-any.whl", hash = "sha256:91f9840a44231cbf5af8fa420d5a8b80635c5d77b9c897a4b22a9c78b93d44e3", size = 177383, upload-time = "2026-11-14T10:37:51.93Z" },
 ]
 
 [[package]]
@@ -647,7 +647,7 @@ requires-dist = [
     { name = "emoji-data-python", specifier = "==1.6.0" },
     { name = "gunicorn", specifier = "==27.0.1" },
     { name = "jsonfield", specifier = ">=2.0.2" },
-    { name = "justhtml", specifier = "==2.4.1" },
+    { name = "justhtml", specifier = "==3.17.1" },
     { name = "psycopg2-binary", specifier = "==2.9.13" },
     { name = "pypd", specifier = "==1.1.0" },
     { name = "python-dotenv", specifier = "==1.2.4" },
