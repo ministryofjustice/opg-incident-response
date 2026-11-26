@@ -1,7 +1,8 @@
 import logging
 import time
 
-import slackclient
+from slack_sdk import WebClient
+from slack_sdk.errors import SlackApiError
 from slugify import slugify
 
 logger = logging.getLogger(__name__)
@@ -22,15 +23,23 @@ class SlackClient(object):
         retryable_errors=None,
     ):
         self.api_token = api_token
-        self.client = slackclient.SlackClient(self.api_token)
+        self.client = WebClient(self.api_token)
         self.max_retry_attempts = max_retry_attempts
         self.retry_base_backoff_seconds = retry_base_backoff_seconds
         self.retryable_errors = retryable_errors or ["ratelimited"]
 
     def api_call(self, api_endpoint, *args, **kwargs):
         logger.info(f"Calling Slack API {api_endpoint}")
-        response = self.client.api_call(api_endpoint, *args, **kwargs)
-        if not response.get("ok", False):
+        did_error = False
+
+        try:
+            response = self.client.api_call(api_endpoint, params=kwargs)
+            did_error = response.get("ok", False) == False
+        except SlackApiError as e:
+            response = e.response
+            did_error = True
+
+        if did_error:
             error = response.get("error", "<no error given>")
 
             # Check if we want to back off and retry (but only if this isn't a
