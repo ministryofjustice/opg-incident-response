@@ -28,6 +28,7 @@ INSTALLED_APPS = [
     "django.contrib.staticfiles",
     "after_response",
     "bootstrap4",
+    "response",
     "response.apps.ResponseConfig",
     "rest_framework",
     'health_check',
