@@ -63,7 +63,7 @@ services:
     tty: true
 
   db:
-    image: "postgres:14@sha256:c0e9c0e9bac7e4c1834b698217a03ee5c708de30d313c84a506972de0e24b059"
+    image: "postgres:15@sha256:32016c79bea24c14917660106bc23a03341d94b9983aeb41f4130b4f3fbd6dd0"
     container_name: postgres
     healthcheck:
       test: pg_isready --username=api --dbname=api
@@ -73,7 +73,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - postgres_data_14_vol:/var/lib/postgresql/data/
+      - postgres_data_15_vol:/var/lib/postgresql/data/
     environment:
       POSTGRES_PASSWORD: postgres
       POSTGRES_DB: postgres
@@ -113,6 +113,6 @@ services:
       - ./testcfg:/app/testcfg
 
 volumes:
-  postgres_data_14_vol:
+  postgres_data_15_vol:
   pypd:
   static-content:
