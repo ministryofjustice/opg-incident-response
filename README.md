@@ -63,7 +63,7 @@ To connect to GitHub, you'll need to create a GitHub OAuth App and set the envir
 You can create a super user with Django's [createsuperuser command](https://docs.djangoproject.com/en/3.1/ref/django-admin/#createsuperuser). In local development this can be done via docker compose:
 
 ```sh
-docker compose exec response python manage.py createsuperuser
+docker compose exec response uv run manage.py createsuperuser
 ```
 
 ### slack-create
